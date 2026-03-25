@@ -620,8 +620,8 @@
     function checkPassword() {
       const input = document.getElementById('pw-input').value;
       if (input === 'lapka') {
-        document.getElementById('login').classList.remove('active');
-        document.getElementById('app').classList.add('active');
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
         showPage('landing');
       } else {
         document.getElementById('pw-error').textContent = 'Incorrect password.';
