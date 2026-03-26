@@ -336,10 +336,222 @@
       vertical-align: middle;
     }
 
+    /* ── Portfolio Hero ── */
+    .pf-hero {
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 2rem 4rem;
+      background: linear-gradient(180deg, #141414 0%, var(--bg) 100%);
+    }
+    .pf-hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .pf-hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .pf-hero-title {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: normal;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .pf-hero-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+    .pf-hero-stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .pf-stat { display: flex; flex-direction: column; gap: 0.25rem; }
+    .pf-stat-num {
+      font-size: 1.6rem;
+      color: var(--accent);
+      font-weight: normal;
+    }
+    .pf-stat-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Case Study Cards ── */
+    .cs-card {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .cs-card:hover { border-color: var(--accent); }
+    .cs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .cs-meta {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .cs-title {
+      font-size: 1.1rem;
+      font-weight: normal;
+      margin-bottom: 0.35rem;
+    }
+    .cs-one-liner {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .cs-impact-block {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .cs-impact-num {
+      font-size: 1.5rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .cs-impact-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+    .cs-body {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .cs-col-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .cs-col p {
+      font-size: 0.82rem;
+      color: #aaa;
+      line-height: 1.75;
+    }
+    .cs-link {
+      display: inline-block;
+      margin-top: 1.25rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Award Grid ── */
+    .award-grid { display: flex; flex-direction: column; gap: 0; }
+    .award-item {
+      display: flex;
+      gap: 2rem;
+      align-items: baseline;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .award-item:last-child { border-bottom: none; }
+    .award-year {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+      width: 4rem;
+    }
+    .award-name {
+      font-size: 0.88rem;
+      color: #bbb;
+      line-height: 1.6;
+    }
+
+    /* ── Portfolio CTA ── */
+    .pf-cta {
+      border: 1px solid var(--border);
+      padding: 3.5rem 2.5rem;
+      text-align: center;
+      margin-top: 3rem;
+      background: var(--surface);
+    }
+    .pf-cta-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .pf-cta-heading {
+      font-size: 2rem;
+      font-weight: normal;
+      margin-bottom: 0.75rem;
+    }
+    .pf-cta-sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .pf-cta-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 0.85rem 2.5rem;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+      transition: opacity 0.2s;
+    }
+    .pf-cta-btn:hover { opacity: 0.85; }
+    .pf-cta-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .pf-cta-links a {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .pf-cta-links a:hover { color: var(--accent); }
+
     @media (max-width: 600px) {
       nav { padding: 1rem 1.5rem; }
       .card-grid { grid-template-columns: 1fr; }
       .inner { padding: 2rem 1.25rem 4rem; }
+      .pf-hero { padding: 3rem 1.25rem 2.5rem; }
+      .pf-hero-stats { gap: 1.5rem; }
+      .cs-body { grid-template-columns: 1fr; }
+      .cs-header { flex-direction: column; }
+      .cs-impact-block { text-align: left; }
+      .pf-cta { padding: 2.5rem 1.5rem; }
     }
   </style>
 </head>
@@ -515,51 +727,140 @@
 
     <!-- PORTFOLIO PAGE -->
     <div id="portfolio-page" class="page">
-      <div class="inner">
-        <div class="page-title">Portfolio</div>
-        <div class="page-sub">Selected projects, research, and work across a 15+ year career in design and innovation.</div>
 
-        <div class="portfolio-section">
-          <h2>Industry Projects</h2>
-
-          <div class="project-card">
-            <div class="meta">Amazon Web Services &nbsp;·&nbsp; 2019 – Present</div>
-            <h3>AI/ML UX — Human-in-the-Loop Systems</h3>
-            <p>Led end-to-end UX for AI and machine learning tools at AWS, including human-in-the-loop and agentic AI products. Drove product strategy, usability programmes, and design direction across global teams.</p>
-          </div>
-
-          <div class="project-card">
-            <div class="meta">Dovetailed &nbsp;·&nbsp; 2011 – Present</div>
-            <h3>UX & Innovation Studio — Multi-sector Work</h3>
-            <p>Built and led an award-winning UX studio spanning AI, health tech, food technology, water systems, and industrial products. Clients range from early-stage startups to large enterprises. Focus on translating complex research into accessible, human-centered experiences.</p>
-            <br/>
-            <a href="https://dovetailed.io" target="_blank">dovetailed.io ↗</a>
-          </div>
-
-          <div class="project-card">
-            <div class="meta">Dovetailed &nbsp;·&nbsp; Food Technology</div>
-            <h3>Nu Food — 3D Food Printing</h3>
-            <p>Co-founded Nu Food, a food innovation venture exploring 3D food printing technologies. Research on user perceptions of novel food tech was published at CHI 2018.</p>
-            <br/>
-            <a href="https://nufood.io" target="_blank">nufood.io ↗</a>
-          </div>
-
-          <div class="project-card">
-            <div class="meta">AVEVA &nbsp;·&nbsp; 2011 – 2012</div>
-            <h3>Human-Centered Design in Industrial Software</h3>
-            <p>Introduced research-led UX methods into industrial software workflows, shaping new product development at one of the world's leading engineering software companies.</p>
-          </div>
-
-          <div class="project-card">
-            <div class="meta">General Electric &nbsp;·&nbsp; 2010 – 2011</div>
-            <h3>Enterprise UX</h3>
-            <p>Improved complex enterprise tooling through user research and prototyping at GE's Cambridge operations.</p>
+      <!-- HERO -->
+      <div class="pf-hero">
+        <div class="pf-hero-inner">
+          <div class="pf-hero-eyebrow">Design Leader · HCI Researcher · Founder</div>
+          <h1 class="pf-hero-title">Turning complexity<br/>into clarity.</h1>
+          <p class="pf-hero-sub">15+ years designing AI products, enterprise tools, and consumer experiences — from research lab to $500M+ revenue at scale.</p>
+          <div class="pf-hero-stats">
+            <div class="pf-stat"><span class="pf-stat-num">15+</span><span class="pf-stat-label">Years in UX</span></div>
+            <div class="pf-stat"><span class="pf-stat-num">$500M+</span><span class="pf-stat-label">Revenue impact</span></div>
+            <div class="pf-stat"><span class="pf-stat-num">10+</span><span class="pf-stat-label">Publications</span></div>
+            <div class="pf-stat"><span class="pf-stat-num">3×</span><span class="pf-stat-label">CHI Best Paper</span></div>
           </div>
         </div>
+      </div>
 
+      <div class="inner">
+
+        <!-- WORK -->
         <div class="portfolio-section">
-          <h2>Research & Publications</h2>
-          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;">10+ peer-reviewed publications in top HCI venues. Multiple Best Paper and Honorable Mention awards at ACM CHI.</p>
+          <h2>Selected Work</h2>
+
+          <div class="cs-card">
+            <div class="cs-header">
+              <div>
+                <div class="cs-meta">Amazon Web Services &nbsp;·&nbsp; 2019 – Present</div>
+                <h3 class="cs-title">Agentic AI &amp; Human-in-the-Loop UX</h3>
+                <p class="cs-one-liner">Designing the human layer for AWS's most complex AI/ML products.</p>
+              </div>
+              <div class="cs-impact-block">
+                <div class="cs-impact-num">$500M+</div>
+                <div class="cs-impact-label">Revenue</div>
+              </div>
+            </div>
+            <div class="cs-body">
+              <div class="cs-col">
+                <div class="cs-col-label">Process</div>
+                <p>End-to-end UX from discovery through delivery — user research, concept design, prototyping, and usability testing across global teams.</p>
+              </div>
+              <div class="cs-col">
+                <div class="cs-col-label">Decisions</div>
+                <p>Shaped product strategy and design direction for agentic AI systems where trust, transparency, and human oversight are paramount.</p>
+              </div>
+              <div class="cs-col">
+                <div class="cs-col-label">Outcomes</div>
+                <p>Influenced roadmaps across multiple AWS orgs. Mentored designers. Delivered AI products now generating $500M+ in annual revenue.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-card">
+            <div class="cs-header">
+              <div>
+                <div class="cs-meta">Dovetailed &nbsp;·&nbsp; 2011 – Present</div>
+                <h3 class="cs-title">UX &amp; Innovation Studio</h3>
+                <p class="cs-one-liner">Award-winning studio spanning AI, health, food tech, water, and industrial sectors.</p>
+              </div>
+              <div class="cs-impact-block">
+                <div class="cs-impact-num">10+</div>
+                <div class="cs-impact-label">Sectors</div>
+              </div>
+            </div>
+            <div class="cs-body">
+              <div class="cs-col">
+                <div class="cs-col-label">Process</div>
+                <p>Built and led a full-service UX and innovation studio — from early-stage research and concept to product launch and iteration.</p>
+              </div>
+              <div class="cs-col">
+                <div class="cs-col-label">Decisions</div>
+                <p>Chose depth over breadth: deep sector immersion to translate complex domain knowledge into accessible, human-centered experiences.</p>
+              </div>
+              <div class="cs-col">
+                <div class="cs-col-label">Outcomes</div>
+                <p>Multiple industry awards. A patented food technology. Academic publications. Clients ranging from seed-stage startups to global enterprises.</p>
+              </div>
+            </div>
+            <a class="cs-link" href="https://dovetailed.io" target="_blank">dovetailed.io ↗</a>
+          </div>
+
+          <div class="cs-card">
+            <div class="cs-header">
+              <div>
+                <div class="cs-meta">Dovetailed &nbsp;·&nbsp; Food Technology</div>
+                <h3 class="cs-title">Nu Food — 3D Food Printing</h3>
+                <p class="cs-one-liner">Reimagining food as a design material.</p>
+              </div>
+              <div class="cs-impact-block">
+                <div class="cs-impact-num">1</div>
+                <div class="cs-impact-label">Patent</div>
+              </div>
+            </div>
+            <div class="cs-body">
+              <div class="cs-col">
+                <div class="cs-col-label">Process</div>
+                <p>Co-founded a food innovation venture, combining hardware, software, and culinary design to explore 3D food printing at commercial scale.</p>
+              </div>
+              <div class="cs-col">
+                <div class="cs-col-label">Decisions</div>
+                <p>Led user research on consumer perceptions of novel food technology — critical for determining product-market fit in an emerging category.</p>
+              </div>
+              <div class="cs-col">
+                <div class="cs-col-label">Outcomes</div>
+                <p>Published at CHI 2018. Awarded US Patent 10912327. Recognised at the Smart Kitchen Summit Startup Showcase (2016).</p>
+              </div>
+            </div>
+            <a class="cs-link" href="https://nufood.io" target="_blank">nufood.io ↗</a>
+          </div>
+
+          <div class="cs-card">
+            <div class="cs-header">
+              <div>
+                <div class="cs-meta">AVEVA &nbsp;·&nbsp; Cambridge, UK &nbsp;·&nbsp; 2011–2012</div>
+                <h3 class="cs-title">Human-Centered Design in Industrial Software</h3>
+                <p class="cs-one-liner">Bringing UX into one of the world's leading engineering software companies.</p>
+              </div>
+            </div>
+            <div class="cs-body">
+              <div class="cs-col">
+                <div class="cs-col-label">Process</div>
+                <p>Introduced research-led UX methods into established engineering software workflows — a significant cultural and process shift.</p>
+              </div>
+              <div class="cs-col">
+                <div class="cs-col-label">Outcomes</div>
+                <p>Shaped new product development direction with a human-centered lens in a domain where usability had historically been secondary.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RESEARCH -->
+        <div class="portfolio-section">
+          <h2>Research &amp; Publications</h2>
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;">10+ peer-reviewed publications at top HCI venues. Multiple Best Paper (Top 1%) and Honorable Mention (Top 5%) awards at ACM CHI.</p>
 
           <div class="pub-entry">
             <div class="pub-title">User perceptions of 3D food printing technologies</div>
@@ -570,15 +871,15 @@
             <div class="pub-meta">ACM CHI 2016</div>
           </div>
           <div class="pub-entry">
-            <div class="pub-title">Best Paper Award recipient <span class="badge">Top 1%</span></div>
+            <div class="pub-title">Best Paper Award <span class="badge">Top 1%</span></div>
             <div class="pub-meta">ACM CHI 2015</div>
           </div>
           <div class="pub-entry">
-            <div class="pub-title">Best Paper Award recipient <span class="badge">Top 1%</span></div>
+            <div class="pub-title">Best Paper Award <span class="badge">Top 1%</span></div>
             <div class="pub-meta">ACM CHI 2012</div>
           </div>
           <div class="pub-entry">
-            <div class="pub-title">Best Paper Award recipient <span class="badge">Top 1%</span></div>
+            <div class="pub-title">Best Paper Award <span class="badge">Top 1%</span></div>
             <div class="pub-meta">ACM CHI 2007</div>
           </div>
           <div class="pub-entry">
@@ -587,27 +888,42 @@
           </div>
         </div>
 
+        <!-- RECOGNITION -->
         <div class="portfolio-section">
-          <h2>Patents</h2>
-          <div class="project-card">
-            <div class="meta">US 10912327 &nbsp;·&nbsp; Issued February 9, 2021</div>
-            <h3>Droplet assemblies and methods for producing droplet assemblies</h3>
-            <p>Patent covering novel methods for producing droplet assemblies, developed through Dovetailed's food technology research.</p>
+          <h2>Recognition</h2>
+          <div class="award-grid">
+            <div class="award-item">
+              <div class="award-year">2021</div>
+              <div class="award-name">SME Cambridgeshire — Positive Impact &amp; Business Woman of the Year Finalist</div>
+            </div>
+            <div class="award-item">
+              <div class="award-year">2018</div>
+              <div class="award-name">Royal Society of Chemistry "Chemistry Means Business" Award</div>
+            </div>
+            <div class="award-item">
+              <div class="award-year">2016</div>
+              <div class="award-name">Smart Kitchen Summit — Startup Showcase Winner</div>
+            </div>
+            <div class="award-item">
+              <div class="award-year">2015</div>
+              <div class="award-name">Cambridge News Business Excellence Finalist</div>
+            </div>
+            <div class="award-item">
+              <div class="award-year">2007–15</div>
+              <div class="award-name">ACM CHI Best Paper (Top 1%) &amp; Honorable Mention (Top 5%)</div>
+            </div>
           </div>
         </div>
 
-        <div class="portfolio-section">
-          <h2>Recognition</h2>
-          <div class="project-card">
-            <div class="meta">Selected Awards</div>
-            <h3>Industry & Research Recognition</h3>
-            <p>
-              Smart Kitchen Summit – Startup Showcase Winner (2016)<br/>
-              Royal Society of Chemistry "Chemistry Means Business" Award (2018)<br/>
-              SME Cambridgeshire – Positive Impact & Business Woman of the Year Finalist (2021)<br/>
-              Cambridge News Business Excellence Finalist (2015)<br/>
-              Multiple Innovation and Open Pitch Awards (GE, IfM Cambridge)
-            </p>
+        <!-- CTA -->
+        <div class="pf-cta">
+          <div class="pf-cta-label">Get in touch</div>
+          <h2 class="pf-cta-heading">Let's work together.</h2>
+          <p class="pf-cta-sub">Open to senior design leadership, advisory, and consulting conversations.</p>
+          <a class="pf-cta-btn" href="mailto:vaiva@dovetailed.io">vaiva@dovetailed.io</a>
+          <div class="pf-cta-links">
+            <a href="https://dovetailed.io" target="_blank">dovetailed.io</a>
+            <a href="https://linkedin.com/in/vaivakalnikaite" target="_blank">LinkedIn</a>
           </div>
         </div>
 
