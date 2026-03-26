@@ -223,6 +223,37 @@
     }
     .project-entry:first-of-type { border-top: 1px solid var(--border); }
 
+    /* First project — lolajiang.com section.slice + .section treatment */
+    .project-entry.slice {
+      max-width: 100%;
+      margin: 0;
+      padding: 3%;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .project-entry.slice .section-inner {
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      max-height: 100vh;
+    }
+    .project-entry.slice .section-text {
+      flex: 1;
+      text-align: center;
+    }
+    .project-entry.slice .section-text h2 {
+      margin-bottom: 1rem;
+    }
+    .project-entry.slice .section-text .project-desc {
+      max-width: 100%;
+    }
+    .project-entry.slice .section-visual {
+      flex: 1;
+    }
+    .project-entry.slice .project-visual {
+      min-height: 320px;
+    }
+
     .project-meta {
       font-family: var(--jso);
       font-size: 11px;
@@ -495,16 +526,22 @@
       <p class="tagline">Product Design Leader excelling in human-centered AI strategy, research-led UX, and building products from zero to scale — with a focus on agentic AI experiences that deliver measurable impact.</p>
     </div>
 
-    <!-- Project 1: AWS -->
-    <div class="project-entry">
-      <div class="project-meta">Amazon Web Services · 2019 – Present</div>
-      <h2>Agentic AI &amp; Human-in-the-Loop UX</h2>
-      <p class="project-desc">Leading UX strategy for AWS's most complex AI/ML products, including agentic AI systems generating $500M+ in revenue. Defining design direction, running end-to-end usability programs, and influencing roadmaps across global teams.</p>
-      <span class="project-cta" onclick="alert('Case study available on request.')">See Case Study</span>
-      <div class="project-visual aws">
-        <div class="project-visual-inner">
-          <span class="project-visual-label">Amazon Web Services</span>
-          <div class="project-visual-title">Agentic AI &amp;<br/>Human-in-the-Loop</div>
+    <!-- Project 1: AWS — lolajiang.com section.slice layout -->
+    <div class="project-entry slice">
+      <div class="section-inner">
+        <div class="section-text">
+          <div class="project-meta">Amazon Web Services · 2019 – Present</div>
+          <h2>Agentic AI &amp; Human-in-the-Loop UX</h2>
+          <p class="project-desc">Leading UX strategy for AWS's most complex AI/ML products, including agentic AI systems generating $500M+ in revenue. Defining design direction, running end-to-end usability programs, and influencing roadmaps across global teams.</p>
+          <span class="project-cta" onclick="alert('Case study available on request.')">See Case Study</span>
+        </div>
+        <div class="section-visual">
+          <div class="project-visual aws">
+            <div class="project-visual-inner">
+              <span class="project-visual-label">Amazon Web Services</span>
+              <div class="project-visual-title">Agentic AI &amp;<br/>Human-in-the-Loop</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
