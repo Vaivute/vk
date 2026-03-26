@@ -189,22 +189,42 @@
     }
     .site-name:hover { text-decoration: none; opacity: 0.6; }
 
-    /* Hero */
+    /* Hero — full viewport, gradient background, centred text block with left border */
     .hero {
-      padding: 7rem 15px 4rem;
-      max-width: 780px;
-      margin: 0 auto;
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background:
+        radial-gradient(ellipse 70% 60% at 5% 8%,  rgba(120, 185, 185, 0.72) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 65% at 95% 92%, rgba(210, 168, 128, 0.60) 0%, transparent 65%),
+        radial-gradient(ellipse 80% 80% at 55% 45%, rgba(242, 238, 233, 0.55) 0%, transparent 100%),
+        #ede8e3;
     }
-    .hero h1 {
-      margin-bottom: 1.5rem;
+    .hero-text-block {
+      border-left: 2px solid rgba(60, 70, 70, 0.35);
+      padding-left: 1.5rem;
+      max-width: 240px;
+      position: relative;
+      top: 2vh;
+      left: 5vw;
     }
-    .hero .tagline {
+    .hero-text-block h1 {
+      font-family: var(--qs);
+      font-weight: 400;
+      font-size: 42px;
+      line-height: 50px;
+      color: #3a4444;
+      margin-bottom: 0.75rem;
+    }
+    .hero-text-block .tagline {
       font-family: var(--mw);
-      font-size: 18px;
-      line-height: 36px;
+      font-size: 14px;
+      line-height: 24px;
       font-weight: 300;
-      color: var(--text);
-      max-width: 560px;
+      color: #4a5555;
     }
 
     /* Divider */
@@ -522,8 +542,10 @@
   <div id="portfolio-page" class="page active">
 
     <div class="hero">
-      <h1>Vaiva Kalnikaitė</h1>
-      <p class="tagline">Product Design Leader excelling in human-centered AI strategy, research-led UX, and building products from zero to scale — with a focus on agentic AI experiences that deliver measurable impact.</p>
+      <div class="hero-text-block">
+        <h1>Vaiva Kalnikaitė</h1>
+        <p class="tagline">Product Design Leader excelling in human-centered AI strategy, research-led UX, and building products from zero to scale — with a focus on agentic AI experiences that deliver measurable impact.</p>
+      </div>
     </div>
 
     <!-- Project 1: AWS — lolajiang.com section.slice layout -->
