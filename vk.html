@@ -4,32 +4,54 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vaiva Kalnikaitė</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #070d1a;
+      --bg:      #070d1a;
       --surface: #0e1829;
-      --border: #1a2d47;
-      --accent: #38bdf8;
-      --text: #e2eaf4;
-      --muted: #6b8aaa;
-      --font: 'Georgia', serif;
-      --mono: 'Courier New', monospace;
+      --border:  #1a2d47;
+      --accent:  #38bdf8;
+      --text:    #e2eaf4;
+      --muted:   #5a7a99;
+      --heading: 'Oswald', sans-serif;
+      --body:    'Inter', sans-serif;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--font);
+      font-family: var(--body);
+      font-weight: 300;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* ── Views ── */
+    /* ─── Views ─── */
     .view { display: none; }
     .view.active { display: block; }
 
-    /* ── Login ── */
+    /* ─── Reveal animations ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── LOGIN ─── */
     #login.active {
       display: flex;
       flex-direction: column;
@@ -38,214 +60,434 @@
       min-height: 100vh;
       gap: 1.5rem;
     }
-    #login h1 {
-      font-size: 1.8rem;
-      font-weight: normal;
-      letter-spacing: 0.12em;
-      color: var(--accent);
+    #login .login-name {
+      font-family: var(--heading);
+      font-weight: 200;
+      font-size: 3rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--text);
     }
     #login p {
+      font-family: var(--body);
       color: var(--muted);
-      font-size: 0.9rem;
-      letter-spacing: 0.06em;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
     }
     #login input {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
       color: var(--text);
-      padding: 0.75rem 1.25rem;
-      font-family: var(--mono);
-      font-size: 1rem;
-      width: 260px;
+      padding: 0.75rem 0;
+      font-family: var(--body);
+      font-size: 0.9rem;
+      width: 240px;
       text-align: center;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.3em;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.3s;
     }
-    #login input:focus { border-color: var(--accent); }
+    #login input:focus { border-bottom-color: var(--accent); }
     #login button {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.6rem 2.5rem;
+      font-family: var(--heading);
+      font-weight: 400;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    #login button:hover {
       background: var(--accent);
       color: var(--bg);
-      border: none;
-      padding: 0.75rem 2rem;
-      font-family: var(--font);
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      transition: opacity 0.2s;
     }
-    #login button:hover { opacity: 0.85; }
     #login .error {
-      color: #c05a5a;
-      font-size: 0.85rem;
-      min-height: 1.2em;
+      color: #f87171;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      min-height: 1em;
     }
 
-    /* ── Nav ── */
+    /* ─── NAV ─── */
     nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 1.5rem 3rem;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      z-index: 10;
+      mix-blend-mode: normal;
+    }
+    nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: -1;
     }
     nav .brand {
+      font-family: var(--heading);
+      font-weight: 300;
       font-size: 1rem;
-      letter-spacing: 0.14em;
-      color: var(--accent);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text);
       cursor: pointer;
+      transition: color 0.3s;
     }
+    nav .brand:hover { color: var(--accent); }
     nav ul {
       list-style: none;
       display: flex;
-      gap: 2.5rem;
+      gap: 3rem;
     }
     nav ul li a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    nav ul li a:hover,
-    nav ul li a.active { color: var(--accent); }
-
-    /* ── Page shell ── */
-    .page { display: none; }
-    .page.active { display: block; }
-
-    /* ── Landing ── */
-    #landing-page {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 6rem 2rem 4rem;
-      text-align: center;
-    }
-    #landing-page .eyebrow {
-      font-family: var(--mono);
+      font-family: var(--heading);
+      font-weight: 300;
       font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-    #landing-page h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: normal;
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-    }
-    #landing-page .tagline {
       color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      max-width: 600px;
-      margin: 0 auto 3rem;
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
     }
-    .card-grid {
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    nav ul li a:hover,
+    nav ul li a.active { color: var(--accent); }
+    nav ul li a.active::after,
+    nav ul li a:hover::after { transform: scaleX(1); }
+
+    /* ─── PAGE SHELL ─── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ─────────────────────────────────
+       LANDING PAGE
+    ───────────────────────────────── */
+    #landing-page { min-height: 100vh; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-line {
+      display: block;
+      font-family: var(--heading);
+      font-weight: 200;
+      text-transform: uppercase;
+      line-height: 0.9;
+      letter-spacing: 0.12em;
+      color: var(--text);
+    }
+    .hero-line-1 {
+      font-size: clamp(5rem, 14vw, 13rem);
+      margin-left: -0.05em;
+    }
+    .hero-line-2 {
+      font-size: clamp(2.5rem, 7vw, 6.5rem);
+      color: transparent;
+      -webkit-text-stroke: 1px var(--text);
+      letter-spacing: 0.18em;
+      margin-top: 0.1em;
+      margin-left: 0.6em;
+    }
+    .hero-sub {
+      margin-top: 3rem;
+      margin-left: 0.1em;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .hero-cta {
+      margin-top: 2rem;
+      margin-left: 0.1em;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .hero-btn {
+      font-family: var(--heading);
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: transparent;
+      border: 1px solid var(--accent);
+      padding: 0.7rem 2rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      text-decoration: none;
+    }
+    .hero-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .hero-btn.ghost {
+      border-color: var(--border);
+      color: var(--muted);
+    }
+    .hero-btn.ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: transparent;
+    }
+    /* Noise grain overlay */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    /* Hero load-in animation */
+    .hero-line-1 { animation: heroIn 1s cubic-bezier(0.16,1,0.3,1) both; }
+    .hero-line-2 { animation: heroIn 1s 0.15s cubic-bezier(0.16,1,0.3,1) both; }
+    .hero-sub    { animation: heroIn 0.8s 0.3s cubic-bezier(0.16,1,0.3,1) both; }
+    .hero-cta    { animation: heroIn 0.8s 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Marquee ticker */
+    .marquee-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 0.9rem 0;
+      background: var(--surface);
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      font-family: var(--heading);
+      font-weight: 300;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 2.5rem;
+      transition: color 0.3s;
+    }
+    .marquee-item span { color: var(--accent); margin-right: 2.5rem; }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Landing nav cards */
+    .landing-cards {
+      padding: 6rem 4rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      max-width: 640px;
-      margin: 0 auto;
+      gap: 1px;
+      background: var(--border);
     }
-    .card {
-      border: 1px solid var(--border);
-      padding: 2.5rem 2rem;
-      text-decoration: none;
-      color: var(--text);
-      text-align: left;
+    .landing-card {
+      background: var(--bg);
+      padding: 4rem 3rem;
       cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s;
     }
-    .card:hover { border-color: var(--accent); background: var(--surface); }
-    .card .card-label {
-      font-family: var(--mono);
+    .landing-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+    .landing-card:hover { background: var(--surface); }
+    .landing-card:hover::before { width: 100%; }
+    .landing-card-num {
+      font-family: var(--heading);
+      font-weight: 200;
+      font-size: 5rem;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      transition: color 0.4s;
+    }
+    .landing-card:hover .landing-card-num { color: var(--accent); }
+    .landing-card-label {
+      font-family: var(--body);
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 0.75rem;
     }
-    .card h2 {
-      font-size: 1.4rem;
-      font-weight: normal;
-      margin-bottom: 0.5rem;
-    }
-    .card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-    .landing-links {
-      margin-top: 3rem;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .landing-links a {
-      color: var(--muted);
-      font-size: 0.8rem;
+    .landing-card h2 {
+      font-family: var(--heading);
+      font-weight: 300;
+      font-size: 2.2rem;
       letter-spacing: 0.1em;
-      text-decoration: none;
-      transition: color 0.2s;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 0.75rem;
     }
-    .landing-links a:hover { color: var(--accent); }
-
-    /* ── Inner pages ── */
-    .inner {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 4rem 2rem 6rem;
-    }
-    .inner .page-title {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: normal;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-    .inner .page-sub {
+    .landing-card p {
+      font-size: 0.85rem;
       color: var(--muted);
-      font-size: 0.9rem;
-      letter-spacing: 0.08em;
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
+      line-height: 1.7;
+      max-width: 300px;
+    }
+    .landing-card-arrow {
+      position: absolute;
+      bottom: 2.5rem; right: 2.5rem;
+      font-size: 1.5rem;
+      color: var(--border);
+      transition: color 0.3s, transform 0.3s;
+    }
+    .landing-card:hover .landing-card-arrow {
+      color: var(--accent);
+      transform: translate(4px, -4px);
+    }
+
+    /* Landing footer links */
+    .landing-footer {
+      padding: 2.5rem 4rem;
+      display: flex;
+      gap: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .landing-footer a {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .landing-footer a:hover { color: var(--accent); }
+
+    /* ─────────────────────────────────
+       INNER PAGE SHELL
+    ───────────────────────────────── */
+    .inner-hero {
+      padding: 10rem 4rem 5rem;
       border-bottom: 1px solid var(--border);
     }
-
-    /* CV */
-    .cv-section { margin-bottom: 3rem; }
-    .cv-section h2 {
-      font-size: 0.75rem;
-      font-family: var(--mono);
-      letter-spacing: 0.2em;
+    .inner-hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
+    }
+    .inner-hero-title {
+      font-family: var(--heading);
+      font-weight: 200;
+      font-size: clamp(3rem, 8vw, 7rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 0.9;
+      color: var(--text);
+    }
+    .inner-hero-title em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--text);
+    }
+
+    /* ─────────────────────────────────
+       CV PAGE
+    ───────────────────────────────── */
+    .cv-body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 4rem 8rem;
+    }
+    .cv-section { margin-bottom: 4rem; }
+    .cv-section-title {
+      font-family: var(--heading);
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      padding-bottom: 0.75rem;
       border-bottom: 1px solid var(--border);
     }
-    .cv-entry { margin-bottom: 1.75rem; }
-    .cv-entry .role {
-      font-size: 1.05rem;
+    .cv-profile {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #9ab4cc;
+      font-weight: 300;
+    }
+    .cv-entry { margin-bottom: 2.25rem; }
+    .cv-entry-role {
+      font-family: var(--heading);
+      font-weight: 400;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text);
       margin-bottom: 0.2rem;
     }
-    .cv-entry .org {
-      font-size: 0.85rem;
+    .cv-entry-org {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
       color: var(--accent);
       margin-bottom: 0.2rem;
+      font-weight: 400;
     }
-    .cv-entry .dates {
-      font-family: var(--mono);
-      font-size: 0.75rem;
+    .cv-entry-dates {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
       color: var(--muted);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.75rem;
+      font-family: var(--body);
     }
     .cv-entry p {
       font-size: 0.88rem;
-      color: #bbb;
-      line-height: 1.75;
+      line-height: 1.8;
+      color: #7a9ab8;
+      font-weight: 300;
+    }
+    .cv-entry ul {
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+      line-height: 2;
+      color: #7a9ab8;
     }
     .cv-pills {
       display: flex;
@@ -253,321 +495,351 @@
       gap: 0.5rem;
     }
     .pill {
-      background: var(--surface);
       border: 1px solid var(--border);
-      padding: 0.3rem 0.75rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-family: var(--mono);
-    }
-    .cv-entry ul {
-      padding-left: 1.2rem;
-      font-size: 0.88rem;
-      color: #bbb;
-      line-height: 1.9;
-    }
-
-    /* Portfolio */
-    .portfolio-section { margin-bottom: 3.5rem; }
-    .portfolio-section h2 {
-      font-size: 0.75rem;
-      font-family: var(--mono);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .project-card {
-      border: 1px solid var(--border);
-      padding: 1.75rem;
-      margin-bottom: 1.25rem;
-      transition: border-color 0.2s;
-    }
-    .project-card:hover { border-color: var(--accent); }
-    .project-card h3 {
-      font-size: 1rem;
-      font-weight: normal;
-      margin-bottom: 0.4rem;
-    }
-    .project-card .meta {
-      font-family: var(--mono);
+      padding: 0.3rem 0.85rem;
       font-size: 0.72rem;
-      color: var(--accent);
       letter-spacing: 0.1em;
-      margin-bottom: 0.6rem;
-    }
-    .project-card p {
-      font-size: 0.85rem;
-      color: #aaa;
-      line-height: 1.7;
-    }
-    .project-card a {
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 0.8rem;
-    }
-    .pub-entry {
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .pub-entry:last-child { border-bottom: none; }
-    .pub-entry .pub-title {
-      font-size: 0.9rem;
-      margin-bottom: 0.25rem;
-    }
-    .pub-entry .pub-meta {
-      font-family: var(--mono);
-      font-size: 0.72rem;
       color: var(--muted);
+      font-family: var(--body);
+      transition: border-color 0.3s, color 0.3s;
     }
-    .badge {
-      display: inline-block;
-      background: #0a1f35;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      padding: 0.15rem 0.5rem;
-      margin-left: 0.5rem;
-      vertical-align: middle;
-    }
+    .pill:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* ── Portfolio Hero ── */
-    .pf-hero {
-      border-bottom: 1px solid var(--border);
-      padding: 5rem 2rem 4rem;
-      background: linear-gradient(180deg, #0b1525 0%, var(--bg) 100%);
-    }
-    .pf-hero-inner {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .pf-hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-    }
-    .pf-hero-title {
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: normal;
-      line-height: 1.15;
-      margin-bottom: 1.25rem;
-    }
-    .pf-hero-sub {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.8;
-      max-width: 560px;
-      margin-bottom: 3rem;
-    }
-    .pf-hero-stats {
+    /* ─────────────────────────────────
+       PORTFOLIO PAGE
+    ───────────────────────────────── */
+
+    /* Stats bar */
+    .pf-stats-bar {
       display: flex;
-      gap: 3rem;
-      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
     }
-    .pf-stat { display: flex; flex-direction: column; gap: 0.25rem; }
+    .pf-stat-cell {
+      flex: 1;
+      padding: 2.5rem 3rem;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .pf-stat-cell:last-child { border-right: none; }
     .pf-stat-num {
-      font-size: 1.6rem;
+      font-family: var(--heading);
+      font-weight: 200;
+      font-size: 2.8rem;
       color: var(--accent);
-      font-weight: normal;
+      display: block;
+      line-height: 1;
     }
     .pf-stat-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
+      margin-top: 0.4rem;
+      display: block;
     }
 
-    /* ── Case Study Cards ── */
+    /* Section headings */
+    .pf-body { padding: 0 4rem 8rem; }
+    .pf-section { margin-top: 5rem; }
+    .pf-section-title {
+      font-family: var(--heading);
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Case study cards */
     .cs-card {
       border: 1px solid var(--border);
-      padding: 2rem;
       margin-bottom: 1.5rem;
-      transition: border-color 0.2s;
+      transition: border-color 0.4s;
+      overflow: hidden;
     }
     .cs-card:hover { border-color: var(--accent); }
-    .cs-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+    .cs-card-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      padding: 2.5rem;
+      cursor: pointer;
+    }
+    .cs-num {
+      font-family: var(--heading);
+      font-weight: 200;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
     }
     .cs-meta {
-      font-family: var(--mono);
       font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--accent);
-      letter-spacing: 0.1em;
       margin-bottom: 0.5rem;
     }
     .cs-title {
-      font-size: 1.1rem;
-      font-weight: normal;
-      margin-bottom: 0.35rem;
+      font-family: var(--heading);
+      font-weight: 300;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 0.5rem;
     }
     .cs-one-liner {
       font-size: 0.85rem;
       color: var(--muted);
       line-height: 1.6;
     }
-    .cs-impact-block {
+    .cs-impact {
       text-align: right;
-      flex-shrink: 0;
     }
     .cs-impact-num {
-      font-size: 1.5rem;
+      font-family: var(--heading);
+      font-weight: 200;
+      font-size: 2rem;
       color: var(--accent);
       line-height: 1;
+      display: block;
     }
     .cs-impact-label {
-      font-family: var(--mono);
       font-size: 0.65rem;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--muted);
       margin-top: 0.25rem;
+      display: block;
     }
     .cs-body {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      padding-top: 1.5rem;
       border-top: 1px solid var(--border);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
     }
+    .cs-card.open .cs-body { max-height: 400px; }
+    .cs-col {
+      padding: 2rem 2.5rem;
+      border-right: 1px solid var(--border);
+    }
+    .cs-col:last-child { border-right: none; }
     .cs-col-label {
-      font-family: var(--mono);
-      font-size: 0.68rem;
+      font-family: var(--heading);
+      font-weight: 400;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .cs-col p {
+      font-size: 0.83rem;
+      line-height: 1.8;
+      color: #7a9ab8;
+      font-weight: 300;
+    }
+    .cs-toggle {
+      font-size: 1.2rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: transform 0.4s, color 0.3s;
+      align-self: center;
+      padding: 0.5rem;
+    }
+    .cs-card.open .cs-toggle {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+    .cs-card-footer {
+      padding: 0 2.5rem 1.5rem;
+    }
+    .cs-link {
+      font-family: var(--heading);
+      font-weight: 400;
+      font-size: 0.72rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-    .cs-col p {
-      font-size: 0.82rem;
-      color: #aaa;
-      line-height: 1.75;
-    }
-    .cs-link {
-      display: inline-block;
-      margin-top: 1.25rem;
-      color: var(--accent);
       text-decoration: none;
-      font-size: 0.8rem;
-      font-family: var(--mono);
-      letter-spacing: 0.08em;
+      transition: opacity 0.3s;
+    }
+    .cs-link:hover { opacity: 0.7; }
+
+    /* Publications */
+    .pub-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .pub-entry:last-child { border-bottom: none; }
+    .pub-title {
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 300;
+    }
+    .pub-meta {
+      font-family: var(--heading);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.1rem 0.45rem;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      font-family: var(--body);
     }
 
-    /* ── Award Grid ── */
-    .award-grid { display: flex; flex-direction: column; gap: 0; }
+    /* Awards */
     .award-item {
       display: flex;
-      gap: 2rem;
+      gap: 3rem;
       align-items: baseline;
-      padding: 0.9rem 0;
+      padding: 1rem 0;
       border-bottom: 1px solid var(--border);
     }
     .award-item:last-child { border-bottom: none; }
     .award-year {
-      font-family: var(--mono);
-      font-size: 0.72rem;
+      font-family: var(--heading);
+      font-weight: 200;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
       color: var(--accent);
-      letter-spacing: 0.08em;
       flex-shrink: 0;
-      width: 4rem;
+      width: 4.5rem;
     }
     .award-name {
       font-size: 0.88rem;
-      color: #bbb;
+      color: #7a9ab8;
       line-height: 1.6;
+      font-weight: 300;
     }
 
-    /* ── Portfolio CTA ── */
+    /* Portfolio CTA */
     .pf-cta {
+      margin-top: 5rem;
+      padding: 5rem 3rem;
       border: 1px solid var(--border);
-      padding: 3.5rem 2.5rem;
       text-align: center;
-      margin-top: 3rem;
-      background: var(--surface);
+      position: relative;
+      overflow: hidden;
     }
-    .pf-cta-label {
-      font-family: var(--mono);
+    .pf-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(56,189,248,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pf-cta-eyebrow {
       font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
-    .pf-cta-heading {
-      font-size: 2rem;
-      font-weight: normal;
-      margin-bottom: 0.75rem;
+    .pf-cta-title {
+      font-family: var(--heading);
+      font-weight: 200;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 1rem;
+      line-height: 1;
     }
     .pf-cta-sub {
       color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
+      font-size: 0.88rem;
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.05em;
     }
     .pf-cta-btn {
       display: inline-block;
-      background: var(--accent);
+      font-family: var(--heading);
+      font-weight: 400;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
       color: var(--bg);
+      background: var(--accent);
+      padding: 1rem 3rem;
       text-decoration: none;
-      padding: 0.85rem 2.5rem;
-      font-family: var(--font);
-      font-size: 0.9rem;
-      letter-spacing: 0.08em;
-      margin-bottom: 1.5rem;
-      transition: opacity 0.2s;
+      transition: opacity 0.3s, transform 0.3s;
+      margin-bottom: 2rem;
     }
-    .pf-cta-btn:hover { opacity: 0.85; }
+    .pf-cta-btn:hover { opacity: 0.85; transform: translateY(-2px); }
     .pf-cta-links {
       display: flex;
       justify-content: center;
-      gap: 2rem;
+      gap: 3rem;
     }
     .pf-cta-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
       color: var(--muted);
-      font-size: 0.8rem;
       text-decoration: none;
-      letter-spacing: 0.08em;
-      transition: color 0.2s;
+      transition: color 0.3s;
     }
     .pf-cta-links a:hover { color: var(--accent); }
 
-    @media (max-width: 600px) {
-      nav { padding: 1rem 1.5rem; }
-      .card-grid { grid-template-columns: 1fr; }
-      .inner { padding: 2rem 1.25rem 4rem; }
-      .pf-hero { padding: 3rem 1.25rem 2.5rem; }
-      .pf-hero-stats { gap: 1.5rem; }
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      nav { padding: 1.25rem 1.5rem; }
+      nav ul { gap: 1.5rem; }
+      .hero { padding: 0 1.5rem; }
+      .hero-line-2 { margin-left: 0; }
+      .landing-cards { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .landing-footer { padding: 2rem 1.5rem; flex-wrap: wrap; gap: 1.5rem; }
+      .inner-hero { padding: 7rem 1.5rem 3rem; }
+      .cv-body { padding: 3rem 1.5rem 5rem; }
+      .pf-stats-bar { flex-wrap: wrap; }
+      .pf-stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .pf-body { padding: 0 1.5rem 5rem; }
       .cs-body { grid-template-columns: 1fr; }
-      .cs-header { flex-direction: column; }
-      .cs-impact-block { text-align: left; }
-      .pf-cta { padding: 2.5rem 1.5rem; }
+      .cs-col { border-right: none; border-bottom: 1px solid var(--border); }
+      .cs-col:last-child { border-bottom: none; }
+      .cs-card-top { grid-template-columns: 1fr; }
+      .cs-impact { text-align: left; }
+      .pub-entry { flex-direction: column; gap: 0.3rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- LOGIN -->
+  <!-- ── LOGIN ── -->
   <div id="login" class="view active">
-    <h1>VK</h1>
-    <p>This page is private.</p>
-    <input type="password" id="pw-input" placeholder="Enter password" autocomplete="current-password" />
+    <div class="login-name">V K</div>
+    <p>Private</p>
+    <input type="password" id="pw-input" placeholder="· · · · · ·" autocomplete="current-password" />
     <button onclick="checkPassword()">Enter</button>
     <div class="error" id="pw-error"></div>
   </div>
 
-  <!-- MAIN APP -->
+  <!-- ── APP ── -->
   <div id="app" class="view">
+
     <nav>
       <span class="brand" onclick="showPage('landing')">VK</span>
       <ul>
@@ -577,107 +849,179 @@
       </ul>
     </nav>
 
-    <!-- LANDING PAGE -->
+    <!-- ══════════════════════════════
+         LANDING
+    ══════════════════════════════ -->
     <div id="landing-page" class="page active">
-      <div class="eyebrow">Design Leader · Researcher · Founder</div>
-      <h1>Vaiva Kalnikaitė</h1>
-      <p class="tagline">15+ years shaping human experiences across AI, enterprise, and emerging technology. PhD in HCI. Fellow of the Royal Society of Arts.</p>
-      <div class="card-grid">
-        <div class="card" onclick="showPage('cv')">
-          <div class="card-label">Document</div>
-          <h2>CV</h2>
-          <p>Experience, education, awards, and expertise.</p>
-        </div>
-        <div class="card" onclick="showPage('portfolio')">
-          <div class="card-label">Work</div>
-          <h2>Portfolio</h2>
-          <p>Projects, publications, and research highlights.</p>
+
+      <div class="hero">
+        <span class="hero-line hero-line-1">Vaiva</span>
+        <span class="hero-line hero-line-2">Kalnikaitė</span>
+        <div class="hero-sub">PhD · FRSA · Design Leader · Seattle</div>
+        <div class="hero-cta">
+          <span class="hero-btn" onclick="showPage('portfolio')">View Work</span>
+          <span class="hero-btn ghost" onclick="showPage('cv')">CV</span>
         </div>
       </div>
-      <div class="landing-links">
+
+      <div class="marquee-wrap">
+        <div class="marquee-track">
+          <!-- duplicated for seamless loop -->
+          <span class="marquee-item"><span>·</span> Design Leader</span>
+          <span class="marquee-item"><span>·</span> HCI Researcher</span>
+          <span class="marquee-item"><span>·</span> Founder, Dovetailed</span>
+          <span class="marquee-item"><span>·</span> Head of UX, AWS</span>
+          <span class="marquee-item"><span>·</span> Agentic AI</span>
+          <span class="marquee-item"><span>·</span> 10+ Publications</span>
+          <span class="marquee-item"><span>·</span> CHI Best Paper</span>
+          <span class="marquee-item"><span>·</span> PhD, Sheffield</span>
+          <span class="marquee-item"><span>·</span> FRSA</span>
+          <span class="marquee-item"><span>·</span> Design Leader</span>
+          <span class="marquee-item"><span>·</span> HCI Researcher</span>
+          <span class="marquee-item"><span>·</span> Founder, Dovetailed</span>
+          <span class="marquee-item"><span>·</span> Head of UX, AWS</span>
+          <span class="marquee-item"><span>·</span> Agentic AI</span>
+          <span class="marquee-item"><span>·</span> 10+ Publications</span>
+          <span class="marquee-item"><span>·</span> CHI Best Paper</span>
+          <span class="marquee-item"><span>·</span> PhD, Sheffield</span>
+          <span class="marquee-item"><span>·</span> FRSA</span>
+        </div>
+      </div>
+
+      <div class="landing-cards">
+        <div class="landing-card reveal" onclick="showPage('cv')">
+          <div class="landing-card-num">01</div>
+          <div class="landing-card-label">Document</div>
+          <h2>CV</h2>
+          <p>15+ years of experience, education, awards, and expertise across AI, design, and research.</p>
+          <span class="landing-card-arrow">↗</span>
+        </div>
+        <div class="landing-card reveal reveal-delay-2" onclick="showPage('portfolio')">
+          <div class="landing-card-num">02</div>
+          <div class="landing-card-label">Work</div>
+          <h2>Portfolio</h2>
+          <p>Selected projects, publications, and research across a 15+ year career in design and innovation.</p>
+          <span class="landing-card-arrow">↗</span>
+        </div>
+      </div>
+
+      <div class="landing-footer">
         <a href="https://dovetailed.io" target="_blank">dovetailed.io</a>
         <a href="https://linkedin.com/in/vaivakalnikaite" target="_blank">LinkedIn</a>
         <a href="mailto:vaiva@dovetailed.io">vaiva@dovetailed.io</a>
+        <a href="https://nufood.io" target="_blank">nufood.io</a>
       </div>
+
     </div>
 
-    <!-- CV PAGE -->
+    <!-- ══════════════════════════════
+         CV
+    ══════════════════════════════ -->
     <div id="cv-page" class="page">
-      <div class="inner">
-        <div class="page-title">Vaiva Kalnikaitė, PhD, FRSA</div>
-        <div class="page-sub">Head of UX &nbsp;·&nbsp; Design Leader &nbsp;·&nbsp; Research Strategist &nbsp;·&nbsp; Seattle, USA / Cambridge, UK</div>
 
-        <div class="cv-section">
-          <h2>Profile</h2>
-          <p style="font-size:0.92rem;line-height:1.8;color:#bbb;">I'm a design leader with 15+ years shaping user experiences across AI, enterprise, and consumer products. I bridge research, design, and strategy to create meaningful, human-centered systems. As a founder of Dovetailed and Head of UX at Amazon, I've led cross-functional teams and driven UX strategy for global products — including agentic AI products delivering $500M+ in revenue. I thrive in complex problem spaces, and my background spanning HCI, product development, business strategy, and startups gives me a distinct advantage in solving the challenges that matter most.</p>
+      <div class="inner-hero reveal">
+        <div class="inner-hero-eyebrow">Curriculum Vitae</div>
+        <div class="inner-hero-title">Vaiva<br/><em>Kalnikaitė</em></div>
+      </div>
+
+      <div class="marquee-wrap">
+        <div class="marquee-track">
+          <span class="marquee-item"><span>·</span> Head of UX</span>
+          <span class="marquee-item"><span>·</span> Design Leader</span>
+          <span class="marquee-item"><span>·</span> Research Strategist</span>
+          <span class="marquee-item"><span>·</span> Seattle, USA</span>
+          <span class="marquee-item"><span>·</span> Cambridge, UK</span>
+          <span class="marquee-item"><span>·</span> PhD, HCI</span>
+          <span class="marquee-item"><span>·</span> FRSA</span>
+          <span class="marquee-item"><span>·</span> Head of UX</span>
+          <span class="marquee-item"><span>·</span> Design Leader</span>
+          <span class="marquee-item"><span>·</span> Research Strategist</span>
+          <span class="marquee-item"><span>·</span> Seattle, USA</span>
+          <span class="marquee-item"><span>·</span> Cambridge, UK</span>
+          <span class="marquee-item"><span>·</span> PhD, HCI</span>
+          <span class="marquee-item"><span>·</span> FRSA</span>
+        </div>
+      </div>
+
+      <div class="cv-body">
+
+        <div class="cv-section reveal">
+          <div class="cv-section-title">Profile</div>
+          <p class="cv-profile">I'm a design leader with 15+ years shaping user experiences across AI, enterprise, and consumer products. I bridge research, design, and strategy to create meaningful, human-centered systems. As a founder of Dovetailed and Head of UX at Amazon, I've led cross-functional teams and driven UX strategy for global products — including agentic AI products delivering $500M+ in revenue. I thrive in complex problem spaces, and my background spanning HCI, product development, business strategy, and startups gives me a distinct advantage in solving the challenges that matter most.</p>
         </div>
 
-        <div class="cv-section">
-          <h2>Experience</h2>
-          <div class="cv-entry">
-            <div class="role">Principal UX Designer</div>
-            <div class="org">Amazon Web Services (AWS) — Seattle, USA</div>
-            <div class="dates">2019 – Present</div>
+        <div class="cv-section reveal">
+          <div class="cv-section-title">Experience</div>
+
+          <div class="cv-entry reveal reveal-delay-1">
+            <div class="cv-entry-role">Head of UX</div>
+            <div class="cv-entry-org">Amazon Web Services (AWS) — Seattle, USA</div>
+            <div class="cv-entry-dates">2019 – Present</div>
             <p>Led UX for AI/ML tools in AWS, focusing on human-in-the-loop systems and agentic AI. Drove product strategy, ran end-to-end usability programs, and defined design direction across global teams. Mentored designers and influenced roadmaps across orgs.</p>
           </div>
-          <div class="cv-entry">
-            <div class="role">Founder & Director</div>
-            <div class="org">Dovetailed (UK & US)</div>
-            <div class="dates">2011 – Present</div>
+
+          <div class="cv-entry reveal reveal-delay-2">
+            <div class="cv-entry-role">Founder & Director</div>
+            <div class="cv-entry-org">Dovetailed (UK & US)</div>
+            <div class="cv-entry-dates">2011 – Present</div>
             <p>Built and scaled an award-winning UX and innovation studio. Led design and research across sectors — AI, health, food tech, water, and industrial systems. Partnered with startups and large organisations to create new product visions, services, and tools.</p>
           </div>
-          <div class="cv-entry">
-            <div class="role">Visiting Senior Fellow – Human Experience Design</div>
-            <div class="org">University College London (UK)</div>
-            <div class="dates">2013 – 2017</div>
+
+          <div class="cv-entry reveal reveal-delay-3">
+            <div class="cv-entry-role">Visiting Senior Fellow – Human Experience Design</div>
+            <div class="cv-entry-org">University College London (UK)</div>
+            <div class="cv-entry-dates">2013 – 2017</div>
             <p>Taught and collaborated on design research, HCI, and interdisciplinary methods. Advised PhDs and partnered on future-focused design programmes.</p>
           </div>
-          <div class="cv-entry">
-            <div class="role">UX Design Lead</div>
-            <div class="org">AVEVA — Cambridge, UK</div>
-            <div class="dates">2011 – 2012</div>
+
+          <div class="cv-entry reveal">
+            <div class="cv-entry-role">UX Design Lead</div>
+            <div class="cv-entry-org">AVEVA — Cambridge, UK</div>
+            <div class="cv-entry-dates">2011 – 2012</div>
             <p>Brought human-centered design into industrial software workflows. Introduced research-led methods to shape new product development.</p>
           </div>
-          <div class="cv-entry">
-            <div class="role">UX Analyst</div>
-            <div class="org">General Electric — Cambridge, UK</div>
-            <div class="dates">2010 – 2011</div>
+
+          <div class="cv-entry reveal">
+            <div class="cv-entry-role">UX Analyst</div>
+            <div class="cv-entry-org">General Electric — Cambridge, UK</div>
+            <div class="cv-entry-dates">2010 – 2011</div>
             <p>Worked on enterprise UX, improving complex tooling through research and prototyping.</p>
           </div>
-          <div class="cv-entry">
-            <div class="role">Fellowships & Early Research Roles</div>
-            <div class="org">Open University &nbsp;·&nbsp; King's College London &nbsp;·&nbsp; Microsoft Research &nbsp;·&nbsp; PARC</div>
+
+          <div class="cv-entry reveal">
+            <div class="cv-entry-role">Fellowships & Early Research Roles</div>
+            <div class="cv-entry-org">Open University &nbsp;·&nbsp; King's College London &nbsp;·&nbsp; Microsoft Research &nbsp;·&nbsp; PARC</div>
           </div>
         </div>
 
-        <div class="cv-section">
-          <h2>Education</h2>
+        <div class="cv-section reveal">
+          <div class="cv-section-title">Education</div>
           <div class="cv-entry">
-            <div class="role">PhD, Human-Computer Interaction</div>
-            <div class="org">University of Sheffield, UK</div>
+            <div class="cv-entry-role">PhD, Human-Computer Interaction</div>
+            <div class="cv-entry-org">University of Sheffield, UK</div>
           </div>
           <div class="cv-entry">
-            <div class="role">Exec Education, General Management</div>
-            <div class="org">Judge Business School, Cambridge</div>
-            <div class="dates">2016 – 2018</div>
+            <div class="cv-entry-role">Exec Education, General Management</div>
+            <div class="cv-entry-org">Judge Business School, Cambridge</div>
+            <div class="cv-entry-dates">2016 – 2018</div>
           </div>
           <div class="cv-entry">
-            <div class="role">BSc & MSc, Computer Science</div>
-            <div class="org">University of Sheffield, UK</div>
-          </div>
-        </div>
-
-        <div class="cv-section">
-          <h2>Certifications</h2>
-          <div class="cv-entry">
-            <div class="role">Designing AI Products</div>
-            <div class="org">MIT xPRO</div>
-            <div class="dates">November 2021 &nbsp;·&nbsp; Credential ID: 715151</div>
+            <div class="cv-entry-role">BSc & MSc, Computer Science</div>
+            <div class="cv-entry-org">University of Sheffield, UK</div>
           </div>
         </div>
 
-        <div class="cv-section">
-          <h2>Awards & Recognition</h2>
+        <div class="cv-section reveal">
+          <div class="cv-section-title">Certifications</div>
+          <div class="cv-entry">
+            <div class="cv-entry-role">Designing AI Products</div>
+            <div class="cv-entry-org">MIT xPRO</div>
+            <div class="cv-entry-dates">November 2021 &nbsp;·&nbsp; Credential ID: 715151</div>
+          </div>
+        </div>
+
+        <div class="cv-section reveal">
+          <div class="cv-section-title">Awards & Recognition</div>
           <ul>
             <li>SME Cambridgeshire Business Awards – Positive Impact & Business Woman of the Year Finalist (2021)</li>
             <li>Royal Society of Chemistry "Chemistry Means Business" Award (2018)</li>
@@ -688,8 +1032,8 @@
           </ul>
         </div>
 
-        <div class="cv-section">
-          <h2>Core Expertise</h2>
+        <div class="cv-section reveal">
+          <div class="cv-section-title">Core Expertise</div>
           <div class="cv-pills">
             <span class="pill">UX Strategy</span>
             <span class="pill">AI Product Design</span>
@@ -703,8 +1047,8 @@
           </div>
         </div>
 
-        <div class="cv-section">
-          <h2>Tools & Languages</h2>
+        <div class="cv-section reveal">
+          <div class="cv-section-title">Tools & Languages</div>
           <div class="cv-pills" style="margin-bottom:1rem;">
             <span class="pill">Figma</span>
             <span class="pill">Sketch</span>
@@ -722,43 +1066,81 @@
             <span class="pill">Spanish (Basic)</span>
           </div>
         </div>
+
       </div>
     </div>
 
-    <!-- PORTFOLIO PAGE -->
+    <!-- ══════════════════════════════
+         PORTFOLIO
+    ══════════════════════════════ -->
     <div id="portfolio-page" class="page">
 
-      <!-- HERO -->
-      <div class="pf-hero">
-        <div class="pf-hero-inner">
-          <div class="pf-hero-eyebrow">Design Leader · HCI Researcher · Founder</div>
-          <h1 class="pf-hero-title">Turning complexity<br/>into clarity.</h1>
-          <p class="pf-hero-sub">15+ years designing AI products, enterprise tools, and consumer experiences — from research lab to $500M+ revenue at scale.</p>
-          <div class="pf-hero-stats">
-            <div class="pf-stat"><span class="pf-stat-num">15+</span><span class="pf-stat-label">Years in UX</span></div>
-            <div class="pf-stat"><span class="pf-stat-num">$500M+</span><span class="pf-stat-label">Revenue impact</span></div>
-            <div class="pf-stat"><span class="pf-stat-num">10+</span><span class="pf-stat-label">Publications</span></div>
-            <div class="pf-stat"><span class="pf-stat-num">3×</span><span class="pf-stat-label">CHI Best Paper</span></div>
-          </div>
+      <div class="inner-hero reveal">
+        <div class="inner-hero-eyebrow">Selected Work</div>
+        <div class="inner-hero-title"><em>Portfolio</em></div>
+      </div>
+
+      <div class="pf-stats-bar">
+        <div class="pf-stat-cell reveal">
+          <span class="pf-stat-num">15+</span>
+          <span class="pf-stat-label">Years in UX</span>
+        </div>
+        <div class="pf-stat-cell reveal reveal-delay-1">
+          <span class="pf-stat-num">$500M+</span>
+          <span class="pf-stat-label">Revenue Impact</span>
+        </div>
+        <div class="pf-stat-cell reveal reveal-delay-2">
+          <span class="pf-stat-num">10+</span>
+          <span class="pf-stat-label">Publications</span>
+        </div>
+        <div class="pf-stat-cell reveal reveal-delay-3">
+          <span class="pf-stat-num">3×</span>
+          <span class="pf-stat-label">CHI Best Paper</span>
         </div>
       </div>
 
-      <div class="inner">
+      <div class="marquee-wrap">
+        <div class="marquee-track">
+          <span class="marquee-item"><span>·</span> AWS</span>
+          <span class="marquee-item"><span>·</span> Dovetailed</span>
+          <span class="marquee-item"><span>·</span> Nu Food</span>
+          <span class="marquee-item"><span>·</span> AVEVA</span>
+          <span class="marquee-item"><span>·</span> GE</span>
+          <span class="marquee-item"><span>·</span> UCL</span>
+          <span class="marquee-item"><span>·</span> Microsoft Research</span>
+          <span class="marquee-item"><span>·</span> King's College London</span>
+          <span class="marquee-item"><span>·</span> PARC</span>
+          <span class="marquee-item"><span>·</span> AWS</span>
+          <span class="marquee-item"><span>·</span> Dovetailed</span>
+          <span class="marquee-item"><span>·</span> Nu Food</span>
+          <span class="marquee-item"><span>·</span> AVEVA</span>
+          <span class="marquee-item"><span>·</span> GE</span>
+          <span class="marquee-item"><span>·</span> UCL</span>
+          <span class="marquee-item"><span>·</span> Microsoft Research</span>
+          <span class="marquee-item"><span>·</span> King's College London</span>
+          <span class="marquee-item"><span>·</span> PARC</span>
+        </div>
+      </div>
 
-        <!-- WORK -->
-        <div class="portfolio-section">
-          <h2>Selected Work</h2>
+      <div class="pf-body">
 
-          <div class="cs-card">
-            <div class="cs-header">
+        <div class="pf-section">
+          <div class="pf-section-title reveal">Industry Projects</div>
+
+          <div class="cs-card reveal" onclick="toggleCard(this)">
+            <div class="cs-card-top">
               <div>
-                <div class="cs-meta">Amazon Web Services &nbsp;·&nbsp; 2019 – Present</div>
-                <h3 class="cs-title">Agentic AI &amp; Human-in-the-Loop UX</h3>
-                <p class="cs-one-liner">Designing the human layer for AWS's most complex AI/ML products.</p>
+                <div class="cs-num">01</div>
+                <div class="cs-meta">Amazon Web Services · 2019 – Present</div>
+                <div class="cs-title">Agentic AI &amp; Human-in-the-Loop UX</div>
+                <div class="cs-one-liner">Designing the human layer for AWS's most complex AI/ML products.</div>
               </div>
-              <div class="cs-impact-block">
-                <div class="cs-impact-num">$500M+</div>
-                <div class="cs-impact-label">Revenue</div>
+              <div style="display:flex;align-items:center;gap:2rem;">
+                <div class="cs-impact">
+                  <span class="cs-impact-num">$500M+</span>
+                  <span class="cs-impact-label">Revenue</span>
+                </div>
+                <div class="cs-toggle">+</div>
               </div>
             </div>
             <div class="cs-body">
@@ -768,157 +1150,143 @@
               </div>
               <div class="cs-col">
                 <div class="cs-col-label">Decisions</div>
-                <p>Shaped product strategy and design direction for agentic AI systems where trust, transparency, and human oversight are paramount.</p>
+                <p>Shaped product strategy for agentic AI systems where trust, transparency, and human oversight are paramount.</p>
               </div>
               <div class="cs-col">
                 <div class="cs-col-label">Outcomes</div>
-                <p>Influenced roadmaps across multiple AWS orgs. Mentored designers. Delivered AI products now generating $500M+ in annual revenue.</p>
+                <p>Influenced roadmaps across multiple AWS orgs. Mentored designers. Delivered AI products generating $500M+ in annual revenue.</p>
               </div>
             </div>
           </div>
 
-          <div class="cs-card">
-            <div class="cs-header">
+          <div class="cs-card reveal" onclick="toggleCard(this)">
+            <div class="cs-card-top">
               <div>
-                <div class="cs-meta">Dovetailed &nbsp;·&nbsp; 2011 – Present</div>
-                <h3 class="cs-title">UX &amp; Innovation Studio</h3>
-                <p class="cs-one-liner">Award-winning studio spanning AI, health, food tech, water, and industrial sectors.</p>
+                <div class="cs-num">02</div>
+                <div class="cs-meta">Dovetailed · 2011 – Present</div>
+                <div class="cs-title">UX &amp; Innovation Studio</div>
+                <div class="cs-one-liner">Award-winning studio spanning AI, health, food tech, water, and industrial sectors.</div>
               </div>
-              <div class="cs-impact-block">
-                <div class="cs-impact-num">10+</div>
-                <div class="cs-impact-label">Sectors</div>
+              <div style="display:flex;align-items:center;gap:2rem;">
+                <div class="cs-impact">
+                  <span class="cs-impact-num">10+</span>
+                  <span class="cs-impact-label">Sectors</span>
+                </div>
+                <div class="cs-toggle">+</div>
               </div>
             </div>
             <div class="cs-body">
               <div class="cs-col">
                 <div class="cs-col-label">Process</div>
-                <p>Built and led a full-service UX and innovation studio — from early-stage research and concept to product launch and iteration.</p>
+                <p>Built and led a full-service UX studio — from early-stage research and concept to product launch and iteration.</p>
               </div>
               <div class="cs-col">
                 <div class="cs-col-label">Decisions</div>
-                <p>Chose depth over breadth: deep sector immersion to translate complex domain knowledge into accessible, human-centered experiences.</p>
+                <p>Deep sector immersion to translate complex domain knowledge into accessible, human-centered experiences.</p>
               </div>
               <div class="cs-col">
                 <div class="cs-col-label">Outcomes</div>
-                <p>Multiple industry awards. A patented food technology. Academic publications. Clients ranging from seed-stage startups to global enterprises.</p>
+                <p>Multiple industry awards. A patented food technology. Academic publications. Clients from seed-stage to global enterprise.</p>
               </div>
             </div>
-            <a class="cs-link" href="https://dovetailed.io" target="_blank">dovetailed.io ↗</a>
+            <div class="cs-card-footer">
+              <a class="cs-link" href="https://dovetailed.io" target="_blank" onclick="event.stopPropagation()">dovetailed.io ↗</a>
+            </div>
           </div>
 
-          <div class="cs-card">
-            <div class="cs-header">
+          <div class="cs-card reveal" onclick="toggleCard(this)">
+            <div class="cs-card-top">
               <div>
-                <div class="cs-meta">Dovetailed &nbsp;·&nbsp; Food Technology</div>
-                <h3 class="cs-title">Nu Food — 3D Food Printing</h3>
-                <p class="cs-one-liner">Reimagining food as a design material.</p>
+                <div class="cs-num">03</div>
+                <div class="cs-meta">Dovetailed · Food Technology</div>
+                <div class="cs-title">Nu Food — 3D Food Printing</div>
+                <div class="cs-one-liner">Reimagining food as a design material.</div>
               </div>
-              <div class="cs-impact-block">
-                <div class="cs-impact-num">1</div>
-                <div class="cs-impact-label">Patent</div>
+              <div style="display:flex;align-items:center;gap:2rem;">
+                <div class="cs-impact">
+                  <span class="cs-impact-num">1</span>
+                  <span class="cs-impact-label">Patent</span>
+                </div>
+                <div class="cs-toggle">+</div>
               </div>
             </div>
             <div class="cs-body">
               <div class="cs-col">
                 <div class="cs-col-label">Process</div>
-                <p>Co-founded a food innovation venture, combining hardware, software, and culinary design to explore 3D food printing at commercial scale.</p>
+                <p>Co-founded a food innovation venture combining hardware, software, and culinary design to explore 3D food printing at commercial scale.</p>
               </div>
               <div class="cs-col">
                 <div class="cs-col-label">Decisions</div>
-                <p>Led user research on consumer perceptions of novel food technology — critical for determining product-market fit in an emerging category.</p>
+                <p>Led user research on consumer perceptions of novel food technology — critical for product-market fit in an emerging category.</p>
               </div>
               <div class="cs-col">
                 <div class="cs-col-label">Outcomes</div>
-                <p>Published at CHI 2018. Awarded US Patent 10912327. Recognised at the Smart Kitchen Summit Startup Showcase (2016).</p>
+                <p>Published at CHI 2018. Awarded US Patent 10912327. Smart Kitchen Summit Startup Showcase Winner (2016).</p>
               </div>
             </div>
-            <a class="cs-link" href="https://nufood.io" target="_blank">nufood.io ↗</a>
+            <div class="cs-card-footer">
+              <a class="cs-link" href="https://nufood.io" target="_blank" onclick="event.stopPropagation()">nufood.io ↗</a>
+            </div>
           </div>
 
-          <div class="cs-card">
-            <div class="cs-header">
+          <div class="cs-card reveal" onclick="toggleCard(this)">
+            <div class="cs-card-top">
               <div>
-                <div class="cs-meta">AVEVA &nbsp;·&nbsp; Cambridge, UK &nbsp;·&nbsp; 2011–2012</div>
-                <h3 class="cs-title">Human-Centered Design in Industrial Software</h3>
-                <p class="cs-one-liner">Bringing UX into one of the world's leading engineering software companies.</p>
+                <div class="cs-num">04</div>
+                <div class="cs-meta">AVEVA · Cambridge, UK · 2011–2012</div>
+                <div class="cs-title">Human-Centered Design in Industrial Software</div>
+                <div class="cs-one-liner">Bringing UX into one of the world's leading engineering software companies.</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:2rem;">
+                <div class="cs-toggle">+</div>
               </div>
             </div>
             <div class="cs-body">
               <div class="cs-col">
                 <div class="cs-col-label">Process</div>
-                <p>Introduced research-led UX methods into established engineering software workflows — a significant cultural and process shift.</p>
+                <p>Introduced research-led UX methods into established engineering software workflows.</p>
               </div>
               <div class="cs-col">
                 <div class="cs-col-label">Outcomes</div>
-                <p>Shaped new product development direction with a human-centered lens in a domain where usability had historically been secondary.</p>
+                <p>Shaped new product development with a human-centered lens in a domain where usability had historically been secondary.</p>
               </div>
             </div>
           </div>
 
         </div>
 
-        <!-- RESEARCH -->
-        <div class="portfolio-section">
-          <h2>Research &amp; Publications</h2>
-          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;">10+ peer-reviewed publications at top HCI venues. Multiple Best Paper (Top 1%) and Honorable Mention (Top 5%) awards at ACM CHI.</p>
+        <div class="pf-section">
+          <div class="pf-section-title reveal">Research &amp; Publications</div>
+          <p class="reveal" style="font-size:0.82rem;color:var(--muted);margin-bottom:1.5rem;letter-spacing:0.05em;">10+ peer-reviewed publications at top HCI venues. Multiple Best Paper (Top 1%) and Honorable Mention (Top 5%) awards at ACM CHI.</p>
 
-          <div class="pub-entry">
-            <div class="pub-title">User perceptions of 3D food printing technologies</div>
-            <div class="pub-meta">ACM CHI 2018</div>
-          </div>
-          <div class="pub-entry">
-            <div class="pub-title">Don't Waste My Time: Use of Time Information Improves Focus <span class="badge">Best Paper</span></div>
-            <div class="pub-meta">ACM CHI 2016</div>
-          </div>
-          <div class="pub-entry">
-            <div class="pub-title">Best Paper Award <span class="badge">Top 1%</span></div>
-            <div class="pub-meta">ACM CHI 2015</div>
-          </div>
-          <div class="pub-entry">
-            <div class="pub-title">Best Paper Award <span class="badge">Top 1%</span></div>
-            <div class="pub-meta">ACM CHI 2012</div>
-          </div>
-          <div class="pub-entry">
-            <div class="pub-title">Best Paper Award <span class="badge">Top 1%</span></div>
-            <div class="pub-meta">ACM CHI 2007</div>
-          </div>
-          <div class="pub-entry">
-            <div class="pub-title">Additional publications in CSCW and CHI (2007–2018)</div>
-            <div class="pub-meta">ACM Digital Library</div>
+          <div class="pub-entry reveal"><div class="pub-title">User perceptions of 3D food printing technologies</div><div class="pub-meta">CHI 2018</div></div>
+          <div class="pub-entry reveal"><div class="pub-title">Don't Waste My Time: Use of Time Information Improves Focus <span class="badge">Best Paper</span></div><div class="pub-meta">CHI 2016</div></div>
+          <div class="pub-entry reveal"><div class="pub-title">Best Paper Award <span class="badge">Top 1%</span></div><div class="pub-meta">CHI 2015</div></div>
+          <div class="pub-entry reveal"><div class="pub-title">Best Paper Award <span class="badge">Top 1%</span></div><div class="pub-meta">CHI 2012</div></div>
+          <div class="pub-entry reveal"><div class="pub-title">Best Paper Award <span class="badge">Top 1%</span></div><div class="pub-meta">CHI 2007</div></div>
+          <div class="pub-entry reveal"><div class="pub-title">Additional publications in CSCW and CHI (2007–2018)</div><div class="pub-meta">ACM Library</div></div>
+        </div>
+
+        <div class="pf-section">
+          <div class="pf-section-title reveal">Patents</div>
+          <div class="award-item reveal">
+            <div class="award-year">2021</div>
+            <div class="award-name">Droplet assemblies and methods for producing droplet assemblies — US 10912327</div>
           </div>
         </div>
 
-        <!-- RECOGNITION -->
-        <div class="portfolio-section">
-          <h2>Recognition</h2>
-          <div class="award-grid">
-            <div class="award-item">
-              <div class="award-year">2021</div>
-              <div class="award-name">SME Cambridgeshire — Positive Impact &amp; Business Woman of the Year Finalist</div>
-            </div>
-            <div class="award-item">
-              <div class="award-year">2018</div>
-              <div class="award-name">Royal Society of Chemistry "Chemistry Means Business" Award</div>
-            </div>
-            <div class="award-item">
-              <div class="award-year">2016</div>
-              <div class="award-name">Smart Kitchen Summit — Startup Showcase Winner</div>
-            </div>
-            <div class="award-item">
-              <div class="award-year">2015</div>
-              <div class="award-name">Cambridge News Business Excellence Finalist</div>
-            </div>
-            <div class="award-item">
-              <div class="award-year">2007–15</div>
-              <div class="award-name">ACM CHI Best Paper (Top 1%) &amp; Honorable Mention (Top 5%)</div>
-            </div>
-          </div>
+        <div class="pf-section">
+          <div class="pf-section-title reveal">Recognition</div>
+          <div class="award-item reveal"><div class="award-year">2021</div><div class="award-name">SME Cambridgeshire — Positive Impact &amp; Business Woman of the Year Finalist</div></div>
+          <div class="award-item reveal"><div class="award-year">2018</div><div class="award-name">Royal Society of Chemistry "Chemistry Means Business" Award</div></div>
+          <div class="award-item reveal"><div class="award-year">2016</div><div class="award-name">Smart Kitchen Summit — Startup Showcase Winner</div></div>
+          <div class="award-item reveal"><div class="award-year">2015</div><div class="award-name">Cambridge News Business Excellence Finalist</div></div>
+          <div class="award-item reveal"><div class="award-year">2007–15</div><div class="award-name">ACM CHI Best Paper (Top 1%) &amp; Honorable Mention (Top 5%)</div></div>
         </div>
 
-        <!-- CTA -->
-        <div class="pf-cta">
-          <div class="pf-cta-label">Get in touch</div>
-          <h2 class="pf-cta-heading">Let's work together.</h2>
+        <div class="pf-cta reveal">
+          <div class="pf-cta-eyebrow">Get in touch</div>
+          <div class="pf-cta-title">Let's work<br/>together.</div>
           <p class="pf-cta-sub">Open to senior design leadership, advisory, and consulting conversations.</p>
           <a class="pf-cta-btn" href="mailto:vaiva@dovetailed.io">vaiva@dovetailed.io</a>
           <div class="pf-cta-links">
@@ -933,6 +1301,7 @@
   </div><!-- /app -->
 
   <script>
+    /* ── Password ── */
     function checkPassword() {
       const input = document.getElementById('pw-input').value;
       if (input === 'lapka') {
@@ -945,11 +1314,11 @@
         document.getElementById('pw-input').focus();
       }
     }
-
-    document.getElementById('pw-input').addEventListener('keydown', function(e) {
+    document.getElementById('pw-input').addEventListener('keydown', e => {
       if (e.key === 'Enter') checkPassword();
     });
 
+    /* ── Page navigation ── */
     function showPage(name) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('nav ul li a').forEach(a => a.classList.remove('active'));
@@ -957,6 +1326,30 @@
       const navEl = document.getElementById('nav-' + name);
       if (navEl) navEl.classList.add('active');
       window.scrollTo(0, 0);
+      // re-trigger reveals for the new page
+      setTimeout(initReveals, 50);
+    }
+
+    /* ── Scroll reveal ── */
+    function initReveals() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.page.active .reveal:not(.revealed)').forEach(el => {
+        observer.observe(el);
+      });
+    }
+    initReveals();
+
+    /* ── Expandable case study cards ── */
+    function toggleCard(card) {
+      // Don't toggle if clicking a link
+      card.classList.toggle('open');
     }
   </script>
 </body>
