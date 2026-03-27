@@ -114,6 +114,16 @@
       min-height: 1em;
     }
 
+    /* ─── Top gradient bar (keeps nav readable while scrolling) ─── */
+    #top-gradient {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0) 100%);
+      pointer-events: none;
+      z-index: 99;
+    }
+
     /* ─── FIXED NAV (top right, like lolajiang.com) ─── */
     #site-nav {
       position: fixed;
@@ -529,6 +539,9 @@
 
 <!-- ══ APP ══ -->
 <div id="app" class="view">
+
+  <!-- Top gradient -->
+  <div id="top-gradient"></div>
 
   <!-- Fixed name top left -->
   <span class="site-name" onclick="showPage('portfolio')">Vaiva Kalnikaitė</span>
