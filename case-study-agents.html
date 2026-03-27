@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study — Vaiva Kalnikaitė</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,300;0,400;1,300&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #ffffff;
+      --text:   #333333;
+      --muted:  #666666;
+      --border: #cccccc;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Lora', serif;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 36px;
+    }
+
+    /* ── Login ── */
+    #login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 1.5rem;
+    }
+    #login .login-name {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: 28px;
+      color: var(--text);
+    }
+    #login p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    #login input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0;
+      font-family: 'Raleway', sans-serif;
+      font-size: 14px;
+      width: 220px;
+      text-align: center;
+      letter-spacing: 0.2em;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    #login input:focus { border-bottom-color: var(--text); }
+    #login button {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.5rem 2rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    #login button:hover { background: var(--text); color: var(--bg); }
+    #login .error {
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #cc0000;
+      min-height: 1em;
+    }
+
+    /* ── Page ── */
+    #page { display: none; }
+
+    nav {
+      position: fixed;
+      top: 1em; right: 1em;
+      z-index: 100;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    nav a {
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    nav a:hover { opacity: 0.5; }
+
+    .back-link {
+      position: fixed;
+      top: 1em; left: 1em;
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    .back-link:hover { opacity: 0.5; }
+
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 8rem 15px 6rem;
+    }
+    .content h1 {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: 42px;
+      line-height: 50px;
+      margin-bottom: 2rem;
+    }
+    .content p {
+      margin-bottom: 1em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div id="login">
+    <div class="login-name">Customizing AI Models with Agents</div>
+    <p>Case Study</p>
+    <input type="password" id="pw-input" placeholder="password" autocomplete="current-password" />
+    <button onclick="checkPassword()">Enter</button>
+    <div class="error" id="pw-error"></div>
+  </div>
+
+  <!-- Page content -->
+  <div id="page">
+    <a class="back-link" href="vk.html">← Back</a>
+    <nav>
+      <a href="vk.html">Portfolio</a>
+    </nav>
+    <div class="content">
+      <h1>Customizing AI Models with Agents</h1>
+      <p>hello world</p>
+    </div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById('pw-input').value;
+      if (input === 'lapka') {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('page').style.display = 'block';
+      } else {
+        document.getElementById('pw-error').textContent = 'Incorrect password.';
+        document.getElementById('pw-input').value = '';
+        document.getElementById('pw-input').focus();
+      }
+    }
+    document.getElementById('pw-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') checkPassword();
+    });
+  </script>
+
+</body>
+</html>
