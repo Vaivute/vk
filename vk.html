@@ -474,19 +474,47 @@
       color: var(--muted);
     }
 
-    /* Awards list */
-    .awards-list {
-      list-style: none;
+    /* Awards tiles */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 0.5rem;
     }
-    .awards-list li {
-      font-size: 16px;
-      line-height: 30px;
+    .award-tile {
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .award-tile:hover {
+      border-color: #aaa;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .award-icon {
+      width: 28px;
+      height: 28px;
+      opacity: 0.45;
+      flex-shrink: 0;
+    }
+    .award-text {
+      font-family: 'Raleway', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .award-year {
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--muted);
-      font-weight: 300;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(204,204,204,0.4);
+      margin-top: auto;
     }
-    .awards-list li:last-child { border-bottom: none; }
 
     /* ═══════════════════════════════════════
        ABOUT PAGE
@@ -756,14 +784,57 @@
 
       <div class="cv-section">
         <div class="cv-section-label">Awards &amp; Recognition</div>
-        <ul class="awards-list">
-          <li>SME Cambridgeshire Business Awards – Positive Impact &amp; Business Woman of the Year Finalist (2021)</li>
-          <li>Royal Society of Chemistry "Chemistry Means Business" Award (2018)</li>
-          <li>CHI Best Paper (Top 1%) &amp; Honorable Mention (Top 5%) — 2007, 2012, 2015</li>
-          <li>Smart Kitchen Summit – Startup Showcase Winner (2016)</li>
-          <li>Cambridge News Business Excellence Finalist (2015)</li>
-          <li>Multiple Innovation and Open Pitch Awards (GE, IfM Cambridge)</li>
-        </ul>
+        <div class="awards-grid">
+
+          <div class="award-tile">
+            <svg class="award-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+            </svg>
+            <div class="award-text">SME Cambridgeshire Business Awards — Positive Impact &amp; Business Woman of the Year Finalist</div>
+            <div class="award-year">2021</div>
+          </div>
+
+          <div class="award-tile">
+            <svg class="award-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 3h6v7l2 4H7l2-4V3z"/><path d="M7 14c0 2.76 2.24 5 5 5s5-2.24 5-5"/><line x1="9" y1="3" x2="15" y2="3"/>
+            </svg>
+            <div class="award-text">Royal Society of Chemistry "Chemistry Means Business" Award</div>
+            <div class="award-year">2018</div>
+          </div>
+
+          <div class="award-tile">
+            <svg class="award-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="4" y="4" width="16" height="16" rx="1"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/>
+            </svg>
+            <div class="award-text">ACM CHI Best Paper (Top 1%) &amp; Honorable Mention (Top 5%)</div>
+            <div class="award-year">2007 · 2012 · 2015</div>
+          </div>
+
+          <div class="award-tile">
+            <svg class="award-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M8 21h8M12 17v4M5 7l1 8h12l1-8"/><path d="M3 7h18"/><path d="M9 7V4h6v3"/>
+            </svg>
+            <div class="award-text">Smart Kitchen Summit — Startup Showcase Winner</div>
+            <div class="award-year">2016</div>
+          </div>
+
+          <div class="award-tile">
+            <svg class="award-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4"/><path d="M8 12l-2 8 6-3 6 3-2-8"/>
+            </svg>
+            <div class="award-text">Cambridge News Business Excellence Finalist</div>
+            <div class="award-year">2015</div>
+          </div>
+
+          <div class="award-tile">
+            <svg class="award-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2a4 4 0 0 1 4 4c0 1.5-.8 2.8-2 3.46V12h-4V9.46A4 4 0 0 1 8 6a4 4 0 0 1 4-4z"/><rect x="9" y="12" width="6" height="3" rx="0.5"/><path d="M7 15h10l1 5H6l1-5z"/>
+            </svg>
+            <div class="award-text">Multiple Innovation &amp; Open Pitch Awards</div>
+            <div class="award-year">GE · IfM Cambridge</div>
+          </div>
+
+        </div>
       </div>
 
       <div class="cv-section">
