@@ -278,26 +278,137 @@
       100% { transform: translate(-6%, 5%) scale(0.95); }
     }
 
-    /* ── HERO: abstract image layer ── */
+    /* ── HERO: image layer ── */
     .hero-image {
       position: absolute;
       inset: -6%;
       width: 112%;
       height: 112%;
       object-fit: cover;
-      opacity: 0.22;
+      opacity: 0.55;
       mix-blend-mode: overlay;
-      filter: blur(18px) saturate(2.4) brightness(1.1) hue-rotate(0deg);
-      animation: imageFloat 30s ease-in-out infinite alternate;
-      will-change: transform, filter;
+      filter: blur(3px) saturate(1.6) brightness(1.05);
+      animation: imageFloat 28s ease-in-out infinite alternate;
+      will-change: transform;
       pointer-events: none;
     }
     @keyframes imageFloat {
-      0%   { transform: scale(1.04) translate(0%,    0%)   rotate(0deg);    filter: blur(18px) saturate(2.4) brightness(1.1)  hue-rotate(0deg);  }
-      25%  { transform: scale(1.10) translate(-2.5%, 1.5%) rotate(0.4deg);  filter: blur(12px) saturate(2.8) brightness(1.14) hue-rotate(14deg); }
-      50%  { transform: scale(1.07) translate(1.5%, -2%)   rotate(-0.3deg); filter: blur(22px) saturate(2.0) brightness(1.05) hue-rotate(-8deg); }
-      75%  { transform: scale(1.13) translate(-1%,   2.5%) rotate(0.5deg);  filter: blur(14px) saturate(2.6) brightness(1.12) hue-rotate(20deg); }
-      100% { transform: scale(1.08) translate(2%,   -1.5%) rotate(-0.2deg); filter: blur(16px) saturate(2.2) brightness(1.08) hue-rotate(6deg);  }
+      0%   { transform: scale(1.04) translate(0%,    0%); }
+      33%  { transform: scale(1.10) translate(-1.5%, 1.2%); }
+      66%  { transform: scale(1.07) translate(1.2%, -1.5%); }
+      100% { transform: scale(1.12) translate(-1%,   1%); }
+    }
+
+    /* ── SUN GLOW: pulsing light at sun position ── */
+    .sun-glow {
+      position: absolute;
+      width: 420px; height: 420px;
+      left: 60%; top: 47%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle,
+        rgba(255,248,200,0.95) 0%,
+        rgba(255,220,100,0.60) 18%,
+        rgba(255,180,50,0.25)  40%,
+        transparent 70%);
+      mix-blend-mode: screen;
+      animation: sunPulse 5s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes sunPulse {
+      0%, 100% { transform: translate(-50%,-50%) scale(1);    opacity: 0.8; }
+      50%       { transform: translate(-50%,-50%) scale(1.35); opacity: 1;   }
+    }
+
+    /* ── SUN RAYS: rotating conic gradient ── */
+    .sun-rays {
+      position: absolute;
+      width: 900px; height: 900px;
+      left: 60%; top: 47%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,   rgba(255,245,180,0.18) 8deg,
+        transparent 16deg,  rgba(255,245,180,0.12) 22deg,
+        transparent 30deg,  rgba(255,245,180,0.20) 38deg,
+        transparent 46deg,  rgba(255,245,180,0.10) 52deg,
+        transparent 60deg,  rgba(255,245,180,0.18) 68deg,
+        transparent 76deg,  rgba(255,245,180,0.14) 82deg,
+        transparent 90deg,  rgba(255,245,180,0.20) 98deg,
+        transparent 106deg, rgba(255,245,180,0.10) 112deg,
+        transparent 120deg, rgba(255,245,180,0.18) 128deg,
+        transparent 136deg, rgba(255,245,180,0.12) 142deg,
+        transparent 150deg, rgba(255,245,180,0.22) 158deg,
+        transparent 166deg, rgba(255,245,180,0.10) 172deg,
+        transparent 180deg, rgba(255,245,180,0.18) 188deg,
+        transparent 196deg, rgba(255,245,180,0.14) 202deg,
+        transparent 210deg, rgba(255,245,180,0.20) 218deg,
+        transparent 226deg, rgba(255,245,180,0.10) 232deg,
+        transparent 240deg, rgba(255,245,180,0.18) 248deg,
+        transparent 256deg, rgba(255,245,180,0.12) 262deg,
+        transparent 270deg, rgba(255,245,180,0.20) 278deg,
+        transparent 286deg, rgba(255,245,180,0.10) 292deg,
+        transparent 300deg, rgba(255,245,180,0.18) 308deg,
+        transparent 316deg, rgba(255,245,180,0.14) 322deg,
+        transparent 330deg, rgba(255,245,180,0.20) 338deg,
+        transparent 346deg, rgba(255,245,180,0.10) 352deg,
+        transparent 360deg
+      );
+      mix-blend-mode: screen;
+      animation: raysRotate 40s linear infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes raysRotate {
+      to { transform: translate(-50%,-50%) rotate(360deg); }
+    }
+
+    /* ── SPARKLES around the sun ── */
+    .sparkle {
+      position: absolute;
+      z-index: 3;
+      pointer-events: none;
+      animation: twinkle var(--dur) ease-in-out infinite var(--delay);
+    }
+    .sparkle::before, .sparkle::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: 50%;
+      background: rgba(255,252,220,0.95);
+      border-radius: 2px;
+      box-shadow: 0 0 6px 2px rgba(255,240,150,0.9);
+    }
+    .sparkle::before {
+      width: 2px; height: var(--size);
+      transform: translate(-50%,-50%);
+    }
+    .sparkle::after {
+      width: var(--size); height: 2px;
+      transform: translate(-50%,-50%);
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0;   transform: scale(0.2) rotate(var(--rot,0deg)); }
+      40%, 60% { opacity: 1;   transform: scale(1)   rotate(calc(var(--rot,0deg) + 15deg)); }
+    }
+
+    /* lens flare streak */
+    .sun-flare {
+      position: absolute;
+      left: 30%; top: 44%;
+      width: 40%; height: 3px;
+      background: linear-gradient(to right, transparent, rgba(255,240,180,0.55) 40%, rgba(255,255,255,0.8) 50%, rgba(255,240,180,0.55) 60%, transparent);
+      mix-blend-mode: screen;
+      border-radius: 2px;
+      transform-origin: right center;
+      animation: flareShimmer 6s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes flareShimmer {
+      0%, 100% { opacity: 0.3; transform: scaleX(1) skewY(0deg); }
+      50%       { opacity: 0.9; transform: scaleX(1.15) skewY(1deg); }
     }
 
     /* ── HERO SLIDES ── */
@@ -846,6 +957,21 @@
           <div class="blob blob-3"></div>
           <div class="blob blob-4"></div>
           <img class="hero-image" src="sunshine.jpg" alt="" aria-hidden="true">
+          <!-- Sun effects -->
+          <div class="sun-rays"></div>
+          <div class="sun-glow"></div>
+          <div class="sun-flare"></div>
+          <!-- Sparkles: style="left:X%;top:Y%;--size:Npx;--dur:Xs;--delay:Xs;--rot:Ndeg" -->
+          <div class="sparkle" style="left:59%;top:45%;--size:18px;--dur:2.8s;--delay:0s;--rot:45deg"></div>
+          <div class="sparkle" style="left:62%;top:43%;--size:12px;--dur:3.4s;--delay:0.6s;--rot:20deg"></div>
+          <div class="sparkle" style="left:57%;top:48%;--size:10px;--dur:2.5s;--delay:1.1s;--rot:60deg"></div>
+          <div class="sparkle" style="left:64%;top:46%;--size:14px;--dur:3.8s;--delay:0.3s;--rot:10deg"></div>
+          <div class="sparkle" style="left:60%;top:42%;--size:8px;--dur:2.2s;--delay:1.5s;--rot:80deg"></div>
+          <div class="sparkle" style="left:56%;top:44%;--size:16px;--dur:4.0s;--delay:0.9s;--rot:35deg"></div>
+          <div class="sparkle" style="left:63%;top:50%;--size:10px;--dur:3.1s;--delay:0.4s;--rot:55deg"></div>
+          <div class="sparkle" style="left:58%;top:51%;--size:12px;--dur:2.7s;--delay:1.8s;--rot:70deg"></div>
+          <div class="sparkle" style="left:66%;top:44%;--size:8px;--dur:3.5s;--delay:0.7s;--rot:15deg"></div>
+          <div class="sparkle" style="left:54%;top:46%;--size:14px;--dur:2.9s;--delay:1.2s;--rot:50deg"></div>
         </div>
 
         <!-- Text slides (all stacked, JS transitions between them) -->
