@@ -199,7 +199,7 @@
     }
     .site-name:hover { text-decoration: none; opacity: 0.6; }
 
-    /* Hero — full viewport, gradient background, centred text block with left border */
+    /* Hero — full viewport, animated gradient background */
     .hero {
       min-height: 100vh;
       width: 100%;
@@ -212,29 +212,58 @@
         radial-gradient(ellipse 55% 65% at 95% 92%, rgba(210, 168, 128, 0.60) 0%, transparent 65%),
         radial-gradient(ellipse 80% 80% at 55% 45%, rgba(242, 238, 233, 0.55) 0%, transparent 100%),
         #ede8e3;
+      animation: gradientShift 12s ease-in-out infinite alternate;
     }
+    @keyframes gradientShift {
+      0%   { filter: hue-rotate(0deg) brightness(1); }
+      50%  { filter: hue-rotate(8deg) brightness(1.02); }
+      100% { filter: hue-rotate(-6deg) brightness(0.98); }
+    }
+
     .hero-text-block {
-      border-left: 2px solid rgba(60, 70, 70, 0.35);
-      padding-left: 1.5rem;
-      max-width: 240px;
       position: relative;
       top: 2vh;
       left: 5vw;
+      max-width: 520px;
+      padding-left: 2rem;
+    }
+    .hero-text-block::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2px;
+      height: 0;
+      background: rgba(60, 70, 70, 0.35);
+      animation: growBorder 1s ease-out 0.3s forwards;
+    }
+    @keyframes growBorder {
+      to { height: 100%; }
     }
     .hero-text-block h1 {
       font-family: var(--qs);
       font-weight: 400;
-      font-size: 42px;
-      line-height: 50px;
+      font-size: 62px;
+      line-height: 70px;
       color: #3a4444;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.9s ease-out 0.5s forwards;
     }
     .hero-text-block .tagline {
       font-family: var(--mw);
-      font-size: 14px;
-      line-height: 24px;
+      font-size: 17px;
+      line-height: 30px;
       font-weight: 300;
       color: #4a5555;
+      text-align: justify;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.9s ease-out 0.85s forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Hero down arrow */
@@ -243,8 +272,11 @@
       bottom: 2.5rem;
       left: 50%;
       transform: translateX(-50%);
-      animation: bounce 2s ease-in-out infinite;
-      opacity: 0.6;
+      opacity: 0;
+      animation: arrowAppear 0.6s ease-out 1.4s forwards, bounce 2s ease-in-out 2s infinite;
+    }
+    @keyframes arrowAppear {
+      to { opacity: 0.6; }
     }
     @keyframes bounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
