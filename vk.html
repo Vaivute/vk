@@ -299,26 +299,58 @@
       100% { transform: scale(1.12) translate(-1%,   1%); }
     }
 
-    /* ── SUN GLOW: pulsing light at sun position ── */
-    .sun-glow {
+    /* ── EDGE SHIMMERS: subtle bokeh-like movement on the edges ── */
+    .edge-shimmer {
       position: absolute;
-      width: 420px; height: 420px;
-      left: 60%; top: 47%;
-      transform: translate(-50%, -50%);
       border-radius: 50%;
-      background: radial-gradient(circle,
-        rgba(255,248,200,0.95) 0%,
-        rgba(255,220,100,0.60) 18%,
-        rgba(255,180,50,0.25)  40%,
-        transparent 70%);
       mix-blend-mode: screen;
-      animation: sunPulse 5s ease-in-out infinite;
       pointer-events: none;
       z-index: 2;
+      opacity: 0.35;
     }
-    @keyframes sunPulse {
-      0%, 100% { transform: translate(-50%,-50%) scale(1);    opacity: 0.8; }
-      50%       { transform: translate(-50%,-50%) scale(1.35); opacity: 1;   }
+    .edge-tl {
+      width: 40vw; height: 40vw;
+      top: -10%; left: -8%;
+      background: radial-gradient(circle, rgba(180,220,210,0.6) 0%, transparent 70%);
+      animation: edgeDrift1 18s ease-in-out infinite alternate;
+    }
+    .edge-tr {
+      width: 32vw; height: 32vw;
+      top: -8%; right: -6%;
+      background: radial-gradient(circle, rgba(240,210,160,0.5) 0%, transparent 70%);
+      animation: edgeDrift2 22s ease-in-out infinite alternate;
+    }
+    .edge-bl {
+      width: 36vw; height: 36vw;
+      bottom: -10%; left: -5%;
+      background: radial-gradient(circle, rgba(160,200,190,0.55) 0%, transparent 70%);
+      animation: edgeDrift3 26s ease-in-out infinite alternate;
+    }
+    .edge-br {
+      width: 30vw; height: 30vw;
+      bottom: -8%; right: -4%;
+      background: radial-gradient(circle, rgba(220,190,140,0.45) 0%, transparent 70%);
+      animation: edgeDrift4 20s ease-in-out infinite alternate;
+    }
+    @keyframes edgeDrift1 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(6%, 8%) scale(1.12); }
+      100% { transform: translate(10%, 4%) scale(0.96); }
+    }
+    @keyframes edgeDrift2 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(-8%, 6%) scale(1.08); }
+      100% { transform: translate(-4%, 10%) scale(1.14); }
+    }
+    @keyframes edgeDrift3 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(7%, -6%) scale(1.1); }
+      100% { transform: translate(4%, -10%) scale(0.94); }
+    }
+    @keyframes edgeDrift4 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(-6%, -8%) scale(1.06); }
+      100% { transform: translate(-10%, -4%) scale(1.12); }
     }
 
     /* ── SUN RAYS: rotating conic gradient ── */
@@ -365,33 +397,6 @@
       to { transform: translate(-50%,-50%) rotate(360deg); }
     }
 
-    /* ── SPARKLES around the sun ── */
-    .sparkle {
-      position: absolute;
-      z-index: 3;
-      pointer-events: none;
-      animation: twinkle var(--dur) ease-in-out infinite var(--delay);
-    }
-    .sparkle::before, .sparkle::after {
-      content: '';
-      position: absolute;
-      left: 50%; top: 50%;
-      background: rgba(255,252,220,0.95);
-      border-radius: 2px;
-      box-shadow: 0 0 6px 2px rgba(255,240,150,0.9);
-    }
-    .sparkle::before {
-      width: 2px; height: var(--size);
-      transform: translate(-50%,-50%);
-    }
-    .sparkle::after {
-      width: var(--size); height: 2px;
-      transform: translate(-50%,-50%);
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0;   transform: scale(0.2) rotate(var(--rot,0deg)); }
-      40%, 60% { opacity: 1;   transform: scale(1)   rotate(calc(var(--rot,0deg) + 15deg)); }
-    }
 
     /* lens flare streak */
     .sun-flare {
@@ -959,19 +964,12 @@
           <img class="hero-image" src="sunshine.jpg" alt="" aria-hidden="true">
           <!-- Sun effects -->
           <div class="sun-rays"></div>
-          <div class="sun-glow"></div>
           <div class="sun-flare"></div>
-          <!-- Sparkles: style="left:X%;top:Y%;--size:Npx;--dur:Xs;--delay:Xs;--rot:Ndeg" -->
-          <div class="sparkle" style="left:59%;top:45%;--size:18px;--dur:2.8s;--delay:0s;--rot:45deg"></div>
-          <div class="sparkle" style="left:62%;top:43%;--size:12px;--dur:3.4s;--delay:0.6s;--rot:20deg"></div>
-          <div class="sparkle" style="left:57%;top:48%;--size:10px;--dur:2.5s;--delay:1.1s;--rot:60deg"></div>
-          <div class="sparkle" style="left:64%;top:46%;--size:14px;--dur:3.8s;--delay:0.3s;--rot:10deg"></div>
-          <div class="sparkle" style="left:60%;top:42%;--size:8px;--dur:2.2s;--delay:1.5s;--rot:80deg"></div>
-          <div class="sparkle" style="left:56%;top:44%;--size:16px;--dur:4.0s;--delay:0.9s;--rot:35deg"></div>
-          <div class="sparkle" style="left:63%;top:50%;--size:10px;--dur:3.1s;--delay:0.4s;--rot:55deg"></div>
-          <div class="sparkle" style="left:58%;top:51%;--size:12px;--dur:2.7s;--delay:1.8s;--rot:70deg"></div>
-          <div class="sparkle" style="left:66%;top:44%;--size:8px;--dur:3.5s;--delay:0.7s;--rot:15deg"></div>
-          <div class="sparkle" style="left:54%;top:46%;--size:14px;--dur:2.9s;--delay:1.2s;--rot:50deg"></div>
+          <!-- Edge shimmer overlays -->
+          <div class="edge-shimmer edge-tl"></div>
+          <div class="edge-shimmer edge-tr"></div>
+          <div class="edge-shimmer edge-bl"></div>
+          <div class="edge-shimmer edge-br"></div>
         </div>
 
         <!-- Text slides (all stacked, JS transitions between them) -->
