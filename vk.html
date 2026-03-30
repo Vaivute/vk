@@ -200,9 +200,21 @@
     }
     .site-name:hover { text-decoration: none; opacity: 0.6; }
 
+    /* ── HERO: sticky scroll container ── */
+    .hero-scroll-container {
+      height: 300vh;
+      position: relative;
+    }
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
     /* ── HERO: animated bokeh background ── */
     .hero-bg {
-      position: fixed;
+      position: absolute;
       inset: 0;
       z-index: 1;
       overflow: hidden;
@@ -210,9 +222,6 @@
       transition: background-color 1.4s cubic-bezier(0.43, 0.195, 0.02, 1);
       pointer-events: none;
     }
-    /* only show the bg when portfolio page is active */
-    #portfolio-page:not(.active) ~ * .hero-bg,
-    .hero-bg.hidden { opacity: 0; }
 
     .blob {
       position: absolute;
@@ -270,25 +279,31 @@
     }
 
     /* ── HERO SLIDES ── */
-    .hero-slides { position: relative; z-index: 2; }
-
-    .hero-slide {
-      min-height: 100vh;
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
       padding: 0 10vw;
     }
 
     .slide-content {
+      position: absolute;
       max-width: 680px;
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s cubic-bezier(0.43,0.195,0.02,1), transform 1s cubic-bezier(0.43,0.195,0.02,1);
+      transform: translateY(36px);
+      transition: opacity 0.85s cubic-bezier(0.43,0.195,0.02,1), transform 0.85s cubic-bezier(0.43,0.195,0.02,1);
+      pointer-events: none;
     }
-    .slide-content.in-view {
+    .slide-content.active {
       opacity: 1;
       transform: translateY(0);
+      pointer-events: auto;
+    }
+    .slide-content.exit {
+      opacity: 0;
+      transform: translateY(-28px);
     }
 
     .slide-label {
@@ -326,7 +341,7 @@
 
     /* thin progress line on right */
     .hero-progress {
-      position: fixed;
+      position: absolute;
       right: 1.8rem;
       top: 50%;
       transform: translateY(-50%);
@@ -798,48 +813,49 @@
   ════════════════════════════════ -->
   <div id="portfolio-page" class="page active">
 
-    <!-- Animated bokeh background -->
-    <div class="hero-bg" id="hero-bg">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
-      <div class="blob blob-4"></div>
-    </div>
+    <!-- Sticky hero: 300vh scroll space, viewport stays pinned -->
+    <div class="hero-scroll-container" id="hero-scroll-container">
+      <div class="hero-sticky">
 
-    <!-- Slide progress dots -->
-    <div class="hero-progress" id="hero-progress">
-      <div class="hero-dot active" data-dot="0"></div>
-      <div class="hero-dot" data-dot="1"></div>
-      <div class="hero-dot" data-dot="2"></div>
-    </div>
-
-    <!-- Three scroll slides -->
-    <div class="hero-slides" id="hero-slides">
-
-      <div class="hero-slide" data-slide="0">
-        <div class="slide-content">
-          <p class="slide-label">Vaiva Kalnikaitė · Portfolio</p>
-          <h1>I design<br><em>AI experiences.</em></h1>
-          <p class="slide-sub">Product Design Leader excelling in human-centered AI strategy and research-led UX — building products from zero to scale.</p>
+        <!-- Animated bokeh background -->
+        <div class="hero-bg" id="hero-bg">
+          <div class="blob blob-1"></div>
+          <div class="blob blob-2"></div>
+          <div class="blob blob-3"></div>
+          <div class="blob blob-4"></div>
         </div>
-      </div>
 
-      <div class="hero-slide" data-slide="1">
-        <div class="slide-content">
-          <p class="slide-label">Approach</p>
-          <h1>I bridge<br><em>research & design.</em></h1>
-          <p class="slide-sub">As Head of UX at Amazon and founder of Dovetailed, I've led cross-functional teams and driven design strategy for global AI products — with a focus on agentic AI and human-in-the-loop systems.</p>
+        <!-- Text slides (all stacked, JS transitions between them) -->
+        <div class="hero-content">
+
+          <div class="slide-content active" data-slide="0">
+            <p class="slide-label">Vaiva Kalnikaitė · Portfolio</p>
+            <h1>I design<br><em>AI experiences.</em></h1>
+            <p class="slide-sub">Product Design Leader excelling in human-centered AI strategy and research-led UX — building products from zero to scale.</p>
+          </div>
+
+          <div class="slide-content" data-slide="1">
+            <p class="slide-label">Approach</p>
+            <h1>I bridge<br><em>research & design.</em></h1>
+            <p class="slide-sub">As Head of UX at Amazon and founder of Dovetailed, I've led cross-functional teams and driven design strategy for global AI products — with a focus on agentic AI and human-in-the-loop systems.</p>
+          </div>
+
+          <div class="slide-content" data-slide="2">
+            <p class="slide-label">Impact</p>
+            <h1>I drive<br><em>measurable impact.</em></h1>
+            <p class="slide-sub">Delivering agentic AI experiences that generate $500M+ in revenue, grounded in real research, bold design thinking — in the most human suitable way.</p>
+          </div>
+
         </div>
-      </div>
 
-      <div class="hero-slide" data-slide="2">
-        <div class="slide-content">
-          <p class="slide-label">Impact</p>
-          <h1>I drive<br><em>measurable impact.</em></h1>
-          <p class="slide-sub">Delivering agentic AI experiences that generate $500M+ in revenue, grounded in real research, bold design thinking — in the most human suitable way.</p>
+        <!-- Progress dots -->
+        <div class="hero-progress" id="hero-progress">
+          <div class="hero-dot active" data-dot="0"></div>
+          <div class="hero-dot" data-dot="1"></div>
+          <div class="hero-dot" data-dot="2"></div>
         </div>
-      </div>
 
+      </div>
     </div>
 
     <!-- Project 1: AWS — lolajiang.com section.slice layout -->
@@ -1234,7 +1250,7 @@
     document.getElementById('hero-progress').style.opacity = name === 'portfolio' ? '1' : '0';
   }
 
-  // Hero scroll tracking
+  // Hero sticky scroll: page stays fixed, text transitions on scroll
   const slideBgs = [
     { bg: '#d8f0ec', blob1: 'rgba(90,180,170,0.75)',  blob2: 'rgba(200,155,110,0.60)', blob3: 'rgba(140,210,200,0.50)', blob4: 'rgba(230,195,155,0.45)' },
     { bg: '#f3e8dc', blob1: 'rgba(210,150,100,0.70)', blob2: 'rgba(225,180,130,0.65)', blob3: 'rgba(240,165,120,0.45)', blob4: 'rgba(200,220,215,0.40)' },
@@ -1242,29 +1258,42 @@
   ];
 
   const heroBg = document.getElementById('hero-bg');
+  const heroContainer = document.getElementById('hero-scroll-container');
+  const slideEls = document.querySelectorAll('.slide-content');
   const dots = document.querySelectorAll('.hero-dot');
+  let currentSlide = 0;
 
   function applySlide(idx) {
+    if (idx === currentSlide) return;
     const s = slideBgs[idx];
     heroBg.style.backgroundColor = s.bg;
     heroBg.style.setProperty('--blob1', s.blob1);
     heroBg.style.setProperty('--blob2', s.blob2);
     heroBg.style.setProperty('--blob3', s.blob3);
     heroBg.style.setProperty('--blob4', s.blob4);
+    // exit current
+    slideEls[currentSlide].classList.remove('active');
+    slideEls[currentSlide].classList.add('exit');
+    const prev = currentSlide;
+    setTimeout(() => slideEls[prev].classList.remove('exit'), 900);
+    // enter new
+    currentSlide = idx;
+    slideEls[currentSlide].classList.add('active');
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
   }
 
-  const slideObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const idx = parseInt(e.target.dataset.slide);
-        applySlide(idx);
-        e.target.querySelector('.slide-content').classList.add('in-view');
-      }
-    });
-  }, { threshold: 0.45 });
+  function onHeroScroll() {
+    if (!heroContainer) return;
+    const rect = heroContainer.getBoundingClientRect();
+    const scrolled = -rect.top;
+    const total = heroContainer.offsetHeight - window.innerHeight;
+    if (scrolled < 0 || total <= 0) return;
+    const progress = Math.min(1, scrolled / total);
+    const idx = Math.min(slideEls.length - 1, Math.floor(progress * slideEls.length));
+    applySlide(idx);
+  }
 
-  document.querySelectorAll('.hero-slide').forEach(s => slideObserver.observe(s));
+  window.addEventListener('scroll', onHeroScroll, { passive: true });
 </script>
 </body>
 </html>
