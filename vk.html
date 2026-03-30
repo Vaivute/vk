@@ -373,7 +373,7 @@
       50%       { opacity: 0.9; transform: scaleX(1.15) skewY(1deg); }
     }
 
-    /* ── HERO SLIDES ── */
+    /* ── HERO TEXT: "I" static, rest transitions ── */
     .hero-content {
       position: absolute;
       inset: 0;
@@ -383,55 +383,81 @@
       padding: 0 10vw;
     }
 
-    .slide-content {
-      position: absolute;
-      max-width: 680px;
-      opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.85s cubic-bezier(0.43,0.195,0.02,1), transform 0.85s cubic-bezier(0.43,0.195,0.02,1);
-      pointer-events: none;
-    }
-    .slide-content.active {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .slide-content.exit {
-      opacity: 0;
-      transform: translateY(-28px);
-    }
+    .hero-text-inner { max-width: 680px; }
 
-    .slide-label {
-      font-family: var(--jso);
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(58,68,68,0.55);
-      margin-bottom: 1.8rem;
-    }
-
-    .slide-content h1 {
+    /* The "I" — never moves */
+    .hero-i {
       font-family: 'EB Garamond', serif;
       font-weight: 400;
       font-size: clamp(52px, 7.5vw, 108px);
       line-height: 1.04;
       color: #2e3c3c;
-      margin-bottom: 1.6rem;
       letter-spacing: -0.02em;
-    }
-    .slide-content h1 em {
-      font-style: italic;
-      color: #3d6b64;
+      display: block;
+      user-select: none;
     }
 
-    .slide-content .slide-sub {
+    /* Changing verb + noun — stacked, only one visible */
+    .hero-changing {
+      position: relative;
+      height: 2.25em; /* 2 lines at 1.04 line-height + buffer */
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-phrase {
+      position: absolute;
+      top: 0; left: 0;
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(52px, 7.5vw, 108px);
+      line-height: 1.04;
+      color: #2e3c3c;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 1s cubic-bezier(0.43, 0.195, 0.02, 1),
+                  transform 1s cubic-bezier(0.43, 0.195, 0.02, 1);
+      pointer-events: none;
+    }
+    .hero-phrase em { font-style: italic; color: #3d6b64; }
+    .hero-phrase.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero-phrase.exit {
+      opacity: 0;
+      transform: translateY(-18px);
+    }
+
+    /* Changing body text */
+    .hero-sub-wrap {
+      position: relative;
+      height: 6em;
+    }
+    .hero-sub {
+      position: absolute;
+      top: 0; left: 0;
       font-family: 'Lora', serif;
-      font-size: clamp(16px, 1.4vw, 20px);
+      font-size: clamp(15px, 1.3vw, 19px);
       line-height: 1.8;
       font-weight: 300;
       color: #3d4e4e;
-      max-width: 520px;
+      max-width: 500px;
       text-align: justify;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 1s cubic-bezier(0.43, 0.195, 0.02, 1),
+                  transform 1s cubic-bezier(0.43, 0.195, 0.02, 1);
+      pointer-events: none;
+    }
+    .hero-sub.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero-sub.exit {
+      opacity: 0;
+      transform: translateY(-12px);
     }
 
     /* thin progress line on right */
@@ -928,24 +954,25 @@
           <div class="edge-shimmer edge-br"></div>
         </div>
 
-        <!-- Text slides (all stacked, JS transitions between them) -->
+        <!-- Hero text: "I" stays, phrases transition -->
         <div class="hero-content">
+          <div class="hero-text-inner">
 
-          <div class="slide-content active" data-slide="0">
-            <h1>I design<br><em>AI experiences.</em></h1>
-            <p class="slide-sub">Product Design Leader excelling in human-centered AI strategy and research-led UX — building products from zero to scale.</p>
+            <span class="hero-i">I</span>
+
+            <div class="hero-changing">
+              <div class="hero-phrase active">design<br><em>AI experiences.</em></div>
+              <div class="hero-phrase">bridge<br><em>research &amp; design.</em></div>
+              <div class="hero-phrase">drive<br><em>measurable impact.</em></div>
+            </div>
+
+            <div class="hero-sub-wrap">
+              <p class="hero-sub active">Product Design Leader excelling in human-centered AI strategy and research-led UX — building products from zero to scale.</p>
+              <p class="hero-sub">As Head of UX at Amazon and founder of Dovetailed, I've led cross-functional teams and driven design strategy for global AI products — with a focus on agentic AI and human-in-the-loop systems.</p>
+              <p class="hero-sub">Delivering agentic AI experiences that generate $500M+ in revenue, grounded in real research, bold design thinking — in the most human suitable way.</p>
+            </div>
+
           </div>
-
-          <div class="slide-content" data-slide="1">
-            <h1>I bridge<br><em>research & design.</em></h1>
-            <p class="slide-sub">As Head of UX at Amazon and founder of Dovetailed, I've led cross-functional teams and driven design strategy for global AI products — with a focus on agentic AI and human-in-the-loop systems.</p>
-          </div>
-
-          <div class="slide-content" data-slide="2">
-            <h1>I drive<br><em>measurable impact.</em></h1>
-            <p class="slide-sub">Delivering agentic AI experiences that generate $500M+ in revenue, grounded in real research, bold design thinking — in the most human suitable way.</p>
-          </div>
-
         </div>
 
         <!-- Progress dots -->
@@ -1350,35 +1377,39 @@
     document.getElementById('hero-progress').style.opacity = name === 'portfolio' ? '1' : '0';
   }
 
-  // Hero sticky scroll: page stays fixed, text transitions on scroll
+  // Hero sticky scroll: "I" stays, phrases + subs transition
   const slideBgs = [
-    { bg: '#d8f0ec', blob1: 'rgba(90,180,170,0.75)',  blob2: 'rgba(200,155,110,0.60)', blob3: 'rgba(140,210,200,0.50)', blob4: 'rgba(230,195,155,0.45)' },
-    { bg: '#f3e8dc', blob1: 'rgba(210,150,100,0.70)', blob2: 'rgba(225,180,130,0.65)', blob3: 'rgba(240,165,120,0.45)', blob4: 'rgba(200,220,215,0.40)' },
-    { bg: '#e9e4f5', blob1: 'rgba(150,120,205,0.65)', blob2: 'rgba(110,130,210,0.55)', blob3: 'rgba(190,165,230,0.50)', blob4: 'rgba(210,195,240,0.45)' },
+    { bg: '#d8f0ec' },
+    { bg: '#d6eeed' },
+    { bg: '#d8ecf0' },
   ];
 
   const heroBg = document.getElementById('hero-bg');
   const heroContainer = document.getElementById('hero-scroll-container');
-  const slideEls = document.querySelectorAll('.slide-content');
+  const phrases = document.querySelectorAll('.hero-phrase');
+  const subs = document.querySelectorAll('.hero-sub');
   const dots = document.querySelectorAll('.hero-dot');
   let currentSlide = 0;
 
   function applySlide(idx) {
     if (idx === currentSlide) return;
-    const s = slideBgs[idx];
-    heroBg.style.backgroundColor = s.bg;
-    heroBg.style.setProperty('--blob1', s.blob1);
-    heroBg.style.setProperty('--blob2', s.blob2);
-    heroBg.style.setProperty('--blob3', s.blob3);
-    heroBg.style.setProperty('--blob4', s.blob4);
-    // exit current
-    slideEls[currentSlide].classList.remove('active');
-    slideEls[currentSlide].classList.add('exit');
+    heroBg.style.backgroundColor = slideBgs[idx].bg;
+
     const prev = currentSlide;
-    setTimeout(() => slideEls[prev].classList.remove('exit'), 900);
-    // enter new
     currentSlide = idx;
-    slideEls[currentSlide].classList.add('active');
+
+    // transition phrases
+    phrases[prev].classList.remove('active');
+    phrases[prev].classList.add('exit');
+    setTimeout(() => phrases[prev].classList.remove('exit'), 1050);
+    phrases[currentSlide].classList.add('active');
+
+    // transition subs
+    subs[prev].classList.remove('active');
+    subs[prev].classList.add('exit');
+    setTimeout(() => subs[prev].classList.remove('exit'), 1050);
+    subs[currentSlide].classList.add('active');
+
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
   }
 
@@ -1389,7 +1420,7 @@
     const total = heroContainer.offsetHeight - window.innerHeight;
     if (scrolled < 0 || total <= 0) return;
     const progress = Math.min(1, scrolled / total);
-    const idx = Math.min(slideEls.length - 1, Math.floor(progress * slideEls.length));
+    const idx = Math.min(phrases.length - 1, Math.floor(progress * phrases.length));
     applySlide(idx);
   }
 
