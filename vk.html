@@ -184,6 +184,79 @@
     #portfolio-page { padding-bottom: 8rem; position: relative; z-index: 2; }
     .project-entry { position: relative; z-index: 2; background: #fff; }
 
+    /* ── Values Section ── */
+    .values-section {
+      background: #f4f0e8;
+      padding: 6rem 2rem 7rem;
+      position: relative;
+      z-index: 2;
+    }
+    .values-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .values-header {
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 4.5rem;
+    }
+    .values-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .values-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .value-item {
+      font-family: 'EB Garamond', serif;
+      font-size: 26px;
+      line-height: 1.7;
+      color: var(--text);
+      opacity: 0.18;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+      user-select: none;
+    }
+    .value-item.active {
+      opacity: 1;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 5px;
+    }
+    .value-item:hover:not(.active) { opacity: 0.5; }
+    .values-desc-wrap {
+      position: relative;
+    }
+    .value-desc {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(28px, 3vw, 38px);
+      line-height: 1.45;
+      font-weight: 400;
+      color: var(--text);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+    }
+    .value-desc.active {
+      opacity: 1;
+      position: relative;
+      pointer-events: auto;
+    }
+    @media (max-width: 600px) {
+      .values-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .values-desc-wrap { min-height: 160px; }
+    }
+
     /* Name / logo top left */
     .site-name {
       position: fixed;
@@ -1007,6 +1080,31 @@
       </div>
     </div>
 
+    <!-- Values Section -->
+    <div class="values-section">
+      <div class="values-inner">
+        <div class="values-header">My Values</div>
+        <div class="values-layout">
+          <div class="values-list">
+            <div class="value-item active" data-value="0">Kindness</div>
+            <div class="value-item" data-value="1">Trust</div>
+            <div class="value-item" data-value="2">Quality</div>
+            <div class="value-item" data-value="3">Simplicity</div>
+            <div class="value-item" data-value="4">Safety &amp; Security</div>
+            <div class="value-item" data-value="5">Evaluation</div>
+          </div>
+          <div class="values-desc-wrap">
+            <p class="value-desc active" data-desc="0">Lead with empathy — for users, teammates, and every person who touches the things we build.</p>
+            <p class="value-desc" data-desc="1">We put our users first and focus on earning their trust through honest, transparent, and predictable experiences.</p>
+            <p class="value-desc" data-desc="2">Never settle for good enough. Every detail — from a single interaction to an entire system — deserves genuine care.</p>
+            <p class="value-desc" data-desc="3">Complexity is easy; clarity is hard. Strip away everything that doesn't serve the human.</p>
+            <p class="value-desc" data-desc="4">Responsible design means anticipating harm before it happens and building systems people can rely on.</p>
+            <p class="value-desc" data-desc="5">Ground every decision in evidence. Measure what matters, question assumptions, and keep learning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Project 1: AWS — lolajiang.com section.slice layout -->
     <div class="project-entry slice">
       <div class="section-inner">
@@ -1465,6 +1563,17 @@
   }
 
   window.addEventListener('scroll', onHeroScroll, { passive: true });
+
+  // Values section interaction
+  document.querySelectorAll('.value-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const idx = item.dataset.value;
+      document.querySelectorAll('.value-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.value-desc').forEach(d => d.classList.remove('active'));
+      item.classList.add('active');
+      document.querySelector(`.value-desc[data-desc="${idx}"]`).classList.add('active');
+    });
+  });
 </script>
 </body>
 </html>
