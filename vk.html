@@ -353,49 +353,6 @@
       100% { transform: translate(-10%, -4%) scale(1.12); }
     }
 
-    /* ── SUN RAYS: rotating conic gradient ── */
-    .sun-rays {
-      position: absolute;
-      width: 900px; height: 900px;
-      left: 60%; top: 47%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background: conic-gradient(
-        from 0deg,
-        transparent 0deg,   rgba(255,245,180,0.18) 8deg,
-        transparent 16deg,  rgba(255,245,180,0.12) 22deg,
-        transparent 30deg,  rgba(255,245,180,0.20) 38deg,
-        transparent 46deg,  rgba(255,245,180,0.10) 52deg,
-        transparent 60deg,  rgba(255,245,180,0.18) 68deg,
-        transparent 76deg,  rgba(255,245,180,0.14) 82deg,
-        transparent 90deg,  rgba(255,245,180,0.20) 98deg,
-        transparent 106deg, rgba(255,245,180,0.10) 112deg,
-        transparent 120deg, rgba(255,245,180,0.18) 128deg,
-        transparent 136deg, rgba(255,245,180,0.12) 142deg,
-        transparent 150deg, rgba(255,245,180,0.22) 158deg,
-        transparent 166deg, rgba(255,245,180,0.10) 172deg,
-        transparent 180deg, rgba(255,245,180,0.18) 188deg,
-        transparent 196deg, rgba(255,245,180,0.14) 202deg,
-        transparent 210deg, rgba(255,245,180,0.20) 218deg,
-        transparent 226deg, rgba(255,245,180,0.10) 232deg,
-        transparent 240deg, rgba(255,245,180,0.18) 248deg,
-        transparent 256deg, rgba(255,245,180,0.12) 262deg,
-        transparent 270deg, rgba(255,245,180,0.20) 278deg,
-        transparent 286deg, rgba(255,245,180,0.10) 292deg,
-        transparent 300deg, rgba(255,245,180,0.18) 308deg,
-        transparent 316deg, rgba(255,245,180,0.14) 322deg,
-        transparent 330deg, rgba(255,245,180,0.20) 338deg,
-        transparent 346deg, rgba(255,245,180,0.10) 352deg,
-        transparent 360deg
-      );
-      mix-blend-mode: screen;
-      animation: raysRotate 40s linear infinite;
-      pointer-events: none;
-      z-index: 2;
-    }
-    @keyframes raysRotate {
-      to { transform: translate(-50%,-50%) rotate(360deg); }
-    }
 
 
     /* lens flare streak */
@@ -963,7 +920,6 @@
           <div class="blob blob-4"></div>
           <img class="hero-image" src="sunshine.jpg" alt="" aria-hidden="true">
           <!-- Sun effects -->
-          <div class="sun-rays"></div>
           <div class="sun-flare"></div>
           <!-- Edge shimmer overlays -->
           <div class="edge-shimmer edge-tl"></div>
