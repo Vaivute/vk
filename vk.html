@@ -181,7 +181,8 @@
     /* ═══════════════════════════════════════
        PORTFOLIO PAGE (main / landing)
     ═══════════════════════════════════════ */
-    #portfolio-page { padding-bottom: 8rem; }
+    #portfolio-page { padding-bottom: 8rem; position: relative; z-index: 2; }
+    .project-entry { position: relative; z-index: 2; background: #fff; }
 
     /* Name / logo top left */
     .site-name {
@@ -199,88 +200,156 @@
     }
     .site-name:hover { text-decoration: none; opacity: 0.6; }
 
-    /* Hero — full viewport, animated gradient background */
-    .hero {
+    /* ── HERO: animated bokeh background ── */
+    .hero-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      background-color: #def2ef;
+      transition: background-color 1.4s cubic-bezier(0.43, 0.195, 0.02, 1);
+      pointer-events: none;
+    }
+    /* only show the bg when portfolio page is active */
+    #portfolio-page:not(.active) ~ * .hero-bg,
+    .hero-bg.hidden { opacity: 0; }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      will-change: transform;
+    }
+    .blob-1 {
+      width: 60vw; height: 60vw;
+      background: var(--blob1, rgba(100,185,178,0.75));
+      top: -15%; left: -10%;
+      animation: drift1 20s ease-in-out infinite alternate;
+      transition: background 1.4s ease;
+    }
+    .blob-2 {
+      width: 50vw; height: 50vw;
+      background: var(--blob2, rgba(200,155,110,0.65));
+      bottom: -10%; right: -8%;
+      animation: drift2 26s ease-in-out infinite alternate;
+      transition: background 1.4s ease;
+    }
+    .blob-3 {
+      width: 38vw; height: 38vw;
+      background: var(--blob3, rgba(160,210,200,0.55));
+      top: 35%; left: 40%;
+      animation: drift3 22s ease-in-out infinite alternate;
+      transition: background 1.4s ease;
+    }
+    .blob-4 {
+      width: 28vw; height: 28vw;
+      background: var(--blob4, rgba(240,200,160,0.50));
+      top: 10%; right: 15%;
+      animation: drift4 18s ease-in-out infinite alternate;
+      transition: background 1.4s ease;
+    }
+    @keyframes drift1 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(8%, 12%) scale(1.08); }
+      100% { transform: translate(15%, -5%) scale(0.96); }
+    }
+    @keyframes drift2 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(-10%, -8%) scale(1.05); }
+      100% { transform: translate(-5%, 10%) scale(1.1); }
+    }
+    @keyframes drift3 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(-12%, 6%) scale(0.92); }
+      100% { transform: translate(8%, -10%) scale(1.06); }
+    }
+    @keyframes drift4 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(10%, 14%) scale(1.12); }
+      100% { transform: translate(-6%, 5%) scale(0.95); }
+    }
+
+    /* ── HERO SLIDES ── */
+    .hero-slides { position: relative; z-index: 2; }
+
+    .hero-slide {
       min-height: 100vh;
-      width: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
-      position: relative;
-      background:
-        radial-gradient(ellipse 70% 60% at 5% 8%,  rgba(120, 185, 185, 0.72) 0%, transparent 65%),
-        radial-gradient(ellipse 55% 65% at 95% 92%, rgba(210, 168, 128, 0.60) 0%, transparent 65%),
-        radial-gradient(ellipse 80% 80% at 55% 45%, rgba(242, 238, 233, 0.55) 0%, transparent 100%),
-        #ede8e3;
-      animation: gradientShift 12s ease-in-out infinite alternate;
-    }
-    @keyframes gradientShift {
-      0%   { filter: hue-rotate(0deg) brightness(1); }
-      50%  { filter: hue-rotate(8deg) brightness(1.02); }
-      100% { filter: hue-rotate(-6deg) brightness(0.98); }
+      justify-content: flex-start;
+      padding: 0 10vw;
     }
 
-    .hero-text-block {
-      position: relative;
-      top: 2vh;
-      left: 5vw;
-      max-width: 520px;
-      padding-left: 2rem;
+    .slide-content {
+      max-width: 680px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.43,0.195,0.02,1), transform 1s cubic-bezier(0.43,0.195,0.02,1);
     }
-    .hero-text-block::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 2px;
-      height: 0;
-      background: rgba(60, 70, 70, 0.35);
-      animation: growBorder 1s ease-out 0.3s forwards;
+    .slide-content.in-view {
+      opacity: 1;
+      transform: translateY(0);
     }
-    @keyframes growBorder {
-      to { height: 100%; }
+
+    .slide-label {
+      font-family: var(--jso);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(58,68,68,0.55);
+      margin-bottom: 1.8rem;
     }
-    .hero-text-block h1 {
-      font-family: var(--qs);
+
+    .slide-content h1 {
+      font-family: 'EB Garamond', serif;
       font-weight: 400;
-      font-size: 62px;
-      line-height: 70px;
-      color: #3a4444;
-      margin-bottom: 1rem;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeUp 0.9s ease-out 0.5s forwards;
+      font-size: clamp(52px, 7.5vw, 108px);
+      line-height: 1.04;
+      color: #2e3c3c;
+      margin-bottom: 1.6rem;
+      letter-spacing: -0.02em;
     }
-    .hero-text-block .tagline {
-      font-family: var(--mw);
-      font-size: 17px;
-      line-height: 30px;
+    .slide-content h1 em {
+      font-style: italic;
+      color: #3d6b64;
+    }
+
+    .slide-content .slide-sub {
+      font-family: 'Lora', serif;
+      font-size: clamp(16px, 1.4vw, 20px);
+      line-height: 1.8;
       font-weight: 300;
-      color: #4a5555;
+      color: #3d4e4e;
+      max-width: 520px;
       text-align: justify;
-      opacity: 0;
-      transform: translateY(14px);
-      animation: fadeUp 0.9s ease-out 0.85s forwards;
     }
+
+    /* thin progress line on right */
+    .hero-progress {
+      position: fixed;
+      right: 1.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .hero-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(58,68,68,0.25);
+      transition: background 0.4s, transform 0.4s;
+    }
+    .hero-dot.active {
+      background: rgba(58,68,68,0.7);
+      transform: scale(1.6);
+    }
+
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Hero down arrow */
-    .hero-arrow {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      animation: arrowAppear 0.6s ease-out 1.4s forwards, bounce 2s ease-in-out 2s infinite;
-    }
-    @keyframes arrowAppear {
-      to { opacity: 0.6; }
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(8px); }
     }
 
     /* Divider */
@@ -729,16 +798,48 @@
   ════════════════════════════════ -->
   <div id="portfolio-page" class="page active">
 
-    <div class="hero">
-      <div class="hero-text-block">
-        <h1>Vaiva Kalnikaitė</h1>
-        <p class="tagline">Product Design Leader excelling in human-centered AI strategy, research-led UX, and building products from zero to scale — with a focus on agentic AI experiences that deliver measurable impact.</p>
+    <!-- Animated bokeh background -->
+    <div class="hero-bg" id="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+    </div>
+
+    <!-- Slide progress dots -->
+    <div class="hero-progress" id="hero-progress">
+      <div class="hero-dot active" data-dot="0"></div>
+      <div class="hero-dot" data-dot="1"></div>
+      <div class="hero-dot" data-dot="2"></div>
+    </div>
+
+    <!-- Three scroll slides -->
+    <div class="hero-slides" id="hero-slides">
+
+      <div class="hero-slide" data-slide="0">
+        <div class="slide-content">
+          <p class="slide-label">Vaiva Kalnikaitė · Portfolio</p>
+          <h1>I design<br><em>AI experiences.</em></h1>
+          <p class="slide-sub">Product Design Leader excelling in human-centered AI strategy and research-led UX — building products from zero to scale.</p>
+        </div>
       </div>
-      <div class="hero-arrow">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 10 L12 17 L19 10" stroke="rgba(60,70,70,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
+
+      <div class="hero-slide" data-slide="1">
+        <div class="slide-content">
+          <p class="slide-label">Approach</p>
+          <h1>I bridge<br><em>research & design.</em></h1>
+          <p class="slide-sub">As Head of UX at Amazon and founder of Dovetailed, I've led cross-functional teams and driven design strategy for global AI products — with a focus on agentic AI and human-in-the-loop systems.</p>
+        </div>
       </div>
+
+      <div class="hero-slide" data-slide="2">
+        <div class="slide-content">
+          <p class="slide-label">Impact</p>
+          <h1>I drive<br><em>measurable impact.</em></h1>
+          <p class="slide-sub">Delivering agentic AI experiences that generate $500M+ in revenue, grounded in real research, bold design thinking — in the most human suitable way.</p>
+        </div>
+      </div>
+
     </div>
 
     <!-- Project 1: AWS — lolajiang.com section.slice layout -->
@@ -1128,7 +1229,42 @@
     const navEl = document.getElementById('nav-' + name);
     if (navEl) navEl.classList.add('active');
     window.scrollTo(0, 0);
+    // show/hide hero bg
+    document.getElementById('hero-bg').style.opacity = name === 'portfolio' ? '1' : '0';
+    document.getElementById('hero-progress').style.opacity = name === 'portfolio' ? '1' : '0';
   }
+
+  // Hero scroll tracking
+  const slideBgs = [
+    { bg: '#d8f0ec', blob1: 'rgba(90,180,170,0.75)',  blob2: 'rgba(200,155,110,0.60)', blob3: 'rgba(140,210,200,0.50)', blob4: 'rgba(230,195,155,0.45)' },
+    { bg: '#f3e8dc', blob1: 'rgba(210,150,100,0.70)', blob2: 'rgba(225,180,130,0.65)', blob3: 'rgba(240,165,120,0.45)', blob4: 'rgba(200,220,215,0.40)' },
+    { bg: '#e9e4f5', blob1: 'rgba(150,120,205,0.65)', blob2: 'rgba(110,130,210,0.55)', blob3: 'rgba(190,165,230,0.50)', blob4: 'rgba(210,195,240,0.45)' },
+  ];
+
+  const heroBg = document.getElementById('hero-bg');
+  const dots = document.querySelectorAll('.hero-dot');
+
+  function applySlide(idx) {
+    const s = slideBgs[idx];
+    heroBg.style.backgroundColor = s.bg;
+    heroBg.style.setProperty('--blob1', s.blob1);
+    heroBg.style.setProperty('--blob2', s.blob2);
+    heroBg.style.setProperty('--blob3', s.blob3);
+    heroBg.style.setProperty('--blob4', s.blob4);
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  const slideObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = parseInt(e.target.dataset.slide);
+        applySlide(idx);
+        e.target.querySelector('.slide-content').classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.45 });
+
+  document.querySelectorAll('.hero-slide').forEach(s => slideObserver.observe(s));
 </script>
 </body>
 </html>
