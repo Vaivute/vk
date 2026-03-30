@@ -385,50 +385,64 @@
 
     .hero-text-inner { max-width: 680px; }
 
-    /* The "I" — never moves */
-    .hero-i {
+    /* Shared heading font */
+    .hero-i, .hero-verb, .hero-noun {
       font-family: 'EB Garamond', serif;
       font-weight: 400;
       font-size: clamp(52px, 7.5vw, 108px);
       line-height: 1.04;
       color: #2e3c3c;
       letter-spacing: -0.02em;
-      display: block;
-      user-select: none;
     }
 
-    /* Changing verb + noun — stacked, only one visible */
-    .hero-changing {
+    /* Line 1: "I" + verb side by side */
+    .hero-line1 {
+      display: flex;
+      align-items: baseline;
+      gap: 0.22em;
+      margin-bottom: 0;
+    }
+    .hero-i { flex-shrink: 0; }
+
+    /* Verb slot — fixed height, verbs stack inside */
+    .hero-verb-wrap {
       position: relative;
-      height: 2.25em; /* 2 lines at 1.04 line-height + buffer */
-      margin-bottom: 1.6rem;
+      height: 1.08em;
+      min-width: 4em;
     }
-
-    .hero-phrase {
+    .hero-verb {
       position: absolute;
-      top: 0; left: 0;
-      font-family: 'EB Garamond', serif;
-      font-weight: 400;
-      font-size: clamp(52px, 7.5vw, 108px);
-      line-height: 1.04;
-      color: #2e3c3c;
-      letter-spacing: -0.02em;
+      left: 0; top: 0;
       white-space: nowrap;
       opacity: 0;
-      transform: translateY(22px);
+      transform: translateY(18px);
       transition: opacity 1s cubic-bezier(0.43, 0.195, 0.02, 1),
                   transform 1s cubic-bezier(0.43, 0.195, 0.02, 1);
       pointer-events: none;
     }
-    .hero-phrase em { font-style: italic; color: #3d6b64; }
-    .hero-phrase.active {
-      opacity: 1;
-      transform: translateY(0);
+    .hero-verb.active  { opacity: 1; transform: translateY(0); }
+    .hero-verb.exit    { opacity: 0; transform: translateY(-16px); }
+
+    /* Line 2: italic noun */
+    .hero-noun-wrap {
+      position: relative;
+      height: 1.12em;
+      margin-bottom: 1.6rem;
     }
-    .hero-phrase.exit {
+    .hero-noun {
+      position: absolute;
+      left: 0; top: 0;
+      font-style: italic;
+      color: #3d6b64;
+      white-space: nowrap;
       opacity: 0;
-      transform: translateY(-18px);
+      transform: translateY(18px);
+      transition: opacity 1s cubic-bezier(0.43, 0.195, 0.02, 1) 0.08s,
+                  transform 1s cubic-bezier(0.43, 0.195, 0.02, 1) 0.08s;
+      pointer-events: none;
     }
+    .hero-noun.active  { opacity: 1; transform: translateY(0); }
+    .hero-noun.exit    { opacity: 0; transform: translateY(-16px); }
 
     /* Changing body text */
     .hero-sub-wrap {
@@ -958,12 +972,19 @@
         <div class="hero-content">
           <div class="hero-text-inner">
 
-            <span class="hero-i">I</span>
+            <div class="hero-line1">
+              <span class="hero-i">I</span>
+              <div class="hero-verb-wrap">
+                <span class="hero-verb active">design</span>
+                <span class="hero-verb">bridge</span>
+                <span class="hero-verb">drive</span>
+              </div>
+            </div>
 
-            <div class="hero-changing">
-              <div class="hero-phrase active">design<br><em>AI experiences.</em></div>
-              <div class="hero-phrase">bridge<br><em>research &amp; design.</em></div>
-              <div class="hero-phrase">drive<br><em>measurable impact.</em></div>
+            <div class="hero-noun-wrap">
+              <span class="hero-noun active">AI experiences.</span>
+              <span class="hero-noun">research &amp; design.</span>
+              <span class="hero-noun">measurable impact.</span>
             </div>
 
             <div class="hero-sub-wrap">
@@ -1386,7 +1407,8 @@
 
   const heroBg = document.getElementById('hero-bg');
   const heroContainer = document.getElementById('hero-scroll-container');
-  const phrases = document.querySelectorAll('.hero-phrase');
+  const phrases = document.querySelectorAll('.hero-verb');
+  const nouns = document.querySelectorAll('.hero-noun');
   const subs = document.querySelectorAll('.hero-sub');
   const dots = document.querySelectorAll('.hero-dot');
   let currentSlide = 0;
@@ -1398,11 +1420,17 @@
     const prev = currentSlide;
     currentSlide = idx;
 
-    // transition phrases
+    // transition verbs
     phrases[prev].classList.remove('active');
     phrases[prev].classList.add('exit');
     setTimeout(() => phrases[prev].classList.remove('exit'), 1050);
     phrases[currentSlide].classList.add('active');
+
+    // transition nouns
+    nouns[prev].classList.remove('active');
+    nouns[prev].classList.add('exit');
+    setTimeout(() => nouns[prev].classList.remove('exit'), 1050);
+    nouns[currentSlide].classList.add('active');
 
     // transition subs
     subs[prev].classList.remove('active');
@@ -1420,7 +1448,7 @@
     const total = heroContainer.offsetHeight - window.innerHeight;
     if (scrolled < 0 || total <= 0) return;
     const progress = Math.min(1, scrolled / total);
-    const idx = Math.min(phrases.length - 1, Math.floor(progress * phrases.length));
+    const idx = Math.min(nouns.length - 1, Math.floor(progress * nouns.length));
     applySlide(idx);
   }
 
