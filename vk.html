@@ -459,7 +459,6 @@
       line-height: 1.8;
       font-weight: 300;
       color: #3d4e4e;
-      max-width: 500px;
       text-align: justify;
       opacity: 0;
       transform: translateY(5px);
@@ -1412,6 +1411,17 @@
   const phrases = document.querySelectorAll('.hero-verb');
   const nouns = document.querySelectorAll('.hero-noun');
   const subs = document.querySelectorAll('.hero-sub');
+
+  function matchSubWidth() {
+    let maxW = 0;
+    nouns.forEach(n => { maxW = Math.max(maxW, n.offsetWidth); });
+    if (maxW > 0) {
+      document.querySelector('.hero-sub-wrap').style.width = maxW + 'px';
+      subs.forEach(s => s.style.width = maxW + 'px');
+    }
+  }
+  matchSubWidth();
+  window.addEventListener('resize', matchSubWidth);
   const dots = document.querySelectorAll('.hero-dot');
   let currentSlide = 0;
 
