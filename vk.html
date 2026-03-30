@@ -398,17 +398,18 @@
     /* Line 1: "I" + verb side by side */
     .hero-line1 {
       display: flex;
-      align-items: baseline;
+      align-items: flex-end;
       gap: 0.22em;
       margin-bottom: 0;
+      font-size: clamp(52px, 7.5vw, 108px); /* makes em units resolve to heading size */
     }
     .hero-i { flex-shrink: 0; }
 
     /* Verb slot — fixed height, verbs stack inside */
     .hero-verb-wrap {
       position: relative;
-      height: 1.08em;
-      min-width: 4em;
+      height: 1.08em;  /* now = 1.08 × heading font-size ✓ */
+      min-width: 4.5em;
     }
     .hero-verb {
       position: absolute;
