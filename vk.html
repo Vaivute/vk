@@ -1566,7 +1566,7 @@
 
   // Values section interaction
   document.querySelectorAll('.value-item').forEach(item => {
-    item.addEventListener('click', () => {
+    item.addEventListener('mouseenter', () => {
       const idx = item.dataset.value;
       document.querySelectorAll('.value-item').forEach(i => i.classList.remove('active'));
       document.querySelectorAll('.value-desc').forEach(d => d.classList.remove('active'));
