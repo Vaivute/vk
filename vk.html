@@ -278,6 +278,28 @@
       100% { transform: translate(-6%, 5%) scale(0.95); }
     }
 
+    /* ── HERO: abstract image layer ── */
+    .hero-image {
+      position: absolute;
+      inset: -6%;
+      width: 112%;
+      height: 112%;
+      object-fit: cover;
+      opacity: 0.22;
+      mix-blend-mode: overlay;
+      filter: blur(18px) saturate(2.4) brightness(1.1) hue-rotate(0deg);
+      animation: imageFloat 30s ease-in-out infinite alternate;
+      will-change: transform, filter;
+      pointer-events: none;
+    }
+    @keyframes imageFloat {
+      0%   { transform: scale(1.04) translate(0%,    0%)   rotate(0deg);    filter: blur(18px) saturate(2.4) brightness(1.1)  hue-rotate(0deg);  }
+      25%  { transform: scale(1.10) translate(-2.5%, 1.5%) rotate(0.4deg);  filter: blur(12px) saturate(2.8) brightness(1.14) hue-rotate(14deg); }
+      50%  { transform: scale(1.07) translate(1.5%, -2%)   rotate(-0.3deg); filter: blur(22px) saturate(2.0) brightness(1.05) hue-rotate(-8deg); }
+      75%  { transform: scale(1.13) translate(-1%,   2.5%) rotate(0.5deg);  filter: blur(14px) saturate(2.6) brightness(1.12) hue-rotate(20deg); }
+      100% { transform: scale(1.08) translate(2%,   -1.5%) rotate(-0.2deg); filter: blur(16px) saturate(2.2) brightness(1.08) hue-rotate(6deg);  }
+    }
+
     /* ── HERO SLIDES ── */
     .hero-content {
       position: absolute;
@@ -823,6 +845,7 @@
           <div class="blob blob-2"></div>
           <div class="blob blob-3"></div>
           <div class="blob blob-4"></div>
+          <img class="hero-image" src="sunshine.jpg" alt="" aria-hidden="true">
         </div>
 
         <!-- Text slides (all stacked, JS transitions between them) -->
