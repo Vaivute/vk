@@ -1606,7 +1606,7 @@
         </div>
         <div class="section-visual">
           <div style="position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;">
-            <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;object-position:center 60%;display:block;">
+            <video id="nufood-robots-video" autoplay loop muted playsinline data-loop-end="16" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;display:block;">
               <source src="images+videos/n%C5%ABfood%20kitchen%20robots%20-%20unfolding.mp4" type="video/mp4">
             </video>
           </div>
@@ -2047,6 +2047,17 @@
   }
 
   window.addEventListener('scroll', onHeroScroll, { passive: true });
+
+  // Loop nufood robots video early so end-of-clip text never shows
+  (function() {
+    const v = document.getElementById('nufood-robots-video');
+    if (!v) return;
+    const cutoff = parseFloat(v.dataset.loopEnd);
+    if (!Number.isFinite(cutoff)) return;
+    v.addEventListener('timeupdate', () => {
+      if (v.currentTime >= cutoff) v.currentTime = 0;
+    });
+  })();
 
   // Mobile hero carousel
   (function() {
