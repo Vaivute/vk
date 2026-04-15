@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Study — Vaiva Kalnikaitė</title>
+  <title>Case Study - Vaiva Kalnikaitė</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,300;0,400;1,300&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
       --text:   #333333;
       --muted:  #666666;
       --border: #cccccc;
+      --warm:   #f4f0e8;
     }
 
     body {
@@ -40,10 +41,13 @@
       font-weight: 400;
       font-size: 28px;
       color: var(--text);
+      max-width: 480px;
+      text-align: center;
+      line-height: 1.4;
     }
     #login p {
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
@@ -69,7 +73,7 @@
       border: 1px solid var(--border);
       padding: 0.5rem 2rem;
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       cursor: pointer;
@@ -78,14 +82,14 @@
     #login button:hover { background: var(--text); color: var(--bg); }
     #login .error {
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.1em;
       color: #cc0000;
       min-height: 1em;
     }
 
     /* ── Page ── */
-    #page { display: none; }
+    #page { display: block; }
 
     nav {
       position: fixed;
@@ -97,7 +101,7 @@
     }
     nav a {
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text);
@@ -110,7 +114,7 @@
       position: fixed;
       top: 1em; left: 1em;
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
@@ -119,33 +123,242 @@
     }
     .back-link:hover { opacity: 0.5; }
 
+    /* ── Content ── */
     .content {
-      max-width: 780px;
+      max-width: 680px;
       margin: 0 auto;
-      padding: 8rem 15px 6rem;
+      padding: 8rem 15px 8rem;
     }
-    .content h1 {
+
+    /* Header */
+    .cs-label {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .cs-title {
       font-family: 'EB Garamond', serif;
       font-weight: 400;
-      font-size: 42px;
-      line-height: 50px;
+      font-size: clamp(36px, 4vw, 52px);
+      line-height: 1.15;
       margin-bottom: 2rem;
+      color: var(--text);
     }
-    .content p {
-      margin-bottom: 1em;
+    .cs-byline {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Sections */
+    .cs-section {
+      margin-bottom: 4rem;
+    }
+    .cs-section-label {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .cs-section h2 {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+      color: var(--text);
+    }
+    .cs-section p {
+      margin-bottom: 1.2em;
+      color: var(--text);
+    }
+    .cs-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Pull quote */
+    .cs-pull {
+      margin: 3rem 0;
+      padding: 2rem 2.5rem;
+      background: var(--warm);
+      font-family: 'EB Garamond', serif;
+      font-size: 26px;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    /* Dimensions grid */
+    .cs-dimensions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+    .cs-dim {
+      background: var(--bg);
+      padding: 1.5rem;
+    }
+    .cs-dim-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .cs-dim-desc {
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 300;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Zones */
+    .cs-zones {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+    .cs-zone {
+      background: var(--bg);
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .cs-zone-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      line-height: 1.3;
+      color: var(--text);
+    }
+    .cs-zone-tag {
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.3rem;
+    }
+    .cs-zone-desc {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 300;
+      color: var(--text);
+      margin: 0;
+    }
+
+    /* Patterns */
+    .cs-patterns {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .cs-pattern h3 {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: 22px;
+      margin-bottom: 0.4rem;
+    }
+    .cs-pattern p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+      margin: 0;
+    }
+
+    /* Impact list */
+    .cs-impact {
+      list-style: none;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .cs-impact li {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.6;
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+    .cs-impact li::before {
+      content: '·';
+      color: var(--muted);
+      flex-shrink: 0;
+      font-size: 1.2em;
+    }
+
+    /* Impact groups */
+    .cs-impact-group {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 2rem;
+      margin-bottom: 2rem;
+      align-items: start;
+    }
+    .cs-impact-category {
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.35rem;
+    }
+
+    /* Images */
+    .cs-image {
+      margin: 3rem 0;
+    }
+    .cs-image img {
+      width: 100%;
+      display: block;
+    }
+    .cs-image-caption {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+
+    /* Divider */
+    .cs-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 4rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .cs-dimensions { grid-template-columns: 1fr; }
+      .cs-zone { grid-template-columns: 1fr; gap: 0.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Login -->
-  <div id="login">
-    <div class="login-name">Designing Agentic AI Patterns: A Framework for Defining Human-in-the-Loop Experiences</div>
-    <p>Case Study</p>
-    <input type="password" id="pw-input" placeholder="password" autocomplete="current-password" />
-    <button onclick="checkPassword()">Enter</button>
-    <div class="error" id="pw-error"></div>
-  </div>
 
   <!-- Page content -->
   <div id="page">
@@ -153,28 +366,191 @@
     <nav>
       <a href="vk.html">Portfolio</a>
     </nav>
+
     <div class="content">
-      <h1>Designing Agentic AI Patterns: A Framework for Defining Human-in-the-Loop Experiences</h1>
-      <p>hello world</p>
+
+      <!-- Header -->
+      <div class="cs-label">Amazon Web Services · Research &amp; Design</div>
+      <h1 class="cs-title">Designing Agentic AI Patterns: A Framework for Human-in-the-Loop Experiences</h1>
+      <div class="cs-byline">Published March 2026 on Amazon Science &nbsp;·&nbsp; Academic paper submitted to ACM DIS 2026 &nbsp;·&nbsp; Co-authored with James Pierce &amp; Siddharth Gupta</div>
+
+      <!-- Hero video -->
+      <div class="cs-image">
+        <video autoplay loop muted playsinline style="width:100%;display:block;">
+          <source src="images+videos/humanai-01-16x9.mp4" type="video/mp4">
+        </video>
+        <div class="cs-image-caption">Published on Amazon Science, March 2026</div>
+      </div>
+
+      <!-- The problem -->
+      <div class="cs-section">
+        <div class="cs-section-label">The Problem</div>
+        <h2>Designing agentic AI with no shared vocabulary</h2>
+        <p>As agentic AI moved from research curiosity to product reality at AWS, a persistent problem surfaced: existing guidance was either too abstract or too narrow. High-level principles like "be transparent" and "keep users in control" articulate what should be achieved but leave open the question of how. Low-level UI patterns - confidence indicators, prompt fields, chat interfaces - prescribe implementation but don't help teams decide what to build in the first place.</p>
+        <p>What was missing was mid-level design knowledge: concepts specific enough to act on, general enough to apply across contexts. The absence was felt in practice. Traditional methods like user stories and user flows broke down when designing for non-deterministic AI. Teams struggled to frame problems, align on the right human-AI balance, and communicate decisions across disciplines.</p>
+        <p>Agentic AI also introduced a new coordination challenge. Unlike conventional software - where user actions produce predictable system reactions - agents can initiate actions, make decisions autonomously, and work out of sight. Getting the interplay between human and AI right is foundational to trust, safety, and usefulness. But no unified vocabulary existed for designing it.</p>
+      </div>
+
+      <div class="cs-pull">
+        "Agentic AI isn't just another feature to bolt onto existing products. It's a fundamentally different kind of software that demands fresh thinking."
+      </div>
+
+      <!-- The research -->
+      <div class="cs-section">
+        <div class="cs-section-label">The Research</div>
+        <h2>Grounded in real products, validated in practice</h2>
+        <p>I initiated this innovation workstream within AWS and secured funding to hire the first Design Scholar in the organisation - an HCI professor from the University of Washington - to work on this project. Working with the resulting cross-disciplinary team, which also included a generative AI product lead, senior engineers, and UX designers, I directed the design and research strategy from conception to publication.</p>
+        <p>We conducted landscape and artifact analysis of 60 commercially available AI applications, ranging from OpenAI's Deep Research and Adobe Photoshop to lesser-known tools with novel interaction models. We deliberately looked beyond dominant chat-interface patterns to surface emerging approaches to AI prominence, autonomy, and user involvement.</p>
+        <p>The framework was validated iteratively: through a formal design critique with six senior UX designers, reviews with scientists in responsible AI and open-source software, a presentation at Conflux - Amazon's flagship design conference with 6,000 attendees from all orgs within Amazon - and applied work across AWS SageMaker AI, where the framework is now in use across 200 projects. The result was a vocabulary that practitioners actually reached for in daily design work.</p>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- The framework -->
+      <div class="cs-section">
+        <div class="cs-section-label">The Framework</div>
+        <h2>Three dimensions designers can directly control</h2>
+        <p>We define human-AI coordination as the interplay of three dimensions. These map to the levers designers can actually manipulate - what is displayed, what users can do, and what the AI actually does. Other important qualities like trust, predictability, and agency are emergent: they arise from how these three are configured.</p>
+
+        <div class="cs-dimensions">
+          <div class="cs-dim">
+            <div class="cs-dim-name">Salience</div>
+            <p class="cs-dim-desc">How prominently the AI presents itself and is perceived by users. More visible, vocal, transparent, or anthropomorphic AI has higher salience.</p>
+          </div>
+          <div class="cs-dim">
+            <div class="cs-dim-name">Involvement</div>
+            <p class="cs-dim-desc">The degree and form of effort a user invests in directing or monitoring the AI - constrained and enabled by what the interface makes possible.</p>
+          </div>
+          <div class="cs-dim">
+            <div class="cs-dim-name">Activity</div>
+            <p class="cs-dim-desc">What the AI actually does, regardless of what is exposed to users. Critical for trust: users form mental models of AI behaviour that may not reflect reality.</p>
+          </div>
+        </div>
+
+        <p>When both involvement and salience are high, coordination is high - a collaborative, deeply in-the-loop experience. When both are low, coordination is minimal - automated and backgrounded. The right balance is not fixed; it shifts with the task, the user, and the moment.</p>
+      </div>
+
+      <!-- Coordination zones -->
+      <div class="cs-section">
+        <div class="cs-section-label">Coordination Zones</div>
+        <h2>Beyond binary: a spectrum of human-AI collaboration</h2>
+        <p>Most discussions of agentic AI reflect binary thinking - the human either is or is not "in the loop." A key insight of our framework is that coordination exists on a spectrum. We articulate four zones, each representing a different calibration of involvement and salience.</p>
+
+        <div class="cs-zones">
+          <div class="cs-zone">
+            <div>
+              <div class="cs-zone-name">Done with me</div>
+              <span class="cs-zone-tag">Mutually collaborative</span>
+            </div>
+            <p class="cs-zone-desc">User and AI work closely together across multiple phases - initiation, monitoring, updating, completion. AI salience and human involvement are both high. The user is very much in the loop. Suited to complex, high-stakes, or unfamiliar tasks.</p>
+          </div>
+          <div class="cs-zone">
+            <div>
+              <div class="cs-zone-name">Done for me</div>
+              <span class="cs-zone-tag">Heavily automated</span>
+            </div>
+            <p class="cs-zone-desc">Tasks are handled by AI with minimal user input. The user initiates and reviews; most of the work happens out of view. AI salience is concentrated at the beginning and end. The user is barely in the loop.</p>
+          </div>
+          <div class="cs-zone">
+            <div>
+              <div class="cs-zone-name">Done under me</div>
+              <span class="cs-zone-tag">Quietly assisted</span>
+            </div>
+            <p class="cs-zone-desc">AI works in the background without announcing itself. The user may not register the assistance at all. Smart sorting, predictive text, and personalised navigation fall here. The AI delivers outcomes quickly and clearly. The user is implicitly in the loop.</p>
+          </div>
+          <div class="cs-zone">
+            <div>
+              <div class="cs-zone-name">Done without me</div>
+              <span class="cs-zone-tag">Covertly conducted</span>
+            </div>
+            <p class="cs-zone-desc">AI acts without user awareness or involvement. While largely outside the scope of UX design, it matters: users form mental models of hidden AI activity, and perceptions of covert behaviour affect trust even when nothing untoward is happening.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coordination curves -->
+      <div class="cs-section">
+        <div class="cs-section-label">Coordination Curves</div>
+        <h2>Mapping how involvement rises and falls across a workflow</h2>
+        <p>Because both agents and users can work independently, coordination cannot be static. A typical workflow moves through multiple zones: high involvement during initiation as users define goals and constraints; lower involvement during execution; a spike again at review and next steps.</p>
+        <p>We visualise these shifts as coordination curves - a variation of user journey mapping that plots human involvement and AI salience across six phases: initiating, monitoring, updating, completing, extending, and settings. High-level curves reveal the overall shape of an experience. Looking beneath the surface exposes specific AI touchpoints, handoffs, and decision points.</p>
+        <div class="cs-image">
+          <img src="images+videos/humanai-03-16x9.png" alt="Coordination curves diagram showing how human involvement and AI salience shift across a workflow" />
+          <div class="cs-image-caption">Coordination curves map how human involvement (orange) and AI salience (blue) shift across a workflow, revealing touchpoints, handoffs, and decision points in agentic systems.</div>
+        </div>
+        <p>As agentic workflows grow longer and more computationally intensive, they create valleys in the coordination curve - stretches where the AI operates independently and the user is minimally involved. These valleys require thoughtful design around notification, approval, monitoring, and auditing. The UX layer must provide the transparency and controls needed to build trust and support course correction.</p>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- Design patterns -->
+      <div class="cs-section">
+        <div class="cs-section-label">Design Patterns in Practice</div>
+        <h2>Four patterns that demonstrate the framework's generative capacity</h2>
+
+        <div class="cs-patterns">
+          <div class="cs-pattern">
+            <h3>Responsive salience</h3>
+            <p>An AI agent that automatically adjusts its visibility and interaction intensity to match the context. When trust is low - a beginner user, a high-stakes task, sensitive data - the system increases salience: richer explanations, additional approval gates, expanded transparency. As confidence recovers, it quietly reverts. Early user testing validated the concept while revealing meaningful individual variation: some participants found high-salience modes exhausting, others valued the guidance. Several didn't notice the adaptation at all - a signal that when well calibrated, dynamic coordination can feel seamless rather than intrusive.</p>
+          </div>
+          <div class="cs-pattern">
+            <h3>Workplan gating</h3>
+            <p>Before executing a complex agentic task, the system surfaces a structured plan for user review and approval. This shifts the experience toward done-with-me at initiation, while allowing done-for-me execution once the user has signed off. It addresses a common user concern: wanting oversight of what the agent is planning before it acts, without having to approve every individual step.</p>
+          </div>
+          <div class="cs-pattern">
+            <h3>Attribution markers</h3>
+            <p>Micro-copy, placement, and iconography that make AI contribution legible without being intrusive. Markers calibrate salience at the content level - surfacing AI involvement where it matters for trust or accountability, keeping it quiet elsewhere. The pattern addresses the challenge of done-under-me experiences becoming covertly conducted without users realising it.</p>
+          </div>
+          <div class="cs-pattern">
+            <h3>Progressive autonomy</h3>
+            <p>A pattern for gradually extending AI autonomy as users build familiarity and trust with a system. Coordination starts in done-with-me territory and migrates toward done-for-me as the user's mental model matures. The shift can be user-initiated, system-suggested, or a combination - with clear affordances for dialling back if needed.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- Impact -->
+      <div class="cs-section">
+        <div class="cs-section-label">Impact</div>
+        <h2>From internal knowledge base to published research</h2>
+
+        <div class="cs-impact-group">
+          <div class="cs-impact-category">Publication</div>
+          <ul class="cs-impact">
+            <li>Published on Amazon Science (March 2026), co-authored with a University of Washington HCI professor and an AWS AI product lead</li>
+            <li>Academic paper submitted to ACM DIS 2026 - one of the field's leading venues for design and human-computer interaction research</li>
+          </ul>
+        </div>
+
+        <div class="cs-impact-group">
+          <div class="cs-impact-category">Adoption</div>
+          <ul class="cs-impact">
+            <li>Framework adopted across all AWS SageMaker AI projects - now applied across 200 projects including production enterprise software used globally by thousands of users</li>
+            <li>Prescriptive guidance site based on the framework distributed across AWS design and product organisations</li>
+          </ul>
+        </div>
+
+        <div class="cs-impact-group">
+          <div class="cs-impact-category">Recognition</div>
+          <ul class="cs-impact">
+            <li>Presented at Conflux - Amazon's flagship design conference with 6,000 attendees from all orgs within Amazon - generating significant follow-up across design and engineering teams</li>
+            <li>Validated through a formal design critique with multiple design and product teams and reviews with scientists in responsible AI</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Reflection -->
+      <div class="cs-section">
+        <div class="cs-section-label">Reflection</div>
+        <h2>What this taught me about designing for non-determinism</h2>
+        <p>The most important lesson from this work is that agentic AI demands a different design posture. With conventional software, the goal is to find the right static design. With agentic AI, the goal is to build systems and a shared vocabulary that evolve as we learn what works. The behaviour is unpredictable, so users and designers must adjust - but the technology itself can also learn, adapt, and course-correct proactively.</p>
+        <p>Building shared vocabulary matters as much as building the right interface. The framework's value wasn't just in the design patterns it generated - it was in giving cross-functional teams a common language for coordination decisions that had previously been implicit or contested. The coordination zones became shorthand that cut across design, engineering, product, and leadership conversations.</p>
+        <p>Teams that get this right won't simply build more capable agents. They will build agents that people trust, adopt, and find genuinely worth collaborating with.</p>
+      </div>
+
     </div>
   </div>
-
-  <script>
-    function checkPassword() {
-      const input = document.getElementById('pw-input').value;
-      if (input === 'lapka') {
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('page').style.display = 'block';
-      } else {
-        document.getElementById('pw-error').textContent = 'Incorrect password.';
-        document.getElementById('pw-input').value = '';
-        document.getElementById('pw-input').focus();
-      }
-    }
-    document.getElementById('pw-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') checkPassword();
-    });
-  </script>
 
 </body>
 </html>

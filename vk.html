@@ -6,7 +6,7 @@
   <title>Vaiva Kalnikaitė</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@300;400;500&family=Roboto+Mono:wght@300;400&subset=latin,latin-ext&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@300;400;500&family=Roboto+Mono:wght@300;400&subset=latin,latin-ext&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -51,26 +51,77 @@
 
     /* ─── LOGIN ─── */
     #login.active {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      gap: 1.5rem;
+      gap: 0;
       background: var(--bg);
+      overflow: hidden;
+    }
+    .login-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .login-trace-svg {
+      width: 100%;
+      height: 100%;
+    }
+    .login-trace-path {
+      fill: none;
+      stroke: #999;
+      stroke-width: 1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @keyframes traceDraw {
+      0%   { stroke-dashoffset: var(--pl); opacity: 0; }
+      8%   { opacity: 0.28; }
+      70%  { stroke-dashoffset: 0; opacity: 0.28; }
+      88%  { stroke-dashoffset: 0; opacity: 0; }
+      100% { stroke-dashoffset: var(--pl); opacity: 0; }
+    }
+    .login-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
     }
     #login .login-name {
       font-family: var(--qs);
       font-weight: 400;
-      font-size: 42px;
-      line-height: 50px;
+      font-size: 52px;
+      line-height: 58px;
       letter-spacing: 0.05em;
       color: var(--text);
+      margin-bottom: 0.25rem;
     }
-    #login p {
+    #login .login-tagline {
+      font-family: var(--qs);
+      font-style: italic;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-bottom: 0;
+      text-transform: none;
+    }
+    #login .login-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 0.25rem 0;
+    }
+    #login .login-welcome {
       font-family: var(--jso);
       font-size: 11px;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 0;
@@ -96,7 +147,7 @@
       border: 1px solid var(--border);
       padding: 0.5rem 2rem;
       font-family: var(--jso);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       cursor: pointer;
@@ -108,7 +159,7 @@
     }
     #login .error {
       font-family: var(--jso);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.1em;
       color: #cc0000;
       min-height: 1em;
@@ -136,7 +187,7 @@
     }
     #site-nav a {
       font-family: var(--jso);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text);
@@ -192,33 +243,57 @@
       z-index: 2;
     }
     .values-inner {
-      max-width: 780px;
+      max-width: 980px;
       margin: 0 auto;
+      position: relative;
+    }
+    #values-connector {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .connector-path {
+      fill: none;
+      stroke: #333;
+      stroke-width: 1.2;
+      stroke-linecap: round;
+      opacity: 0.35;
+    }
+    .connector-doodle {
+      fill: none;
+      stroke: #333;
+      stroke-width: 1.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.35;
     }
     .values-header {
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
-      text-align: center;
-      margin-bottom: 4.5rem;
+      text-align: left;
+      margin-bottom: 3rem;
     }
     .values-layout {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 4rem;
-      align-items: start;
+      grid-template-columns: 320px 1fr;
+      gap: 6rem;
+      align-items: center;
     }
     .values-list {
       display: flex;
       flex-direction: column;
-      gap: 0.1rem;
+      gap: 0;
     }
     .value-item {
       font-family: 'EB Garamond', serif;
       font-size: 36px;
-      line-height: 1.7;
+      line-height: 1.55;
+      white-space: nowrap;
       color: var(--text);
       opacity: 0.18;
       cursor: pointer;
@@ -227,20 +302,18 @@
     }
     .value-item.active {
       opacity: 1;
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 5px;
     }
-    .value-item:hover:not(.active) { opacity: 0.5; }
+    .value-item:hover:not(.active) { opacity: 0.4; }
     .values-desc-wrap {
       position: relative;
+      height: 200px;
     }
     .value-desc {
       position: absolute;
       top: 0; left: 0; right: 0;
       font-family: 'EB Garamond', serif;
-      font-size: clamp(28px, 3vw, 38px);
-      line-height: 1.45;
+      font-size: clamp(22px, 2.2vw, 28px);
+      line-height: 1.55;
       font-weight: 400;
       color: var(--text);
       opacity: 0;
@@ -249,7 +322,6 @@
     }
     .value-desc.active {
       opacity: 1;
-      position: relative;
       pointer-events: auto;
     }
     @media (max-width: 600px) {
@@ -264,7 +336,7 @@
       left: 1em;
       z-index: 100;
       font-family: var(--jso);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text);
@@ -291,7 +363,7 @@
       inset: 0;
       z-index: 1;
       overflow: hidden;
-      background-color: #def2ef;
+      background-color: #000000;
       transition: background-color 1.4s cubic-bezier(0.43, 0.195, 0.02, 1);
       pointer-events: none;
     }
@@ -358,9 +430,9 @@
       width: 112%;
       height: 112%;
       object-fit: cover;
-      opacity: 0.55;
-      mix-blend-mode: overlay;
-      filter: blur(3px) saturate(1.6) brightness(1.05);
+      opacity: 1;
+      mix-blend-mode: normal;
+      filter: none;
       animation: imageFloat 28s ease-in-out infinite alternate;
       will-change: transform;
       pointer-events: none;
@@ -371,6 +443,7 @@
       66%  { transform: scale(1.07) translate(1.2%, -1.5%); }
       100% { transform: scale(1.12) translate(-1%,   1%); }
     }
+
 
     /* ── EDGE SHIMMERS: subtle bokeh-like movement on the edges ── */
     .edge-shimmer {
@@ -464,7 +537,7 @@
       font-weight: 400;
       font-size: clamp(52px, 7.5vw, 108px);
       line-height: 1.04;
-      color: #2e3c3c;
+      color: #1a1a1a;
       letter-spacing: -0.02em;
     }
 
@@ -472,11 +545,11 @@
     .hero-line1 {
       display: flex;
       align-items: flex-end;
-      gap: 0.22em;
+      gap: 0;
       margin-bottom: 0;
       font-size: clamp(52px, 7.5vw, 108px); /* makes em units resolve to heading size */
     }
-    .hero-i { flex-shrink: 0; }
+    .hero-i { display: none; }
 
     /* Verb slot — fixed height, verbs stack inside */
     .hero-verb-wrap {
@@ -508,7 +581,7 @@
       position: absolute;
       left: 0; top: 0;
       font-style: italic;
-      color: #3d6b64;
+      color: #3a3a2a;
       white-space: nowrap;
       opacity: 0;
       transform: translateY(6px);
@@ -522,7 +595,7 @@
     /* Changing body text */
     .hero-sub-wrap {
       position: relative;
-      height: 6em;
+      height: 9em;
     }
     .hero-sub {
       position: absolute;
@@ -531,7 +604,7 @@
       font-size: clamp(15px, 1.3vw, 19px);
       line-height: 1.8;
       font-weight: 300;
-      color: #3d4e4e;
+      color: #2a2a1a;
       text-align: justify;
       opacity: 0;
       transform: translateY(5px);
@@ -625,7 +698,7 @@
 
     .project-meta {
       font-family: var(--jso);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
@@ -644,7 +717,7 @@
     }
     .project-entry .project-cta {
       font-family: var(--jso);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text);
@@ -710,7 +783,7 @@
     .cv-hero h1 { margin-bottom: 0.5rem; }
     .cv-hero .cv-title {
       font-family: var(--jso);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
@@ -730,7 +803,7 @@
 
     .cv-section-label {
       font-family: var(--jso);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
@@ -749,7 +822,7 @@
     }
     .cv-entry .cv-org {
       font-family: var(--jso);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--muted);
@@ -796,7 +869,7 @@
     }
     .cv-pub-note {
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       font-style: italic;
       color: var(--muted);
       margin-top: 1rem;
@@ -900,27 +973,34 @@
     ═══════════════════════════════════════ */
     #about-page { padding-bottom: 8rem; }
     .about-content {
-      max-width: 780px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 7rem 15px 0;
     }
     .about-content h1 { margin-bottom: 2rem; }
+    .about-photo {
+      width: 100%;
+      max-height: 480px;
+      object-fit: cover;
+      display: block;
+      margin: 2.5rem 0;
+    }
     .about-content p {
       font-size: 18px;
       line-height: 36px;
       font-weight: 300;
-      max-width: 560px;
+      max-width: 100%;
       margin-bottom: 1.5rem;
     }
     .about-links {
       margin-top: 2rem;
-      display: flex;
+      display: inline-flex;
       flex-direction: column;
       gap: 0.5rem;
     }
     .about-links a {
       font-family: var(--jso);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text);
@@ -970,6 +1050,27 @@
     .cv-dl-btn:hover { color: var(--text); border-color: #999; background: rgba(0,0,0,0.02); }
     .cv-dl-btn svg { width: 11px; height: 11px; flex-shrink: 0; }
 
+    /* Capabilities grid */
+    /* Capabilities grid */
+    .caps-section {
+      background: #fcfcfa;
+      padding: 6rem 0 0;
+      border-top: 1px solid var(--border);
+    }
+    .caps-header {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 0.25rem;
+    }
+    .caps-hub-svg {
+      display: block;
+      width: 100%;
+    }
+
     @media print {
       #login, #portfolio-page, #about-page, nav, .back-link,
       #site-name, #site-contact, #top-bar, .cv-download-bar { display: none !important; }
@@ -984,11 +1085,32 @@
 
 <!-- ══ LOGIN ══ -->
 <div id="login" class="view active">
-  <div class="login-name">Vaiva Kalnikaitė</div>
-  <p>Private</p>
-  <input type="password" id="pw-input" placeholder="password" autocomplete="current-password" />
-  <button onclick="checkPassword()">Enter</button>
-  <div class="error" id="pw-error"></div>
+  <!-- animated background -->
+  <div class="login-bg" aria-hidden="true">
+    <svg class="login-trace-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="login-sketch" x="-5%" y="-30%" width="110%" height="160%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="7"/>
+          <feDisplacementMap scale="2" in="SourceGraphic"/>
+        </filter>
+      </defs>
+      <!-- single path looping around the text block -->
+      <path id="login-trace"
+        class="login-trace-path"
+        filter="url(#login-sketch)"
+        d="M -60 480 C 0 200, 200 20, 500 40 C 640 50, 700 60, 720 60 C 740 60, 800 50, 940 40 C 1240 20, 1440 200, 1480 480 C 1440 750, 1240 880, 940 870 C 800 864, 740 858, 720 858 C 700 858, 640 864, 500 870 C 200 880, 0 750, -60 480"/>
+    </svg>
+  </div>
+  <!-- content -->
+  <div class="login-content">
+    <div class="login-name">Vaiva Kalnikaitė</div>
+    <div class="login-tagline">Design. Research. AI.</div>
+    <div class="login-rule"></div>
+    <p class="login-welcome">Welcome — password-protected portfolio &amp; résumé</p>
+    <input type="password" id="pw-input" placeholder="password" autocomplete="current-password" />
+    <button onclick="checkPassword()">Enter</button>
+    <div class="error" id="pw-error"></div>
+  </div>
 </div>
 
 <!-- ══ APP ══ -->
@@ -1032,15 +1154,14 @@
           <div class="blob blob-2"></div>
           <div class="blob blob-3"></div>
           <div class="blob blob-4"></div>
-          <img class="hero-image" src="sunshine.jpg" alt="" aria-hidden="true">
-          <!-- Sun effects -->
-          <div class="sun-flare"></div>
+          <img class="hero-image" src="images+videos/hero5.png" alt="" aria-hidden="true">
           <!-- Edge shimmer overlays -->
           <div class="edge-shimmer edge-tl"></div>
           <div class="edge-shimmer edge-tr"></div>
           <div class="edge-shimmer edge-bl"></div>
           <div class="edge-shimmer edge-br"></div>
         </div>
+
 
         <!-- Hero text: "I" stays, phrases transition -->
         <div class="hero-content">
@@ -1049,22 +1170,20 @@
             <div class="hero-line1">
               <span class="hero-i">I</span>
               <div class="hero-verb-wrap">
-                <span class="hero-verb active">design</span>
-                <span class="hero-verb">bridge</span>
-                <span class="hero-verb">drive</span>
+                <span class="hero-verb active">Grounded in</span>
               </div>
             </div>
 
             <div class="hero-noun-wrap">
-              <span class="hero-noun active">AI experiences.</span>
-              <span class="hero-noun">research &amp; design.</span>
-              <span class="hero-noun">measurable impact.</span>
+              <span class="hero-noun active">systems thinking.</span>
+              <span class="hero-noun">innovation, research and design.</span>
+              <span class="hero-noun">outcomes that matter.</span>
             </div>
 
             <div class="hero-sub-wrap">
-              <p class="hero-sub active">Product Design Leader excelling in human-centered AI strategy and research-led UX — building products from zero to scale.</p>
-              <p class="hero-sub">As Head of UX at Amazon and founder of Dovetailed, I've led cross-functional teams and driven design strategy for global AI products — with a focus on agentic AI and human-in-the-loop systems.</p>
-              <p class="hero-sub">Delivering agentic AI experiences that generate $500M+ in revenue, grounded in real research, bold design thinking — in the most human suitable way.</p>
+              <p class="hero-sub active">From interaction to architecture — designing AI systems that scale. I work where product strategy, design and engineering intersect — making complex AI systems feel coherent.</p>
+              <p class="hero-sub">Research shapes the questions. Design shapes the answers. Innovation shapes what comes next. I work at the intersection of all three — turning insight into AI products that genuinely advance what people can do.</p>
+              <p class="hero-sub">From research insight and impactful design decisions to shipped product to $800M+ in revenue. Design measured end to end.</p>
             </div>
 
           </div>
@@ -1083,24 +1202,99 @@
     <!-- Values Section -->
     <div class="values-section">
       <div class="values-inner">
+        <svg id="values-connector" aria-hidden="true"></svg>
         <div class="values-header">My Values</div>
         <div class="values-layout">
           <div class="values-list">
-            <div class="value-item active" data-value="0">Kindness</div>
-            <div class="value-item" data-value="1">Trust</div>
-            <div class="value-item" data-value="2">Quality</div>
-            <div class="value-item" data-value="3">Simplicity</div>
-            <div class="value-item" data-value="4">Evaluation</div>
+            <div class="value-item active" data-value="0">Trust + Leadership</div>
+            <div class="value-item" data-value="1">Empathy</div>
+            <div class="value-item" data-value="2">Taste + Quality</div>
+            <div class="value-item" data-value="3">Innovation</div>
+            <div class="value-item" data-value="4">Clarity</div>
           </div>
           <div class="values-desc-wrap">
-            <p class="value-desc active" data-desc="0">Lead with empathy. For users, teammates and every person who interacts with what I design and build.</p>
-            <p class="value-desc" data-desc="1">Earn trust through design & leadership. I create agentic AI interactions where transparency, thoughtfulness and humanised experiences are the default.</p>
-            <p class="value-desc" data-desc="2">Never settle for good enough. Every detail deserves genuine care, from a single interaction to an entire system. I run go/no-go UX quality gates for product releases at scale, which I describe in case study X.</p>
-            <p class="value-desc" data-desc="3">Complexity is easy; clarity is hard. Strip away everything that doesn't serve the human.</p>
-            <p class="value-desc" data-desc="4">Ground every decision in evidence. Measure what matters, question assumptions, and keep learning.</p>
+            <p class="value-desc active" data-desc="0">Earn trust through design and leadership. I set direction, grow teams and shape agentic AI interactions where transparency and humanised experiences come built in.</p>
+            <p class="value-desc" data-desc="1">Lead with empathy. For users, teammates and every person who interacts with what I design and build.</p>
+            <p class="value-desc" data-desc="2">Never settle. Every detail matters, from a single interaction to an entire system. I blend cultural curiosity with design rigour to create products that feel deeply human — and I run go/no-go UX readiness gates at scale at AWS to hold that standard.</p>
+            <p class="value-desc" data-desc="3">I established an innovation stream at Amazon SageMaker AI — driving new product directions, discovering novel agentic AI design patterns, and pioneering new design processes that didn't exist before. Pushing boundaries by asking what's genuinely new, not just what's different.</p>
+            <p class="value-desc" data-desc="4">Complexity is easy; clarity is hard. Strip away everything that doesn't serve the human.</p>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Capabilities hub and spoke -->
+    <div class="caps-section">
+      <div class="caps-header">What I Do</div>
+
+      <svg class="caps-hub-svg" viewBox="-120 -70 1440 820" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="hub-sketch" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="11"/>
+            <feDisplacementMap scale="1.5" in="SourceGraphic"/>
+          </filter>
+        </defs>
+
+        <!-- Center hub -->
+        <circle cx="600" cy="340" r="60" fill="none" stroke="#aaa" stroke-width="1.4" filter="url(#hub-sketch)"/>
+        <text x="600" y="336" text-anchor="middle" font-family="EB Garamond, serif" font-size="16" font-style="italic" fill="#aaa" letter-spacing="1">design</text>
+        <text x="600" y="355" text-anchor="middle" font-family="EB Garamond, serif" font-size="16" font-style="italic" fill="#aaa" letter-spacing="1">&amp; AI</text>
+
+        <!-- Spokes -->
+        <line x1="600" y1="280" x2="600" y2="118" stroke="#bbb" stroke-width="1.2"/>
+        <line x1="652" y1="310" x2="791" y2="233" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
+        <line x1="652" y1="370" x2="791" y2="447" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
+        <line x1="600" y1="400" x2="600" y2="562" stroke="#bbb" stroke-width="1.2"/>
+        <line x1="548" y1="370" x2="409" y2="447" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
+        <line x1="548" y1="310" x2="409" y2="233" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
+
+        <!-- Node dots -->
+        <circle cx="600" cy="110" r="5" fill="#aaa"/>
+        <circle cx="799" cy="225" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
+        <circle cx="799" cy="455" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
+        <circle cx="600" cy="570" r="5" fill="#aaa"/>
+        <circle cx="401" cy="455" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
+        <circle cx="401" cy="225" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
+
+        <!-- 1. TOP: Agentic AI Products & UX -->
+        <text x="600" y="18" text-anchor="middle" font-family="EB Garamond, serif" font-size="28" fill="#333">Agentic AI Products &amp; UX</text>
+        <text x="600" y="44" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Agentic systems design</text>
+        <text x="600" y="62" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Human-in-the-loop experiences</text>
+        <text x="600" y="80" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">LLM product design</text>
+        <text x="600" y="98" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Design with &amp; for AI</text>
+
+        <!-- 2. TOP-RIGHT: Research, Design & Craft -->
+        <text x="815" y="213" text-anchor="start" font-family="EB Garamond, serif" font-size="28" fill="#333">Research, Design &amp; Craft</text>
+        <text x="815" y="239" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">User research &amp; synthesis</text>
+        <text x="815" y="257" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Interaction design</text>
+        <text x="815" y="275" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Agentic UX patterns</text>
+        <text x="815" y="293" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Design systems &amp; prototyping</text>
+
+        <!-- 3. BOTTOM-RIGHT: Product Strategy -->
+        <text x="815" y="443" text-anchor="start" font-family="EB Garamond, serif" font-size="28" fill="#333">Product Strategy</text>
+        <text x="815" y="469" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Vision &amp; roadmap</text>
+        <text x="815" y="487" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Cross-functional alignment</text>
+        <text x="815" y="505" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Scaling products &amp; teams</text>
+
+        <!-- 4. BOTTOM: Leadership & Org -->
+        <text x="600" y="600" text-anchor="middle" font-family="EB Garamond, serif" font-size="28" fill="#333">Leadership &amp; Org</text>
+        <text x="600" y="626" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Team leadership · Design ops</text>
+        <text x="600" y="644" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Hiring &amp; mentoring</text>
+        <text x="600" y="662" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Building future leaders</text>
+
+        <!-- 5. BOTTOM-LEFT: Innovation -->
+        <text x="385" y="443" text-anchor="end" font-family="EB Garamond, serif" font-size="28" fill="#333">Innovation</text>
+        <text x="385" y="469" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Concept development</text>
+        <text x="385" y="487" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Rapid experimentation</text>
+        <text x="385" y="505" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">0→1 product creation</text>
+
+        <!-- 6. TOP-LEFT: UX Operations -->
+        <text x="385" y="213" text-anchor="end" font-family="EB Garamond, serif" font-size="28" fill="#333">UX Operations</text>
+        <text x="385" y="239" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Go/no-go UX frameworks</text>
+        <text x="385" y="257" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">for product launches</text>
+        <text x="385" y="275" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Building agentic UX teams</text>
+
+      </svg>
     </div>
 
     <!-- Project 1: AWS — lolajiang.com section.slice layout -->
@@ -1114,7 +1308,7 @@
         </div>
         <div class="section-visual">
           <video autoplay loop muted playsinline style="width:100%;display:block;">
-            <source src="humanai-04-16x9.mp4" type="video/mp4">
+            <source src="images+videos/humanai-04-16x9.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -1125,13 +1319,13 @@
     <div class="project-entry slice">
       <div class="section-inner">
         <div class="section-visual">
-          <div class="project-visual" style="background:#f5f5f5;min-height:320px;display:flex;align-items:center;justify-content:center;border:1px dashed #ccc;">
-            <span style="font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#ccc;">Image placeholder</span>
+          <div style="position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;">
+            <img src="images+videos/agent_design.png" alt="Designing Away the Complexity with AI Agents" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
         </div>
         <div class="section-text">
           <div class="project-meta">Amazon Web Services</div>
-          <h2>Customizing AI Models with Agents</h2>
+          <h2>Designing Away the Complexity with AI Agents</h2>
           <a class="project-cta" href="case-study-agents.html">See Case Study</a>
         </div>
       </div>
@@ -1146,7 +1340,7 @@
           <a class="project-cta" href="case-study-nufood.html">See Case Study</a>
         </div>
         <div class="section-visual">
-          <img src="nufood.gif" alt="nūfood 3D food printing" style="width:100%;display:block;" />
+          <img src="images+videos/nufood.gif" alt="nūfood 3D food printing" style="width:100%;display:block;" />
         </div>
       </div>
     </div>
@@ -1178,7 +1372,7 @@
 
       <div class="cv-section">
         <div class="cv-section-label">Profile</div>
-        <p class="cv-profile-text">I'm a design leader with 15+ years shaping user experiences across AI, enterprise, and consumer products. I bridge research, design, and strategy to create meaningful, human-centered systems. As a founder of Dovetailed and Head of UX at Amazon, I've led cross-functional teams and driven UX strategy for global products — including agentic AI products delivering $500M+ in revenue. I thrive in complex problem spaces, and my background spanning HCI, product development, business strategy, and startups gives me a distinct advantage in solving the challenges that matter most, in the most human suitable way.</p>
+        <p class="cv-profile-text">I'm a design leader with 15+ years shaping user experiences across AI, enterprise, and consumer products. I bridge research, design, and strategy to create meaningful, human-centered systems. As a founder of Dovetailed and Head of UX at Amazon, I've led cross-functional teams and driven UX strategy for global products — including agentic AI products delivering $800M+ in revenue. I thrive in complex problem spaces, and my background spanning HCI, product development, business strategy, and startups gives me a distinct advantage in solving the challenges that matter most, in the most human suitable way.</p>
       </div>
 
       <div class="cv-section">
@@ -1451,14 +1645,15 @@
   <div id="about-page" class="page">
     <div class="about-content">
       <h1>About</h1>
-      <p>I'm Vaiva Kalnikaitė — a design leader, researcher, and founder with over 15 years of experience shaping human experiences across AI, enterprise, and emerging technology.</p>
-      <p>I'm currently Head of UX at Amazon Web Services, leading design for agentic AI and human-in-the-loop systems. I'm also the founder of <a href="https://dovetailed.io" target="_blank">Dovetailed</a>, an award-winning UX and innovation studio based in the UK and US.</p>
-      <p>I hold a PhD in Human-Computer Interaction from the University of Sheffield and am a Fellow of the Royal Society of Arts. My research has been published at ACM CHI and CSCW, earning three Best Paper Awards.</p>
-      <p>I'm based in Seattle, USA, with roots in Cambridge, UK and Vilnius, Lithuania.</p>
+      <p>I've always been drawn to the problems where the map runs out.</p>
+      <p>I'm Vaiva Kalnikaitė — design leader, researcher, and founder working at the frontier of AI. I'm currently Head of UX at Amazon Web Services, leading design for agentic AI and human-in-the-loop systems: the practice of designing AI that genuinely collaborates with people rather than simply responding to them.</p>
+      <p>Before Amazon, I founded <a href="https://dovetailed.io" target="_blank">Dovetailed</a>, a UX and innovation studio based in Cambridge, UK. Our most recognised work was nūfood — the world's first edible 3D food printer — featured in the Financial Times, BBC World, The Spoon, and Digital Trends.</p>
+      <p>I hold a PhD in Human-Computer Interaction from the University of Sheffield and am a Fellow of the Royal Society of Arts. My research has earned three Best Paper Awards at ACM CHI and CSCW (top 1% of submissions). Across fifteen years, the products I've led have contributed to over $1B in revenue — The best design decisions don't just improve products — they drive them.</p>
+      <p>Outside of work I sail, play pickleball, and host dinners for strangers — bringing together people who have never met over food, in support of homelessness charities around Seattle.</p>
+      <img class="about-photo" src="images+videos/vaiva_sailing.JPG" alt="Vaiva sailing">
+      <p>Originally from Lithuania. Shaped by Cambridge, UK. Now working at the edge of what AI can become, in Seattle.</p>
       <div class="about-links">
         <a href="https://dovetailed.io" target="_blank">dovetailed.io</a>
-        <a href="https://linkedin.com/in/vaivakalnikaite" target="_blank">LinkedIn</a>
-        <a href="mailto:vaiva@dovetailed.io">vaiva@dovetailed.io</a>
         <a href="https://nufood.io" target="_blank">nufood.io</a>
       </div>
     </div>
@@ -1524,15 +1719,8 @@
   function applySlide(idx) {
     if (idx === currentSlide) return;
     heroBg.style.backgroundColor = slideBgs[idx].bg;
-
     const prev = currentSlide;
     currentSlide = idx;
-
-    // transition verbs
-    phrases[prev].classList.remove('active');
-    phrases[prev].classList.add('exit');
-    setTimeout(() => phrases[prev].classList.remove('exit'), 1050);
-    phrases[currentSlide].classList.add('active');
 
     // transition nouns
     nouns[prev].classList.remove('active');
@@ -1563,6 +1751,104 @@
   window.addEventListener('scroll', onHeroScroll, { passive: true });
 
   // Values section interaction
+  let _doodleTimer = null;
+
+  function drawValueConnector(idx) {
+    // Cancel any pending doodle from a previous hover
+    if (_doodleTimer) { clearTimeout(_doodleTimer); _doodleTimer = null; }
+
+    const svg = document.getElementById('values-connector');
+    const inner = document.querySelector('.values-inner');
+    const item = document.querySelector(`.value-item[data-value="${idx}"]`);
+    const descWrap = document.querySelector('.values-desc-wrap');
+    if (!svg || !item || !descWrap) return;
+
+    const innerRect = inner.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    const descRect = descWrap.getBoundingClientRect();
+
+    const x1 = itemRect.right - innerRect.left + 8;
+    const y1 = itemRect.top + itemRect.height / 2 - innerRect.top;
+    const x2 = descRect.left - innerRect.left - 8;
+    const y2 = descRect.top + descRect.height / 2 - innerRect.top;
+    const itemTop = itemRect.top - innerRect.top;
+    const above = itemTop - 18;
+    const mx = (x1 + x2) / 2;
+
+    // Unique path per value — some arc over the heading, some loop, some wave
+    const pathDefs = [
+      // 0 Trust+Leadership: sweeping arc up over the heading — ends short to leave room for plane
+      `M ${x1} ${y1} C ${x1+30} ${above-50}, ${x2-65} ${above-50}, ${x2-35} ${y2}`,
+      // 1 Empathy: relaxed S-curve, dips down then rises
+      `M ${x1} ${y1} C ${x1+50} ${y1+55}, ${x2-50} ${y2-65}, ${x2} ${y2}`,
+      // 2 Taste+Quality: smooth arc rising over heading — ends short of x2 to leave room for balloon
+      `M ${x1} ${y1} C ${x1+25} ${above-55}, ${x2-55} ${above-30}, ${x2-30} ${y2}`,
+      // 3 Innovation: multi-wave with smooth continuation — ends short of x2 to make room for pencil
+      `M ${x1} ${y1} C ${x1+55} ${y1-75}, ${x1+115} ${y1+45}, ${mx} ${above-15} S ${x2-60} ${y2-45}, ${x2-30} ${y2}`,
+      // 4 Clarity: easy arc looping below, then clean arrival
+      `M ${x1} ${y1} C ${x1+55} ${y1+65}, ${x2-55} ${y2+50}, ${x2} ${y2}`,
+    ];
+
+    // Pencil doodle at endpoint — different symbol per value
+    const doodleDefs = [
+      // 0: paper plane — below and near line endpoint, clear of description text
+      `M ${x2-23} ${y2+21} L ${x2-41} ${y2+8} L ${x2-36} ${y2+18} L ${x2-47} ${y2+19} L ${x2-47} ${y2+23} L ${x2-36} ${y2+24} L ${x2-41} ${y2+34} Z M ${x2-23} ${y2+21} L ${x2-47} ${y2+21} M ${x2-36} ${y2+18} L ${x2-41} ${y2+8} M ${x2-36} ${y2+24} L ${x2-41} ${y2+34}`,
+      // 1: open loop (near-full arc)
+      `M ${x2+8} ${y2} A 8 8 0 1 1 ${x2+7.99} ${y2+0.14}`,
+      // 2: crown — sits below line endpoint, top point 8px below line end
+      `M ${x2-40} ${y2+28} L ${x2-40} ${y2+10} L ${x2-35} ${y2+18} L ${x2-30} ${y2+8} L ${x2-25} ${y2+18} L ${x2-20} ${y2+10} L ${x2-20} ${y2+28} Z M ${x2-40} ${y2+24} L ${x2-20} ${y2+24} M ${x2-40} ${y2+8} A 2 2 0 1 1 ${x2-40.01} ${y2+8} M ${x2-30} ${y2+6} A 2 2 0 1 1 ${x2-30.01} ${y2+6} M ${x2-20} ${y2+8} A 2 2 0 1 1 ${x2-20.01} ${y2+8}`,
+      // 3: vertical pencil to the LEFT of description text — body + tip + ferrule band + eraser line
+      `M ${x2-26} ${y2-24} L ${x2-18} ${y2-24} L ${x2-18} ${y2-8} L ${x2-26} ${y2-8} Z M ${x2-26} ${y2-8} L ${x2-22} ${y2+4} L ${x2-18} ${y2-8} M ${x2-26} ${y2-20} L ${x2-18} ${y2-20} M ${x2-24} ${y2-24} L ${x2-24} ${y2-20}`,
+      // 4: cut diamond — outer rhombus + girdle line + upper/lower facet lines
+      `M ${x2+20} ${y2-22} L ${x2+30} ${y2-10} L ${x2+20} ${y2+2} L ${x2+10} ${y2-10} Z M ${x2+10} ${y2-10} L ${x2+30} ${y2-10} M ${x2+17} ${y2-22} L ${x2+10} ${y2-10} M ${x2+23} ${y2-22} L ${x2+30} ${y2-10} M ${x2+14} ${y2-10} L ${x2+20} ${y2+2} M ${x2+26} ${y2-10} L ${x2+20} ${y2+2}`,
+    ];
+
+    const seed = idx * 13 + 5;
+
+    svg.innerHTML = `
+      <defs>
+        <filter id="val-sketch-${idx}" x="-20%" y="-60%" width="140%" height="220%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="${seed}"/>
+          <feDisplacementMap scale="1.2" in="SourceGraphic"/>
+        </filter>
+      </defs>
+      <g filter="url(#val-sketch-${idx})">
+        <path class="connector-path" d="${pathDefs[idx]}"/>
+      </g>
+    `;
+
+    const path = svg.querySelector('path.connector-path');
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    path.getBoundingClientRect();
+    path.style.transition = 'stroke-dashoffset 0.55s ease';
+    path.style.strokeDashoffset = '0';
+
+    // After line finishes, draw exactly one doodle
+    _doodleTimer = setTimeout(() => {
+      _doodleTimer = null;
+      // Remove only stale doodle groups, leave the connector line intact
+      svg.querySelectorAll('.doodle-g').forEach(g => g.remove());
+
+      const doodleG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      doodleG.setAttribute('class', 'doodle-g');
+      doodleG.setAttribute('filter', `url(#val-sketch-${idx})`);
+      const doodlePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      doodlePath.setAttribute('class', 'connector-doodle');
+      doodlePath.setAttribute('d', doodleDefs[idx]);
+      doodleG.appendChild(doodlePath);
+      svg.appendChild(doodleG);
+
+      const dLen = doodlePath.getTotalLength();
+      doodlePath.style.strokeDasharray = dLen;
+      doodlePath.style.strokeDashoffset = dLen;
+      doodlePath.getBoundingClientRect();
+      doodlePath.style.transition = 'stroke-dashoffset 0.4s ease';
+      doodlePath.style.strokeDashoffset = '0';
+    }, 580);
+  }
+
   document.querySelectorAll('.value-item').forEach(item => {
     item.addEventListener('mouseenter', () => {
       const idx = item.dataset.value;
@@ -1570,8 +1856,24 @@
       document.querySelectorAll('.value-desc').forEach(d => d.classList.remove('active'));
       item.classList.add('active');
       document.querySelector(`.value-desc[data-desc="${idx}"]`).classList.add('active');
+      drawValueConnector(idx);
     });
   });
+
+  // Draw initial connector for value 0
+  drawValueConnector(0);
+
+  // Login trace animation — set path length then start
+  [['login-trace', '0s'], ['login-trace-2', '3.5s']].forEach(function(pair) {
+    const el = document.getElementById(pair[0]);
+    if (!el) return;
+    const len = el.getTotalLength();
+    el.style.setProperty('--pl', len);
+    el.style.strokeDasharray = len;
+    el.style.strokeDashoffset = len;
+    el.style.animation = 'traceDraw 7s cubic-bezier(0.4, 0, 0.2, 1) ' + pair[1] + ' infinite';
+  });
 </script>
+
 </body>
 </html>

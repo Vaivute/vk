@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Study — Vaiva Kalnikaitė</title>
+  <title>Case Study - Vaiva Kalnikaitė</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,300;0,400;1,300&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
       --text:   #333333;
       --muted:  #666666;
       --border: #cccccc;
+      --warm:   #f4f0e8;
     }
 
     body {
@@ -26,7 +27,7 @@
       line-height: 36px;
     }
 
-    /* ── Login ── */
+    /* Login */
     #login {
       display: flex;
       flex-direction: column;
@@ -40,10 +41,13 @@
       font-weight: 400;
       font-size: 28px;
       color: var(--text);
+      max-width: 480px;
+      text-align: center;
+      line-height: 1.4;
     }
     #login p {
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
@@ -69,7 +73,7 @@
       border: 1px solid var(--border);
       padding: 0.5rem 2rem;
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       cursor: pointer;
@@ -78,14 +82,14 @@
     #login button:hover { background: var(--text); color: var(--bg); }
     #login .error {
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.1em;
       color: #cc0000;
       min-height: 1em;
     }
 
-    /* ── Page ── */
-    #page { display: none; }
+    /* Page */
+    #page { display: block; }
 
     nav {
       position: fixed;
@@ -97,7 +101,7 @@
     }
     nav a {
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text);
@@ -110,7 +114,7 @@
       position: fixed;
       top: 1em; left: 1em;
       font-family: 'Raleway', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
@@ -119,33 +123,297 @@
     }
     .back-link:hover { opacity: 0.5; }
 
+    /* Content */
     .content {
-      max-width: 780px;
+      max-width: 680px;
       margin: 0 auto;
-      padding: 8rem 15px 6rem;
+      padding: 8rem 15px 8rem;
     }
-    .content h1 {
+
+    /* Header */
+    .cs-label {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .cs-title {
       font-family: 'EB Garamond', serif;
       font-weight: 400;
-      font-size: 42px;
-      line-height: 50px;
+      font-size: clamp(36px, 4vw, 52px);
+      line-height: 1.15;
       margin-bottom: 2rem;
+      color: var(--text);
     }
-    .content p {
-      margin-bottom: 1em;
+    .cs-byline {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Sections */
+    .cs-section {
+      margin-bottom: 4rem;
+    }
+    .cs-section-label {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .cs-section h2 {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+      color: var(--text);
+    }
+    .cs-section p {
+      margin-bottom: 1.2em;
+      color: var(--text);
+    }
+    .cs-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Pull quote */
+    .cs-pull {
+      margin: 3rem 0;
+      padding: 2rem 2.5rem;
+      background: var(--warm);
+      font-family: 'EB Garamond', serif;
+      font-size: 26px;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    /* Dimensions grid */
+    .cs-dimensions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+    .cs-dim {
+      background: var(--bg);
+      padding: 1.5rem;
+    }
+    .cs-dim-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .cs-dim-desc {
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 300;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Zones */
+    .cs-zones {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+    .cs-zone {
+      background: var(--bg);
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .cs-zone-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      line-height: 1.3;
+      color: var(--text);
+    }
+    .cs-zone-tag {
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.3rem;
+    }
+    .cs-zone-desc {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 300;
+      color: var(--text);
+      margin: 0;
+    }
+
+    /* Patterns */
+    .cs-patterns {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .cs-pattern h3 {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: 22px;
+      margin-bottom: 0.4rem;
+    }
+    .cs-pattern p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+      margin: 0;
+    }
+
+    /* Impact groups */
+    .cs-impact-group {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 2rem;
+      margin-bottom: 2rem;
+      align-items: start;
+    }
+    .cs-impact-category {
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.35rem;
+    }
+
+    /* Impact list */
+    .cs-impact {
+      list-style: none;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .cs-impact li {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.6;
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+    .cs-impact li::before {
+      content: '·';
+      color: var(--muted);
+      flex-shrink: 0;
+      font-size: 1.2em;
+    }
+
+    /* Images */
+    .cs-image {
+      margin: 3rem 0;
+    }
+    .cs-image img, .cs-image gif {
+      width: 100%;
+      display: block;
+    }
+    .cs-image-caption {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+
+    /* Two-up image grid */
+    .cs-image-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin: 3rem 0;
+    }
+    .cs-image-grid img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+    }
+
+    /* Press quotes */
+    .cs-press {
+      margin: 4rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    .cs-press-item {
+      border-left: 2px solid var(--border);
+      padding-left: 1.75rem;
+    }
+    .cs-press-logo {
+      height: 22px;
+      width: auto;
+      display: block;
+      margin-bottom: 1.1rem;
+      opacity: 0.7;
+      filter: grayscale(100%);
+    }
+    .cs-press-logo-text {
+      display: block;
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.1rem;
+    }
+    .cs-press-quote {
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text);
+      margin: 0;
+    }
+
+    /* Divider */
+    .cs-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 4rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .cs-dimensions { grid-template-columns: 1fr; }
+      .cs-zone { grid-template-columns: 1fr; gap: 0.5rem; }
+      .cs-impact-group { grid-template-columns: 1fr; gap: 0.25rem; }
+      .cs-image-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Login -->
-  <div id="login">
-    <div class="login-name">Designing World's First Edible Raspberry 3D Printer</div>
-    <p>Case Study</p>
-    <input type="password" id="pw-input" placeholder="password" autocomplete="current-password" />
-    <button onclick="checkPassword()">Enter</button>
-    <div class="error" id="pw-error"></div>
-  </div>
 
   <!-- Page content -->
   <div id="page">
@@ -153,28 +421,209 @@
     <nav>
       <a href="vk.html">Portfolio</a>
     </nav>
+
     <div class="content">
-      <h1>Designing World's First Edible Raspberry 3D Printer</h1>
-      <p>hello world</p>
+
+      <!-- Header -->
+      <div class="cs-label">Dovetailed · nūfood</div>
+      <h1 class="cs-title">Designing the World's First Edible Raspberry 3D Printer</h1>
+      <div class="cs-byline">Founded 2014 &nbsp;·&nbsp; Cambridge, England &nbsp;·&nbsp; Founder, CEO, Inventor &amp; Creative Director</div>
+
+      <!-- Hero collage -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:0 0 3rem;">
+        <img src="images+videos/nufood-app-green.jpg" alt="nūfood app shape designer" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;" />
+        <img src="images+videos/nufood-printing-heart.jpg" alt="nūfood printing a heart shape" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;" />
+        <img src="images+videos/nufood-cocktail.jpg" alt="Cocktail with 3D printed raspberry garnish" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;" />
+        <img src="images+videos/nufood-black-olive.png" alt="3D printed black olive by nūfood - credit Ellis Parrinder" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;" />
+      </div>
+
+      <!-- The problem -->
+      <div class="cs-section">
+        <div class="cs-section-label">The Problem</div>
+        <h2>Food has always been limited by the form of its ingredients</h2>
+        <p>A raspberry looks like a raspberry. A blueberry tastes like a blueberry. For as long as food has existed, appearance and flavour have been inseparable - constrained by what grows, what ferments, what blends. The idea that you could decouple the two - that something could look completely different from what it tastes like, or that you could 3D print a flavour - didn't exist in a home kitchen context.</p>
+        <p>At the same time, cooking had become increasingly passive. People consumed more and created less. The playfulness and experimentation that characterised great cuisine were locked away in professional kitchens, inaccessible to anyone without formal training or industrial equipment.</p>
+        <p>The design challenge was to change that - to invent a product category that didn't exist, build the technology to make it possible, and design an experience simple enough for anyone to use at home. Not a professional tool. Not a novelty gadget. Something genuinely new.</p>
+      </div>
+
+      <div class="cs-pull">
+        "What if appearance and flavour didn't have to match? What if you could print a raspberry that tasted of fig, or a blue cube that burst with the taste of balsamic strawberry?"
+      </div>
+
+      <!-- My Role -->
+      <div class="cs-section">
+        <div class="cs-section-label">My Role</div>
+        <h2>Founder, CEO, and Inventor of an entirely new product category</h2>
+        <p>I founded Dovetailed, the Cambridge-based design studio and innovation lab that created nūfood, and as CEO and Inventor led the project from a single concept at a food hackathon to a working product exhibited across Europe. My role spanned the full product - from inventing the core technology and directing industrial design, to designing the mobile app and crafting the brand and dining experiences that brought the product to life publicly.</p>
+        <p>The idea originated from a food-centred hackathon I organised, bringing together UX designers, technologists, and gastronomical experts. From that collision of disciplines, the concept of 3D printed flavour emerged as the most compelling direction. I led and directed a team of 15 spanning UX and industrial designers, software and hardware engineers, food scientists, and business development - taking the product from concept to market over the following two years.</p>
+        <p>Alongside building the product, I created a series of sold-out pop-up dining experiences across Cambridge and London, using them not just as public events but as primary research environments - observing how people interacted with the printer, understanding what drew them in, and using those insights to shape every subsequent iteration of the product and app.</p>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- The technology -->
+      <div class="cs-section">
+        <div class="cs-section-label">The Technology</div>
+        <h2>Inventing berrification - 3D printing with liquid ingredients</h2>
+        <p>Every existing food 3D printer at the time worked with composite pastes and extrusion - essentially a sophisticated piping bag. They could reshape food but not reinvent it. To print with raw liquid ingredients - fruit juice, edible oils, liquid flavour extracts - required a completely different approach.</p>
+        <p>We invented a patented process - awarded in the USA, UK, France, and Germany - we called berrification, inspired by the modernist cooking technique of spherification. Liquid ingredients mixed with sodium alginate are deposited layer by layer into a cold calcium chloride solution. The chemical reaction forms a paper-thin membrane around each drop, encapsulating the liquid inside a delicate, edible sphere. These spheres are assembled into three-dimensional structures - flavour bombs that hold their shape until they burst in the mouth.</p>
+        <p>The most important discovery in the development process was about authenticity. Pure raspberry juice, when encapsulated, didn't taste like a raspberry. The flavour fell flat. After extensive experimentation, we found that the authentic raspberry taste required a combination of raspberry juice and balsamic vinegar - a formula that would never have been intuitive. This insight shaped our entire approach to the ink system: flavour accuracy required chemistry, not just ingredients.</p>
+      </div>
+
+      <div class="cs-image-grid">
+        <img src="images+videos/nufood-printer-kitchen.jpg" alt="nūfood printer in a kitchen setting" />
+        <img src="images+videos/nufood-sketches.png" alt="nūfood industrial design sketches and iterations" />
+      </div>
+
+      <!-- The design -->
+      <div class="cs-section">
+        <div class="cs-section-label">The Design</div>
+        <h2>Three design challenges that shaped the product</h2>
+
+        <div class="cs-dimensions">
+          <div class="cs-dim">
+            <div class="cs-dim-name">Hardware form</div>
+            <p class="cs-dim-desc">The printer had to be kitchen-worthy - compact, beautiful, and approachable. Not a machine. Something that belonged on a worktop alongside the things people already loved.</p>
+          </div>
+          <div class="cs-dim">
+            <div class="cs-dim-name">App experience</div>
+            <p class="cs-dim-desc">3D design is intimidating. The app had to make designing edible shapes feel as simple as drawing - with a visual grid, pre-made templates, and flavour selection that felt more like browsing than configuring.</p>
+          </div>
+          <div class="cs-dim">
+            <div class="cs-dim-name">The ink system</div>
+            <p class="cs-dim-desc">Flavour inks needed to feel premium and considered - not cartridges. Small glass bottles with precise formulas, each a collaboration between food science and taste. The packaging was part of the experience.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- The app -->
+      <div class="cs-section">
+        <div class="cs-section-label">The App</div>
+        <h2>Making 3D food design feel like play</h2>
+        <p>The mobile app was the primary interaction surface - the place where users designed their flavour creations before sending them to print. The core design challenge was abstracting 3D design into something that felt completely natural for a home cook with no technical background.</p>
+        <p>The shape designer used a simple dot grid where users tapped to fill a pattern, building up their creation layer by layer in an intuitive visual language. Pre-made templates - small pearl, layer cake, sphere - gave new users an immediate starting point. A flavour library presented each ink with a photograph and a short description of its taste profile and pairing suggestions, framing the experience around food culture rather than technology. The printer could hold two flavour inks simultaneously, enabling two-flavour creations from a single print run.</p>
+
+        <div class="cs-image">
+          <img src="images+videos/nufood-app.jpg" alt="nūfood mobile app - shape designer, flavour library, and print interface" />
+          <div class="cs-image-caption">The nūfood app: logo and splash, shape designer using a dot grid, pre-made model selection, flavour library, and individual flavour detail with pairing notes.</div>
+        </div>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- Design patterns -->
+      <div class="cs-section">
+        <div class="cs-section-label">Design Decisions</div>
+        <h2>What made nūfood feel like a genuinely new thing</h2>
+
+        <div class="cs-patterns">
+          <div class="cs-pattern">
+            <h3>Decoupling appearance from flavour</h3>
+            <p>The radical design premise was that what something looks like and what it tastes like are independent variables. A blue cube can taste of raspberry. A translucent sphere can taste of fig. This wasn't a gimmick - it was the foundation of a new culinary language. Every product decision reinforced it: the shape designer and flavour selector were separate, deliberate steps in the app, making the decoupling an explicit creative act rather than an incidental outcome.</p>
+          </div>
+          <div class="cs-pattern">
+            <h3>Flavour as a material</h3>
+            <p>Positioning the flavour inks as premium consumables - small glass bottles with curated formulas - shifted the product's cultural register. This wasn't cooking equipment. It was closer to a palette of materials for edible design. The packaging language, the flavour descriptions, the pairing notes in the app: all reinforced the idea that flavour could be chosen, combined, and applied with the intentionality of a design medium.</p>
+          </div>
+          <div class="cs-pattern">
+            <h3>Pop-ups as research</h3>
+            <p>The sold-out dining events in Cambridge and London served a dual purpose. Publicly, they were experiences - five-course 3D printed meals, cocktail garnishes, edible art. Privately, they were the most valuable user research available. Watching how people approached the printer for the first time, what surprised them, what delighted them, and where they hesitated directly informed the hardware ergonomics, the app flow, and the flavour introductions we prioritised for the Kickstarter campaign.</p>
+          </div>
+          <div class="cs-pattern">
+            <h3>Playfulness as the product</h3>
+            <p>nūfood was not designed to replace cooking. It was designed to add something cooking couldn't offer: a kind of edible playfulness - the ability to create something that surprises, that prompts a double-take, that makes a meal into a small spectacle. Every design decision was evaluated against this: does it feel joyful? Does it invite experimentation? Does it make the person using it feel like they made something genuinely extraordinary?</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Printing gif -->
+      <div class="cs-image">
+        <img src="images+videos/nufood-printing.gif" alt="nūfood printing in action - spherification process" />
+        <div class="cs-image-caption">nūfood printing in action - the berrification process forms edible spheres layer by layer in real time.</div>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- Impact -->
+      <div class="cs-section">
+        <div class="cs-section-label">Impact</div>
+        <h2>A new product category, recognised globally</h2>
+
+        <div class="cs-impact-group">
+          <div class="cs-impact-category">Recognition</div>
+          <ul class="cs-impact">
+            <li>Winner, Smart Kitchen Startup Showcase - Seattle, USA (2016)</li>
+            <li>Edison Award nomination for design and business innovation</li>
+            <li>Red Dot Award recognition</li>
+            <li>Featured in 3D Printing Industry, Digital Trends, The Spoon, IBTimes UK, Food Science and Technology journal</li>
+          </ul>
+        </div>
+
+        <div class="cs-impact-group">
+          <div class="cs-impact-category">Exhibitions</div>
+          <ul class="cs-impact">
+            <li>Sold-out pop-up dining events in Cambridge and London - tickets at £200 per pair</li>
+            <li>Kickstarter campaign tour across 10 European cities including Paris, London, Vienna, Helsinki, Berlin, Amsterdam, Copenhagen, and Vilnius</li>
+            <li>Eat Cambridge Food Festival five-course 3D printed meal</li>
+          </ul>
+        </div>
+
+        <div class="cs-impact-group">
+          <div class="cs-impact-category">Product</div>
+          <ul class="cs-impact">
+            <li>World's first food 3D printer to work with raw liquid ingredients rather than composite pastes</li>
+            <li>Patented berrification technology for edible liquid encapsulation - patents awarded in the USA, UK, France, and Germany</li>
+            <li>Available in four AWS regions at launch - designed for home kitchens at approximately £500-600</li>
+            <li>Initial flavour library including raspberry, strawberry, soya, wasabi, lychee, vanilla, and coffee</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- Press -->
+      <div class="cs-section">
+        <div class="cs-section-label">In The Press</div>
+        <h2>How the world described nūfood</h2>
+
+        <div class="cs-press">
+
+          <div class="cs-press-item">
+            <img class="cs-press-logo" src="images+videos/logo-ft.png" alt="Financial Times">
+            <p class="cs-press-quote">"You can use raw ingredients to produce strawberries with cream in the middle. We don't think that is as interesting as creating new shapes and tastes, like an orange made from raspberry juice."</p>
+          </div>
+
+          <div class="cs-press-item">
+            <span class="cs-press-logo-text">Cambridge Independent</span>
+            <p class="cs-press-quote">"Our approach is to introduce playfulness back into the kitchen, adding interesting flavours to everyday meals. The level of skill expected to model something is very complex, which is why we've made our software really easy to use for everyone from children to grandparents."</p>
+          </div>
+
+          <div class="cs-press-item">
+            <img class="cs-press-logo" src="images+videos/logo-thespoon.png" alt="The Spoon">
+            <p class="cs-press-quote">"The nūfood printer allows you to print something that has the exact delicious flavour of a raspberry but design it in a way that is far from its natural form - making it blue and in the shape of a cube."</p>
+          </div>
+
+          <div class="cs-press-item">
+            <img class="cs-press-logo" src="images+videos/logo-digitaltrends.svg" alt="Digital Trends">
+            <p class="cs-press-quote">"Nufood allows backers to experience a new type of dining by offering a pop-up restaurant serving 3D-printed dishes."</p>
+          </div>
+
+        </div>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- Reflection -->
+      <div class="cs-section">
+        <div class="cs-section-label">Reflection</div>
+        <h2>What building a new product category taught me about design</h2>
+        <p>Inventing something that doesn't exist yet is a different kind of design challenge. There are no comparable products to benchmark against, no existing mental models to build on, no user expectations to meet or subvert. You have to construct the entire framework - the technology, the language, the cultural context - from scratch. That is both the hardest and the most interesting version of design work.</p>
+        <p>The most important thing I learned was that the product experience extended far beyond the hardware. The flavour inks, the app, the dining events, the way we described each flavour in the library - all of it was the product. None of it was peripheral. A 3D printer that came with generic cartridges and a functional app would have been a curiosity. The combination of beautiful materials, a joyful interface, and experiences that let people taste what it could do turned it into something that felt genuinely worth wanting.</p>
+        <p>The pop-up dinners were the most valuable investment we made. Direct, repeated contact with real people encountering the product for the first time revealed things that no user interview or prototype test could have surfaced - the exact moment of surprise, the instinct to share, the question of what to pair it with. Building a new product category means building the audience for it at the same time. You cannot separate the two.</p>
+      </div>
+
     </div>
   </div>
-
-  <script>
-    function checkPassword() {
-      const input = document.getElementById('pw-input').value;
-      if (input === 'lapka') {
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('page').style.display = 'block';
-      } else {
-        document.getElementById('pw-error').textContent = 'Incorrect password.';
-        document.getElementById('pw-input').value = '';
-        document.getElementById('pw-input').focus();
-      }
-    }
-    document.getElementById('pw-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') checkPassword();
-    });
-  </script>
 
 </body>
 </html>
