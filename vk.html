@@ -1027,23 +1027,23 @@
       #login .login-name { font-size: 36px; line-height: 42px; }
       #login .login-tagline { font-size: 18px; }
 
-      /* Hero — allow text to wrap, shrink padding */
+      /* Hero — kill sticky scroll, show slide 0 as compact block */
       .hero-scroll-container { height: auto; }
-      .hero-sticky { position: relative; height: auto; min-height: 100vh; padding: 5rem 0 3rem; }
-      .hero-content { position: relative; padding: 0 1.25rem; align-items: flex-start; }
+      .hero-sticky { position: relative; height: auto; min-height: 0; padding: 7rem 1.25rem 4rem; }
+      .hero-content { position: relative; inset: auto; padding: 0; display: block; }
       .hero-text-inner { max-width: 100%; }
-      .hero-i, .hero-verb, .hero-noun { font-size: clamp(36px, 10vw, 56px); line-height: 1.1; }
-      .hero-line1 { font-size: clamp(36px, 10vw, 56px); flex-wrap: wrap; }
-      .hero-verb-wrap { min-width: 0; height: auto; min-height: 1.15em; width: 100%; }
-      .hero-verb { white-space: normal; position: relative; }
+      .hero-i, .hero-verb, .hero-noun { font-size: clamp(36px, 10vw, 56px); line-height: 1.08; }
+      .hero-line1 { font-size: clamp(36px, 10vw, 56px); flex-wrap: wrap; margin-bottom: 0.25rem; }
+      .hero-verb-wrap { min-width: 0; height: auto; width: 100%; position: relative; }
+      .hero-verb { white-space: normal; position: relative; display: block; }
       .hero-verb:not(.active) { display: none; }
-      .hero-noun-wrap { font-size: clamp(36px, 10vw, 56px); height: auto; min-height: 2.4em; margin-bottom: 1.25rem; }
-      .hero-noun { white-space: normal; position: relative; }
+      .hero-noun-wrap { font-size: clamp(36px, 10vw, 56px); height: auto; margin-bottom: 1.5rem; position: relative; }
+      .hero-noun { white-space: normal; position: relative; display: block; }
       .hero-noun:not(.active) { display: none; }
-      .hero-sub-wrap { height: auto; min-height: 10em; width: 100% !important; }
-      .hero-sub { position: relative; text-align: left; width: 100% !important; font-size: 15px; line-height: 1.7; }
+      .hero-sub-wrap { height: auto; width: 100% !important; position: relative; }
+      .hero-sub { position: relative; text-align: left; width: 100% !important; font-size: 15px; line-height: 1.7; display: block; }
       .hero-sub:not(.active) { display: none; }
-      .hero-progress { right: 0.9rem; }
+      .hero-progress { display: none; }
 
       /* Values */
       .values-section { padding: 4rem 1.25rem 4.5rem; }
@@ -1054,10 +1054,11 @@
       .value-desc { font-size: 18px; line-height: 1.55; }
       #values-connector { display: none; }
 
-      /* Capabilities — keep SVG readable via horizontal scroll */
-      .caps-section { padding: 4rem 0 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-      .caps-header { padding: 0 1.25rem; }
-      .caps-hub-svg { min-width: 760px; padding: 0 1rem; }
+      /* Capabilities — swap SVG for a clean list on mobile */
+      .caps-section { padding: 4rem 0 0; }
+      .caps-header { padding: 0 1.25rem; margin-bottom: 2rem; }
+      .caps-hub-svg { display: none; }
+      .caps-mobile { display: block; }
 
       /* Projects */
       .project-entry { padding: 3rem 1.25rem; }
@@ -1134,6 +1135,40 @@
     .caps-hub-svg {
       display: block;
       width: 100%;
+    }
+
+    /* Mobile capabilities list (hidden on desktop) */
+    .caps-mobile { display: none; padding: 0 1.25rem 4rem; }
+    .caps-mobile-hub {
+      font-family: var(--qs);
+      font-style: italic;
+      font-size: 20px;
+      color: #888;
+      text-align: center;
+      padding: 1rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+      letter-spacing: 0.04em;
+    }
+    .caps-mobile-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .caps-mobile-item h3 {
+      font-family: var(--qs);
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .caps-mobile-item p {
+      font-family: var(--jso);
+      font-size: 13px;
+      line-height: 1.75;
+      color: #888;
+      margin: 0;
     }
 
     @media print {
@@ -1360,6 +1395,37 @@
         <text x="385" y="275" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Building agentic UX teams</text>
 
       </svg>
+
+      <!-- Mobile fallback: list view of capabilities -->
+      <div class="caps-mobile" aria-hidden="false">
+        <div class="caps-mobile-hub">design &amp; AI</div>
+        <div class="caps-mobile-list">
+          <div class="caps-mobile-item">
+            <h3>Agentic AI Products &amp; UX</h3>
+            <p>Agentic systems design · Human-in-the-loop experiences · LLM product design · Design with &amp; for AI</p>
+          </div>
+          <div class="caps-mobile-item">
+            <h3>Research, Design &amp; Craft</h3>
+            <p>User research &amp; synthesis · Interaction design · Agentic UX patterns · Design systems &amp; prototyping</p>
+          </div>
+          <div class="caps-mobile-item">
+            <h3>Product Strategy</h3>
+            <p>Vision &amp; roadmap · Cross-functional alignment · Scaling products &amp; teams</p>
+          </div>
+          <div class="caps-mobile-item">
+            <h3>Leadership &amp; Org</h3>
+            <p>Team leadership · Design ops · Hiring &amp; mentoring · Building future leaders</p>
+          </div>
+          <div class="caps-mobile-item">
+            <h3>Innovation</h3>
+            <p>Concept development · Rapid experimentation · 0→1 product creation</p>
+          </div>
+          <div class="caps-mobile-item">
+            <h3>UX Operations</h3>
+            <p>Go/no-go UX frameworks for product launches · Building agentic UX teams</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Project 1: AWS — lolajiang.com section.slice layout -->
@@ -1391,6 +1457,7 @@
         <div class="section-text">
           <div class="project-meta">Amazon Web Services</div>
           <h2>Designing Away the Complexity with AI Agents</h2>
+          <p class="project-desc">Led end-to-end design of SageMaker AI's serverless model customisation - shaping the agentic workflow that lets teams describe a business objective in natural language and have an AI agent generate the full fine-tuning specification. Directed the designer on the project, ran user working sessions with ML teams, and owned UX readiness through launch.</p>
           <a class="project-cta" href="case-study-agents.html">See Case Study</a>
         </div>
       </div>
@@ -1402,6 +1469,7 @@
         <div class="section-text">
           <div class="project-meta">Dovetailed · nūfood</div>
           <h2>Designing World's First Edible Raspberry 3D Printer</h2>
+          <p class="project-desc">Founded Dovetailed and invented nūfood - taking it from a hackathon concept to a working product exhibited across Europe. As CEO and Inventor, I led a team of 15 across industrial design, hardware and software engineering, food science, and business - directing the core printing technology, the mobile app, and the brand and dining experiences that launched the product publicly.</p>
           <a class="project-cta" href="case-study-nufood.html">See Case Study</a>
         </div>
         <div class="section-visual">
