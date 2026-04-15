@@ -363,10 +363,14 @@
       inset: 0;
       z-index: 1;
       overflow: hidden;
-      background-color: #000000;
+      background-color: #f4f0e8;
       transition: background-color 1.4s cubic-bezier(0.43, 0.195, 0.02, 1);
       pointer-events: none;
     }
+
+    .blob,
+    .edge-shimmer,
+    .sun-flare { display: none; }
 
     .blob {
       position: absolute;
@@ -1352,7 +1356,7 @@
           <div class="blob blob-2"></div>
           <div class="blob blob-3"></div>
           <div class="blob blob-4"></div>
-          <img class="hero-image" src="images+videos/hero5.png" alt="" aria-hidden="true">
+          <img class="hero-image" src="images+videos/hero5.png" alt="" aria-hidden="true" loading="eager" fetchpriority="high" decoding="async">
           <!-- Edge shimmer overlays -->
           <div class="edge-shimmer edge-tl"></div>
           <div class="edge-shimmer edge-tr"></div>
