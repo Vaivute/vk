@@ -621,6 +621,94 @@
       transform: translateY(-3px);
     }
 
+    /* ── Mobile hero carousel (hidden on desktop) ── */
+    .hero-mobile { display: none; }
+    .hero-mobile-verb {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      color: #1a1a1a;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .hero-mobile-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .hero-mobile-track::-webkit-scrollbar { display: none; }
+    .hero-mobile-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      min-width: 0;
+      padding-right: 0.25rem;
+    }
+    .hero-mobile-noun {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: #3a3a2a;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+      word-wrap: break-word;
+    }
+    .hero-mobile-sub {
+      font-family: 'Lora', serif;
+      font-weight: 300;
+      color: #2a2a1a;
+      margin: 0;
+    }
+    .hero-mobile-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.75rem;
+    }
+    .hero-mobile-arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.65);
+      color: var(--text);
+      font-family: 'EB Garamond', serif;
+      font-size: 24px;
+      line-height: 1;
+      padding: 0 0 3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .hero-mobile-arrow:hover,
+    .hero-mobile-arrow:focus {
+      background: rgba(255,255,255,0.95);
+      border-color: #999;
+      outline: none;
+    }
+    .hero-mobile-arrow:disabled { opacity: 0.35; cursor: default; }
+    .hero-mobile-dots {
+      display: flex;
+      gap: 0.45rem;
+      margin-left: 0.5rem;
+      align-items: center;
+    }
+    .hero-mobile-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(58,68,68,0.25);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .hero-mobile-dot.active {
+      background: rgba(58,68,68,0.75);
+      transform: scale(1.5);
+    }
+
     /* thin progress line on right */
     .hero-progress {
       position: absolute;
@@ -1027,23 +1115,16 @@
       #login .login-name { font-size: 36px; line-height: 42px; }
       #login .login-tagline { font-size: 18px; }
 
-      /* Hero — kill sticky scroll, show slide 0 as compact block */
+      /* Hero — kill sticky scroll, swap in mobile carousel */
       .hero-scroll-container { height: auto; }
       .hero-sticky { position: relative; height: auto; min-height: 0; padding: 7rem 1.25rem 4rem; }
       .hero-content { position: relative; inset: auto; padding: 0; display: block; }
-      .hero-text-inner { max-width: 100%; }
-      .hero-i, .hero-verb, .hero-noun { font-size: clamp(36px, 10vw, 56px); line-height: 1.08; }
-      .hero-line1 { font-size: clamp(36px, 10vw, 56px); flex-wrap: wrap; margin-bottom: 0.25rem; }
-      .hero-verb-wrap { min-width: 0; height: auto; width: 100%; position: relative; }
-      .hero-verb { white-space: normal; position: relative; display: block; }
-      .hero-verb:not(.active) { display: none; }
-      .hero-noun-wrap { font-size: clamp(36px, 10vw, 56px); height: auto; margin-bottom: 1.5rem; position: relative; }
-      .hero-noun { white-space: normal; position: relative; display: block; }
-      .hero-noun:not(.active) { display: none; }
-      .hero-sub-wrap { height: auto; width: 100% !important; position: relative; }
-      .hero-sub { position: relative; text-align: left; width: 100% !important; font-size: 15px; line-height: 1.7; display: block; }
-      .hero-sub:not(.active) { display: none; }
+      .hero-text-inner { display: none; }
       .hero-progress { display: none; }
+      .hero-mobile { display: block; width: 100%; }
+      .hero-mobile-verb { font-size: clamp(38px, 11vw, 56px); }
+      .hero-mobile-noun { font-size: clamp(34px, 10vw, 50px); }
+      .hero-mobile-sub { font-size: 15px; line-height: 1.75; }
 
       /* Values */
       .values-section { padding: 4rem 1.25rem 4.5rem; }
@@ -1063,7 +1144,9 @@
       /* Projects */
       .project-entry { padding: 3rem 1.25rem; }
       .project-entry.slice { padding: 3rem 1.25rem; }
-      .project-entry.slice .section-inner { flex-direction: column; gap: 2rem; max-height: none; }
+      .project-entry.slice .section-inner { flex-direction: column; gap: 1.5rem; max-height: none; }
+      .project-entry.slice .section-text { order: 1; }
+      .project-entry.slice .section-visual { order: 2; }
       .project-entry .project-desc { font-size: 16px; line-height: 30px; }
       .project-visual { padding: 2.5rem 1rem; }
       .project-visual-title { font-size: 24px; }
@@ -1137,38 +1220,48 @@
       width: 100%;
     }
 
-    /* Mobile capabilities list (hidden on desktop) */
+    /* Mobile capabilities tiles (hidden on desktop) */
     .caps-mobile { display: none; padding: 0 1.25rem 4rem; }
     .caps-mobile-hub {
       font-family: var(--qs);
       font-style: italic;
-      font-size: 20px;
+      font-size: 18px;
       color: #888;
       text-align: center;
-      padding: 1rem 0 2rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 2rem;
+      padding: 0.5rem 0 1.75rem;
       letter-spacing: 0.04em;
     }
     .caps-mobile-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .caps-mobile-item {
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 1.1rem 1rem 1.2rem;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      min-height: 170px;
     }
     .caps-mobile-item h3 {
       font-family: var(--qs);
       font-weight: 400;
-      font-size: 24px;
-      line-height: 1.25;
+      font-size: 19px;
+      line-height: 1.2;
       color: var(--text);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.65rem;
     }
     .caps-mobile-item p {
       font-family: var(--jso);
-      font-size: 13px;
-      line-height: 1.75;
+      font-size: 11px;
+      line-height: 1.7;
       color: #888;
       margin: 0;
+    }
+    @media (max-width: 380px) {
+      .caps-mobile-list { grid-template-columns: 1fr; }
+      .caps-mobile-item { min-height: 0; }
     }
 
     @media print {
@@ -1286,6 +1379,34 @@
               <p class="hero-sub">From research insight and impactful design decisions to shipped product to $800M+ in revenue. Design measured end to end.</p>
             </div>
 
+          </div>
+
+          <!-- Mobile-only carousel -->
+          <div class="hero-mobile" id="hero-mobile">
+            <div class="hero-mobile-verb">Grounded in</div>
+            <div class="hero-mobile-track" id="hero-mobile-track">
+              <div class="hero-mobile-slide">
+                <div class="hero-mobile-noun">systems thinking.</div>
+                <p class="hero-mobile-sub">From interaction to architecture — designing AI systems that scale. I work where product strategy, design and engineering intersect — making complex AI systems feel coherent.</p>
+              </div>
+              <div class="hero-mobile-slide">
+                <div class="hero-mobile-noun">innovation, research and design.</div>
+                <p class="hero-mobile-sub">Research shapes the questions. Design shapes the answers. Innovation shapes what comes next. I work at the intersection of all three — turning insight into AI products that genuinely advance what people can do.</p>
+              </div>
+              <div class="hero-mobile-slide">
+                <div class="hero-mobile-noun">outcomes that matter.</div>
+                <p class="hero-mobile-sub">From research insight and impactful design decisions to shipped product to $800M+ in revenue. Design measured end to end.</p>
+              </div>
+            </div>
+            <div class="hero-mobile-controls">
+              <button class="hero-mobile-arrow" id="hero-mobile-prev" aria-label="Previous slide">‹</button>
+              <button class="hero-mobile-arrow" id="hero-mobile-next" aria-label="Next slide">›</button>
+              <div class="hero-mobile-dots" id="hero-mobile-dots">
+                <span class="hero-mobile-dot active"></span>
+                <span class="hero-mobile-dot"></span>
+                <span class="hero-mobile-dot"></span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1891,6 +2012,37 @@
   }
 
   window.addEventListener('scroll', onHeroScroll, { passive: true });
+
+  // Mobile hero carousel
+  (function() {
+    const track = document.getElementById('hero-mobile-track');
+    if (!track) return;
+    const slides = track.querySelectorAll('.hero-mobile-slide');
+    const dotsWrap = document.getElementById('hero-mobile-dots');
+    const dots = dotsWrap ? dotsWrap.querySelectorAll('.hero-mobile-dot') : [];
+    const prevBtn = document.getElementById('hero-mobile-prev');
+    const nextBtn = document.getElementById('hero-mobile-next');
+
+    function currentIdx() {
+      const w = track.clientWidth || 1;
+      return Math.round(track.scrollLeft / w);
+    }
+    function update() {
+      const idx = currentIdx();
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      if (prevBtn) prevBtn.disabled = idx <= 0;
+      if (nextBtn) nextBtn.disabled = idx >= slides.length - 1;
+    }
+    function goTo(idx) {
+      const clamped = Math.max(0, Math.min(slides.length - 1, idx));
+      track.scrollTo({ left: clamped * track.clientWidth, behavior: 'smooth' });
+    }
+    track.addEventListener('scroll', update, { passive: true });
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIdx() - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIdx() + 1));
+    window.addEventListener('resize', update);
+    update();
+  })();
 
   // Values section interaction
   let _doodleTimer = null;
