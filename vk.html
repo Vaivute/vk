@@ -1662,12 +1662,17 @@
 </div><!-- /app -->
 
 <script>
+  function unlockSite() {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    showPage('portfolio');
+  }
+
   function checkPassword() {
     const input = document.getElementById('pw-input').value;
     if (input === 'lapka') {
-      document.getElementById('login').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      showPage('portfolio');
+      try { sessionStorage.setItem('vk_auth', '1'); } catch (e) {}
+      unlockSite();
     } else {
       document.getElementById('pw-error').textContent = 'Incorrect password.';
       document.getElementById('pw-input').value = '';
@@ -1677,6 +1682,10 @@
   document.getElementById('pw-input').addEventListener('keydown', e => {
     if (e.key === 'Enter') checkPassword();
   });
+
+  try {
+    if (sessionStorage.getItem('vk_auth') === '1') unlockSite();
+  } catch (e) {}
 
   function showPage(name) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
