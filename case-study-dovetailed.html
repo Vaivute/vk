@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dovetailed · Case Study — Vaiva Kalnikaitė</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,300;0,400;1,300&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #ffffff;
+      --text:   #333333;
+      --muted:  #666666;
+      --border: #cccccc;
+      --warm:   #f4f0e8;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Lora', serif;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 36px;
+    }
+
+    /* ── Login ── */
+    #login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 1.5rem;
+    }
+    #login .login-name {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: 28px;
+      color: var(--text);
+      max-width: 480px;
+      text-align: center;
+      line-height: 1.4;
+    }
+    #login p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    #login input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0;
+      font-family: 'Raleway', sans-serif;
+      font-size: 14px;
+      width: 220px;
+      text-align: center;
+      letter-spacing: 0.2em;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    #login input:focus { border-bottom-color: var(--text); }
+    #login button {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.5rem 2rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    #login button:hover { background: var(--text); color: var(--bg); }
+    #login .error {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: #cc0000;
+      min-height: 1em;
+    }
+
+    /* ── Page ── */
+    #page { display: block; }
+
+    nav {
+      position: fixed;
+      top: 1em; right: 1em;
+      z-index: 100;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    nav a {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    nav a:hover { opacity: 0.5; }
+
+    .back-link {
+      position: fixed;
+      top: 1em; left: 1em;
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    .back-link:hover { opacity: 0.5; }
+
+    /* ── Content ── */
+    .content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 8rem 15px 8rem;
+    }
+
+    /* Header */
+    .cs-label {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .cs-title {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(36px, 4vw, 52px);
+      line-height: 1.15;
+      margin-bottom: 2rem;
+      color: var(--text);
+    }
+    .cs-byline {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Sections */
+    .cs-section {
+      margin-bottom: 4rem;
+    }
+    .cs-section-label {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .cs-section h2 {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+      color: var(--text);
+    }
+    .cs-section p {
+      margin-bottom: 1.2em;
+      color: var(--text);
+    }
+    .cs-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Pull quote */
+    .cs-pull {
+      margin: 3rem 0;
+      padding: 2rem 2.5rem;
+      background: var(--warm);
+      font-family: 'EB Garamond', serif;
+      font-size: 26px;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    /* Dimensions grid */
+    .cs-dimensions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+    .cs-dim {
+      background: var(--bg);
+      padding: 1.5rem;
+    }
+    .cs-dim-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .cs-dim-desc {
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 300;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Zones */
+    .cs-zones {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+    .cs-zone {
+      background: var(--bg);
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .cs-zone-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      line-height: 1.3;
+      color: var(--text);
+    }
+    .cs-zone-tag {
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.3rem;
+    }
+    .cs-zone-desc {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 300;
+      color: var(--text);
+      margin: 0;
+    }
+
+    /* Patterns */
+    .cs-patterns {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .cs-pattern h3 {
+      font-family: 'EB Garamond', serif;
+      font-weight: 400;
+      font-size: 22px;
+      margin-bottom: 0.4rem;
+    }
+    .cs-pattern p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+      margin: 0;
+    }
+
+    /* Impact list */
+    .cs-impact {
+      list-style: none;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .cs-impact li {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.6;
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+    .cs-impact li::before {
+      content: '·';
+      color: var(--muted);
+      flex-shrink: 0;
+      font-size: 1.2em;
+    }
+
+    /* Impact groups */
+    .cs-impact-group {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 2rem;
+      margin-bottom: 2rem;
+      align-items: start;
+    }
+    .cs-impact-category {
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.35rem;
+    }
+
+    /* Images */
+    .cs-image {
+      margin: 3rem 0;
+    }
+    .cs-image img {
+      width: 100%;
+      display: block;
+    }
+    .cs-image-caption {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+
+    /* Divider */
+    .cs-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 4rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .back-link, nav a { font-size: 11px; letter-spacing: 0.1em; }
+      .back-link { top: 0.75em; left: 0.75em; }
+      nav { top: 0.75em; right: 0.75em; gap: 1rem; }
+      .content { padding: 5rem 1.25rem 4rem; }
+      .cs-label { margin-bottom: 1rem; }
+      .cs-byline { margin-bottom: 2.5rem; padding-bottom: 2rem; font-size: 11px; line-height: 1.8; }
+      .cs-section { margin-bottom: 2.5rem; }
+      .cs-section h2 { font-size: 24px; line-height: 1.3; }
+      .cs-section-label { margin-bottom: 0.75rem; }
+      .cs-pull { margin: 2rem 0; padding: 1.5rem; font-size: 20px; line-height: 1.5; }
+      .cs-divider { margin: 2.5rem 0; }
+      .cs-dimensions { grid-template-columns: 1fr; }
+      .cs-dim { padding: 1.25rem; }
+      .cs-zones { margin: 1.5rem 0; }
+      .cs-zone { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.25rem; }
+      .cs-impact-group { grid-template-columns: 1fr; gap: 0.25rem 0; margin-bottom: 1.5rem; }
+      .cs-impact-category { padding-top: 0; margin-bottom: 0.4rem; }
+      .cs-image { margin: 2rem 0; }
+      .cs-patterns { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Page content -->
+  <div id="page">
+    <a class="back-link" href="/">← Back</a>
+    <nav>
+      <a href="/">Portfolio</a>
+    </nav>
+
+    <div class="content">
+
+      <!-- Header -->
+      <div class="cs-label">Dovetailed · Design &amp; Innovation Studio</div>
+      <h1 class="cs-title">Leading a Design &amp; Innovation Consultancy for 12 Years</h1>
+      <div class="cs-byline">Founder, CEO &amp; Creative Director &nbsp;·&nbsp; Cambridge, UK &amp; US &nbsp;·&nbsp; 2011–2023</div>
+
+      <!-- Hero image -->
+      <div class="cs-image">
+        <img src="images+videos/Stylist_prep - credit Ellis Parrinder.jpg" alt="Dovetailed studio work — hands-on design and prototyping" style="width:100%;display:block;" />
+        <div class="cs-image-caption">Dovetailed — an award-winning UX and innovation consultancy, Cambridge, UK</div>
+      </div>
+
+      <!-- The problem -->
+      <div class="cs-section">
+        <div class="cs-section-label">The Problem</div>
+        <h2>Organisations had ideas and engineers, but no path from one to the other</h2>
+        <p>Across the sectors I worked in — AI, healthcare, food tech, water, industrial systems — I kept seeing the same gap. Organisations had technology, ambition, and smart people, but the path from "interesting idea" to "product that customers actually adopt" was unreliable. Experiments stalled. Pilots never made it to scale. Engineering teams built things business teams couldn't use; business teams commissioned things engineering teams couldn't ship.</p>
+        <p>What was missing wasn't more design, or more research, or more strategy in isolation. It was a partner who could hold all three at once — map a business process end to end, reimagine it with new technology, prototype the reimagined version fast enough to test, and shepherd it through the change management that makes adoption real.</p>
+        <p>That's the gap Dovetailed filled for twelve years.</p>
+      </div>
+
+      <div class="cs-pull">
+        "Innovation is not the idea. Innovation is the organisation accepting the idea, adopting it, and changing because of it. Most of the work is that second half."
+      </div>
+
+      <!-- My role -->
+      <div class="cs-section">
+        <div class="cs-section-label">My Role</div>
+        <h2>Founder, CEO, and Creative Director — from 2 people to 15+</h2>
+        <p>I founded Dovetailed in Cambridge in 2011 and led it for twelve years. My role spanned everything: shaping the commercial strategy, winning client relationships, directing creative and research work, building and mentoring the team, and keeping the studio financially healthy across two continents. I grew the team from a two-person operation to 15+ multidisciplinary staff spanning UX and service designers, user researchers, industrial designers, software and hardware engineers, food scientists, and business strategists.</p>
+        <p>Across that time I led or directed more than a hundred client engagements — some lasting a few weeks, some lasting years. Clients ranged from very early-stage startups to FTSE and Fortune 500 enterprises in sectors including AI, health and medical devices, food tech, water, industrial systems, and consumer products. The common thread: they came to us because they needed something new and needed it to work, and they trusted us to drive the work end to end.</p>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- How we worked -->
+      <div class="cs-section">
+        <div class="cs-section-label">How We Worked</div>
+        <h2>Three disciplines, held together by one team</h2>
+        <p>Over the years I refined a way of working that deliberately collapsed the walls between strategy, research, and design. Clients didn't have to manage a strategy firm, a research firm, and a design firm separately — or hope the handoffs worked. One team did all three, and measured success on whether the resulting product or service actually got adopted.</p>
+
+        <div class="cs-dimensions">
+          <div class="cs-dim">
+            <div class="cs-dim-name">Strategy &amp; Commercial</div>
+            <p class="cs-dim-desc">Commercial strategy, vision and positioning, opportunity mapping, and business transformation. The work that decides what to build and why.</p>
+          </div>
+          <div class="cs-dim">
+            <div class="cs-dim-name">Research &amp; Service Design</div>
+            <p class="cs-dim-desc">Mixed-method user research, end-to-end process mapping, service blueprinting, and reimagining how work actually flows when new technology is introduced.</p>
+          </div>
+          <div class="cs-dim">
+            <div class="cs-dim-name">Product &amp; Prototyping</div>
+            <p class="cs-dim-desc">Rapid prototyping across software, hardware, and service layers — turning reimagined processes into things you can try, test, and iterate on in weeks.</p>
+          </div>
+        </div>
+
+        <p>The method mattered: we held these three together across every engagement. Strategy without research produces confident nonsense. Research without design produces reports that nobody uses. Design without commercial grounding produces beautiful things that never ship. Integrating them was how we moved clients from pilot to adoption at pace.</p>
+      </div>
+
+      <!-- Innovation pipeline -->
+      <div class="cs-section">
+        <div class="cs-section-label">The Innovation Pipeline</div>
+        <h2>From experimentation to scaled adoption</h2>
+        <p>Most innovation work fails at the seams between phases. Pilots never get productionised. Production never gets adopted. We built Dovetailed's offering around those seams — not the pretty demo, but the full pipeline from opportunity to adoption.</p>
+
+        <div class="cs-zones">
+          <div class="cs-zone">
+            <div>
+              <div class="cs-zone-name">Discovery</div>
+              <span class="cs-zone-tag">Opportunity framing</span>
+            </div>
+            <p class="cs-zone-desc">Mixed-method research, process mapping, and stakeholder alignment to identify where new technology would actually create value — and where it wouldn't. The goal was to kill bad ideas early so we could spend client budget on the right ones.</p>
+          </div>
+          <div class="cs-zone">
+            <div>
+              <div class="cs-zone-name">Experimentation</div>
+              <span class="cs-zone-tag">Fast, cheap pilots</span>
+            </div>
+            <p class="cs-zone-desc">Facilitated structured experiments and prototypes that tested the riskiest assumptions in weeks, not quarters. Often hands-on workshops with client teams so the learning stayed inside the organisation.</p>
+          </div>
+          <div class="cs-zone">
+            <div>
+              <div class="cs-zone-name">Incubation</div>
+              <span class="cs-zone-tag">From pilot to product</span>
+            </div>
+            <p class="cs-zone-desc">Took validated pilots and hardened them into products or services — shaping roadmaps, interaction details, engineering specs, and the internal operating model needed to run the new thing.</p>
+          </div>
+          <div class="cs-zone">
+            <div>
+              <div class="cs-zone-name">Adoption</div>
+              <span class="cs-zone-tag">Change management</span>
+            </div>
+            <p class="cs-zone-desc">The unglamorous part that decides whether any of it matters. Training users, championing the work inside the client organisation, and supporting the operational change that turns a launch into a business outcome.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- Notable work -->
+      <div class="cs-section">
+        <div class="cs-section-label">Notable Work</div>
+        <h2>A sample of what twelve years produced</h2>
+
+        <div class="cs-patterns">
+          <div class="cs-pattern">
+            <h3>nūfood — inventing a new product category</h3>
+            <p>Dovetailed's most visible output: the world's first 3D food printer for raw liquid ingredients. From hackathon concept to a working product exhibited across Europe, featured in the Financial Times, BBC World, The Spoon, and Digital Trends. See the dedicated case study for the full story — it's an example of what this kind of integrated team can do when pointed at a genuinely new problem.</p>
+          </div>
+          <div class="cs-pattern">
+            <h3>Enterprise innovation programs</h3>
+            <p>Ran multi-year innovation engagements with FTSE and Fortune 500 clients across food, health, and industrial sectors — standing up internal innovation pipelines, facilitating leadership-level opportunity framing, and delivering validated prototypes into client product teams.</p>
+          </div>
+          <div class="cs-pattern">
+            <h3>Startup product strategy &amp; design</h3>
+            <p>Partnered with early-stage startups to take ideas from napkin to shipped product: vision, research, design, and in some cases hardware prototyping. Several of these became the startups' founding products.</p>
+          </div>
+          <div class="cs-pattern">
+            <h3>Service design for regulated sectors</h3>
+            <p>Led service design engagements in healthcare and water where the hard part wasn't the interface — it was mapping the real end-to-end process, understanding regulatory constraints, and designing change that clinicians and operators could actually absorb.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="cs-divider">
+
+      <!-- Impact -->
+      <div class="cs-section">
+        <div class="cs-section-label">Impact</div>
+        <h2>Twelve years, hundreds of projects, six sectors</h2>
+
+        <div class="cs-impact-group">
+          <div class="cs-impact-category">Scale</div>
+          <ul class="cs-impact">
+            <li>Founded, scaled, and led Dovetailed from 2011 to 2023 across offices in the UK and US</li>
+            <li>Grew the team from 2 to 15+ multidisciplinary staff spanning design, research, engineering, and food science</li>
+            <li>Led or directed 100+ client engagements across AI, health, food tech, water, industrial, and consumer sectors</li>
+          </ul>
+        </div>
+
+        <div class="cs-impact-group">
+          <div class="cs-impact-category">Recognition</div>
+          <ul class="cs-impact">
+            <li>Award-winning studio — Smart Kitchen Startup Show winner, international press coverage, and regular speaking slots at design and innovation conferences</li>
+            <li>nūfood featured in the Financial Times, BBC World, The Spoon, and Digital Trends; exhibited at food and design events across Europe</li>
+          </ul>
+        </div>
+
+        <div class="cs-impact-group">
+          <div class="cs-impact-category">Commercial</div>
+          <ul class="cs-impact">
+            <li>Self-funded across twelve years — no outside capital — through consulting revenue and selective product work</li>
+            <li>Deep client relationships that generated multi-year engagements and significant repeat business</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Reflection -->
+      <div class="cs-section">
+        <div class="cs-section-label">Reflection</div>
+        <h2>What twelve years of innovation consulting taught me</h2>
+        <p>The most important thing Dovetailed taught me is that innovation isn't a creative problem — it's a commercial and organisational one. The ideas are usually the easy part. The hard part is identifying the right opportunity, framing it so a business can actually fund it, running experiments that produce honest answers, and then doing the patient change-management work that turns a successful pilot into an adopted product. The teams that win at this aren't the ones with the best ideas. They're the ones who can hold the whole pipeline — discovery, experimentation, incubation, adoption — as one piece of work.</p>
+        <p>I also learned that integrated teams outperform siloed ones at a scale that's genuinely hard to believe until you've seen it. A researcher, a service designer, a commercial strategist, and an engineer sitting in the same room, working on the same problem, iterating daily, will outproduce and outdeliver a relay of specialists every single time. My job as founder was to protect that integration — commercially, culturally, and operationally.</p>
+        <p>Much of what I do now at AWS, and the way I think about agentic AI transformation, is rooted directly in what Dovetailed taught me about how real organisations actually absorb new technology.</p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
