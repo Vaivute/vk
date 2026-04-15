@@ -8,7 +8,13 @@ PhD · FRSA | Head of UX
 
 ## Profile
 
-I'm a design leader with 15+ years shaping user experiences across AI, enterprise, and consumer products. I bridge research, design, and strategy to create meaningful, human-centered systems. As a founder of Dovetailed and Head of UX at Amazon, I've led cross-functional teams and driven UX strategy for global products - including agentic AI products delivering $800M+ in revenue. I thrive in complex problem spaces, and my background spanning HCI, product development, business strategy, and startups gives me a distinct advantage in solving the challenges that matter most, in the most human suitable way.
+Transformation and innovation leader with 15+ years turning emerging technologies - most recently GenAI and agentic systems - into measurable business outcomes. I combine human-centered design, service design, and commercial strategy to map end-to-end processes, run experiments and pilots, and scale the ones that work. As founder and CEO of Dovetailed and Head of UX for SageMaker AI & Agentic Experiences at AWS, I've partnered with business units and technical teams to identify high-value GenAI opportunities, design new AI-enabled ways of working, and embed them from incubation through to scaled implementation - including agentic AI products delivering $800M+ in revenue. My background across HCI research, product strategy, and startup building gives me a distinct advantage in reimagining complex, highly technical environments so they become more usable, more adopted, and more commercially impactful.
+
+---
+
+## Core Expertise
+
+GenAI Strategy & Adoption · Business Transformation · Innovation Management · Service Design · Human-Centered Design · Commercial Strategy · Process Mapping · Mixed-Method User Research · Experimentation & Pilots · Pilot-to-Scale Implementation · Change Management · Stakeholder Alignment · Design Leadership · Human-AI Interaction · Agentic AI · LLMs · Prompt Engineering · Human-in-the-Loop Design · Cross-Functional Collaboration · UX & Product Vision · Applied Research · HCI · Designing for Autonomy, Uncertainty & Trust · Evaluation-Driven Design · Behavioral Modelling · Data Analysis · AI Product Design
 
 ---
 
@@ -17,12 +23,12 @@ I'm a design leader with 15+ years shaping user experiences across AI, enterpris
 ### Head of UX · SageMaker AI & Agentic Experiences
 **Amazon Web Services (AWS)** · Seattle, USA · 2023 - Present
 
-Directing UX design and innovation team to create new design patterns for designing with and for AI - I focus on human-in-the-loop agentic AI systems. I drive product strategy, run end-to-end usability programs, spearheading the UX operational reviews that ensure that all UX requirements of the product are ready for launches. Driving product strategy and defining design direction across global teams. Mentoring designers and influencing roadmaps across orgs. Presenting at global conferences the latest Agentic AI UX findings.
+Leading UX, design, and innovation for SageMaker AI and agentic GenAI experiences. Partnering with product, engineering, and research teams to identify high-value GenAI opportunities and guide them through the full innovation pipeline - from opportunity mapping and pilot design through to adoption programs and scaled launches. Drive product and design strategy for human-in-the-loop agentic systems across global teams, champion best practices for GenAI adoption, and run the UX operational reviews that ensure every launch is user-ready. Mentor designers, influence roadmaps across orgs, and present at global conferences on agentic AI UX and the commercial case for human-centered GenAI.
 
 ### Principal UX Leader · AI Services
 **Amazon Web Services (AWS)** · Seattle, USA · 2022 - 2023
 
-Leading the UX across multiple AI services at AWS, including AI/ML Personalization, DeepRacer, all edge machine services such as AWS Panorama and SageMaker Edge. Setting cross org UX vision, inventing and driving process for raising UX bar and maturity across organizations. Innovating with new GenAI UX and launching in the products.
+Led UX strategy across multiple AWS AI services - AI/ML Personalization, DeepRacer, AWS Panorama, and SageMaker Edge - setting cross-org vision and building the operating model that raised UX maturity across the organization. Championed new GenAI experiences through hands-on experimentation and shipped them into customer-facing products. Drove change together with highly technical teams and stakeholders across engineering, research, and product.
 
 ### Principal UX Designer · Alexa Conversational AI
 **Amazon Web Services (AWS)** · Seattle, USA · 2019 - 2022
@@ -32,7 +38,7 @@ Creating Alexa experiences and leading the UX design and research of Alexa Conve
 ### CEO · Dovetailed
 **Dovetailed (UK & US)** · 2011 - 2023
 
-Built and scaled an award-winning UX and innovation studio. Led design and research across sectors - AI, health, food tech, water, and industrial systems. Partnered with startups and large organisations including Amazon, Microsoft, Beko, Anglian Water, Secondmind, Factmata, Aqilla, Cambridge University Centre for Risk Studies, and Cambridge Cognition to create new product visions, services, and tools.
+Founded and scaled an award-winning innovation and service design consultancy. Led 12 years of client engagements in business transformation, innovation management, and human-centered design - mapping end-to-end processes, running mixed-method user research, facilitating experiments and pilots, and guiding solutions from incubation through to scaled implementation. Partnered with startups and enterprises including Amazon, Microsoft, Beko, Anglian Water, Secondmind, Factmata, Aqilla, Cambridge University Centre for Risk Studies, and Cambridge Cognition - across AI, health, food tech, water, and industrial systems. Combined commercial strategy with applied research to reimagine complex business challenges into new products, services, and ways of working.
 
 ### Visiting Senior Fellow · Human Experience Design
 **University College London (UK)** · 2013 - 2017
@@ -42,7 +48,7 @@ Taught and collaborated on design research, HCI, and interdisciplinary methods. 
 ### Head of UX · 3D Plant Design
 **AVEVA** · Cambridge, UK · 2011 - 2012
 
-Pioneered human-centered design for industrial software for engineering, design, and operations management across industries like energy, manufacturing, and marine. Directed a team of designers and researchers and influenced leadership to implement novel designs that optimized the industry standards. Tracked and measured the impact of design in this $1.6 billion revenue business, large parts of which were attributed to the design work I and my team produced.
+Pioneered human-centered design and service design for industrial software across energy, manufacturing, and marine. Directed a team of designers and researchers and drove leadership adoption of novel design approaches that reset industry standards. Tracked and measured the commercial impact of design within a $1.6B revenue business - a large share of which was attributed to work led by my team.
 
 ### UX Analyst · Geospatial System Design
 **General Electric** · Cambridge, UK · 2010 - 2011
@@ -76,11 +82,11 @@ MIT xPRO · November 2021 · Credential ID: 715151
 
 ## Selected Publications
 
-- **Designing user experience for agentic AI: A framework for human-AI coordination** - *Amazon Science · March 2026*
-- **User perceptions of 3D food printing technologies** - *ACM CHI 2018*
-- **Don't Waste My Time: Use of Time Information Improves Focus** - *ACM CHI 2016* · Best Paper · Top 1%
-- **'Everyone Is Talking about It!': A Distributed Approach to Urban Voting Technology and Visualisations** - *ACM CHI 2015* · Honorable Mention · Top 4%
-- **Software or Wetware?: Discovering When and Why People Use Digital Prosthetic Memory** - *ACM CHI 2007* · Best Paper · Top 1%
+- **[Designing user experience for agentic AI: A framework for human-AI coordination](https://www.amazon.science/blog/designing-ai-agents-that-know-when-to-step-back)** - *Amazon Science · March 2026*
+- **[User perceptions of 3D food printing technologies](https://dl.acm.org/doi/10.1145/3170427.3188529)** - *ACM CHI 2018*
+- **[Don't Waste My Time: Use of Time Information Improves Focus](https://dl.acm.org/doi/10.1145/2858036.2858193)** - *ACM CHI 2016* · Best Paper · Top 1%
+- **['Everyone Is Talking about It!': A Distributed Approach to Urban Voting Technology and Visualisations](https://dl.acm.org/doi/10.1145/2702123.2702263)** - *ACM CHI 2015* · Honorable Mention · Top 4%
+- **[Software or Wetware?: Discovering When and Why People Use Digital Prosthetic Memory](https://dl.acm.org/doi/10.1145/1240624.1240635)** - *ACM CHI 2007* · Best Paper · Top 1%
 
 *30+ peer-reviewed publications across ACM CHI, CSCW, DIS, and IUI (2007-2025)*
 
@@ -101,12 +107,6 @@ US 10912327 · Issued February 9, 2021
 - **Smart Kitchen Summit** · Startup Showcase Winner · 2016
 - **Cambridge News Business Excellence Finalist** · 2015
 - **Multiple Innovation & Open Pitch Awards** · GE · IfM Cambridge
-
----
-
-## Core Expertise
-
-Human-AI Interaction · Design Leadership · Applied Research · Service Design · Design Systems · HCI · Business Transformation · Designing for Autonomy & Trust · Conversational & Intent Modelling · Designing for Uncertainty · Agentic AI · LLMs · Prompt Engineering · System Views of Data & APIs · Evaluation-Driven Design · Behavioral Modelling · Cross-functional Collaboration · Agent Orchestration · Design for Human-in-the-Loop · Context Management · Leadership · UX and Product Vision · Data Analysis · Collaboration · UX Strategy · AI Product Design
 
 ---
 
