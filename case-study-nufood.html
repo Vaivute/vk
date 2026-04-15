@@ -404,11 +404,26 @@
       margin: 4rem 0;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .back-link, nav a { font-size: 11px; letter-spacing: 0.1em; }
+      .back-link { top: 0.75em; left: 0.75em; }
+      nav { top: 0.75em; right: 0.75em; gap: 1rem; }
+      .content { padding: 5rem 1.25rem 4rem; }
+      .cs-label { margin-bottom: 1rem; }
+      .cs-byline { margin-bottom: 2.5rem; padding-bottom: 2rem; font-size: 11px; line-height: 1.8; }
+      .cs-section { margin-bottom: 2.5rem; }
+      .cs-section h2 { font-size: 24px; line-height: 1.3; }
+      .cs-section-label { margin-bottom: 0.75rem; }
+      .cs-pull { margin: 2rem 0; padding: 1.5rem; font-size: 20px; line-height: 1.5; }
+      .cs-divider { margin: 2.5rem 0; }
       .cs-dimensions { grid-template-columns: 1fr; }
-      .cs-zone { grid-template-columns: 1fr; gap: 0.5rem; }
-      .cs-impact-group { grid-template-columns: 1fr; gap: 0.25rem; }
+      .cs-zone { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.25rem; }
+      .cs-impact-group { grid-template-columns: 1fr; gap: 0.25rem 0; margin-bottom: 1.5rem; }
+      .cs-impact-category { padding-top: 0; margin-bottom: 0.4rem; }
+      .cs-image { margin: 2rem 0; }
       .cs-image-grid { grid-template-columns: 1fr; }
+      .cs-press { gap: 1.5rem; margin: 2.5rem 0; }
+      .cs-press-quote { font-size: 19px; }
     }
   </style>
 </head>

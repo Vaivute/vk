@@ -1016,11 +1016,76 @@
     @media (max-width: 768px) {
       h1 { font-size: 42px; line-height: 50px; }
       h2 { font-size: 28px; line-height: 38px; }
-      #site-nav { gap: 1rem; }
+
+      /* Nav */
+      #site-nav { top: 0.75em; right: 0.75em; gap: 0.9rem; }
+      #site-nav a { font-size: 11px; letter-spacing: 0.1em; }
+      .site-name { top: 0.75em; left: 0.75em; font-size: 11px; letter-spacing: 0.12em; }
       #site-contact { display: none; }
-      .hero { padding: 6rem 15px 3rem; }
-      .cv-hero { padding: 6rem 15px 2rem; }
-      .about-content { padding: 6rem 15px 0; }
+
+      /* Login */
+      #login .login-name { font-size: 36px; line-height: 42px; }
+      #login .login-tagline { font-size: 18px; }
+
+      /* Hero — allow text to wrap, shrink padding */
+      .hero-scroll-container { height: auto; }
+      .hero-sticky { position: relative; height: auto; min-height: 100vh; padding: 5rem 0 3rem; }
+      .hero-content { position: relative; padding: 0 1.25rem; align-items: flex-start; }
+      .hero-text-inner { max-width: 100%; }
+      .hero-i, .hero-verb, .hero-noun { font-size: clamp(36px, 10vw, 56px); line-height: 1.1; }
+      .hero-line1 { font-size: clamp(36px, 10vw, 56px); flex-wrap: wrap; }
+      .hero-verb-wrap { min-width: 0; height: auto; min-height: 1.15em; width: 100%; }
+      .hero-verb { white-space: normal; position: relative; }
+      .hero-verb:not(.active) { display: none; }
+      .hero-noun-wrap { font-size: clamp(36px, 10vw, 56px); height: auto; min-height: 2.4em; margin-bottom: 1.25rem; }
+      .hero-noun { white-space: normal; position: relative; }
+      .hero-noun:not(.active) { display: none; }
+      .hero-sub-wrap { height: auto; min-height: 10em; width: 100% !important; }
+      .hero-sub { position: relative; text-align: left; width: 100% !important; font-size: 15px; line-height: 1.7; }
+      .hero-sub:not(.active) { display: none; }
+      .hero-progress { right: 0.9rem; }
+
+      /* Values */
+      .values-section { padding: 4rem 1.25rem 4.5rem; }
+      .values-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .values-header { margin-bottom: 2rem; }
+      .value-item { font-size: 26px; line-height: 1.5; white-space: normal; }
+      .values-desc-wrap { position: relative; height: auto; min-height: 180px; }
+      .value-desc { font-size: 18px; line-height: 1.55; }
+      #values-connector { display: none; }
+
+      /* Capabilities — keep SVG readable via horizontal scroll */
+      .caps-section { padding: 4rem 0 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .caps-header { padding: 0 1.25rem; }
+      .caps-hub-svg { min-width: 760px; padding: 0 1rem; }
+
+      /* Projects */
+      .project-entry { padding: 3rem 1.25rem; }
+      .project-entry.slice { padding: 3rem 1.25rem; }
+      .project-entry.slice .section-inner { flex-direction: column; gap: 2rem; max-height: none; }
+      .project-entry .project-desc { font-size: 16px; line-height: 30px; }
+      .project-visual { padding: 2.5rem 1rem; }
+      .project-visual-title { font-size: 24px; }
+
+      /* CV */
+      .cv-hero { padding: 6rem 1.25rem 2rem; }
+      .cv-content { padding: 0 1.25rem; }
+      .cv-section { padding: 2rem 0; }
+      .cv-entry h3 { font-size: 18px; line-height: 26px; }
+      .awards-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .cv-profile-text { font-size: 16px; line-height: 30px; }
+
+      /* About */
+      .about-content { padding: 6rem 1.25rem 0; }
+      .about-content p { font-size: 16px; line-height: 30px; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 34px; line-height: 42px; }
+      .hero-i, .hero-verb, .hero-noun,
+      .hero-line1, .hero-noun-wrap { font-size: clamp(30px, 9vw, 44px); }
+      .value-item { font-size: 22px; }
+      .awards-grid { grid-template-columns: 1fr; }
     }
     /* CV download buttons */
     .cv-download-bar {
