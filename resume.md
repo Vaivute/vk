@@ -28,12 +28,12 @@ Directing UX design and innovation team to create new design patterns for design
 ### Principal UX Leader · AI Services
 **Amazon Web Services (AWS)** · Seattle, USA · 2022 - 2023
 
-Led UX strategy across multiple AWS AI services - AI/ML Personalization, DeepRacer, AWS Panorama, and SageMaker Edge - setting cross-org vision and building the operating model that raised UX maturity across the organization. Championed new GenAI experiences through hands-on experimentation and shipped them into customer-facing products. Drove change together with highly technical teams and stakeholders across engineering, research, and product.
+Led UX strategy across multiple AWS AI services - AI/ML Personalization, DeepRacer, AWS Panorama, and SageMaker Edge - setting cross-org vision and building the operating model that raised UX maturity across the organization. Innovating with new GenAI UX and incorporating it into existing products and the launch of new products.
 
 ### Principal UX Designer · Alexa Conversational AI
 **Amazon Web Services (AWS)** · Seattle, USA · 2019 - 2022
 
-Creating Alexa experiences and leading the UX design and research of Alexa Conversations and other similar AI driven products. Leading the Design for AI Principles initiative at Alexa. Managing a team of designers and researchers.
+Leading the Design for AI Principles initiative at Alexa.
 
 ### CEO · Dovetailed
 **Dovetailed (UK & US)** · 2011 - 2023
