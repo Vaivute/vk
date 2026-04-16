@@ -357,6 +357,25 @@
       overflow: hidden;
     }
 
+    /* ── HERO: scroll arrow ── */
+    .hero-scroll-arrow {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      color: var(--text);
+      opacity: 0.35;
+      cursor: pointer;
+      transition: opacity 0.4s;
+      animation: scrollBounce 2.4s ease-in-out infinite;
+    }
+    .hero-scroll-arrow:hover { opacity: 0.7; }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
     /* ── HERO: animated bokeh background ── */
     .hero-bg {
       position: absolute;
@@ -1126,6 +1145,7 @@
       .hero-content { position: relative; inset: auto; padding: 0; display: block; }
       .hero-text-inner { display: none; }
       .hero-progress { display: none; }
+      .hero-scroll-arrow { display: none; }
       .hero-mobile { display: block; width: 100%; }
       .hero-mobile-verb { font-size: clamp(38px, 11vw, 56px); padding: 0 2.75rem; }
       .hero-mobile-slide { padding: 0 2.75rem; }
@@ -1573,6 +1593,14 @@
           <div class="hero-dot active" data-dot="0"></div>
           <div class="hero-dot" data-dot="1"></div>
           <div class="hero-dot" data-dot="2"></div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hero-scroll-arrow" id="hero-scroll-arrow">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6,4 14,12 22,4"/>
+            <polyline points="6,14 14,22 22,14"/>
+          </svg>
         </div>
 
       </div>
@@ -2197,6 +2225,31 @@
 
   window.addEventListener('scroll', onHeroScroll, { passive: true });
 
+  // Scroll arrow: advance to next hero slide, or scroll past hero on last slide
+  const scrollArrow = document.getElementById('hero-scroll-arrow');
+  if (scrollArrow && heroContainer) {
+    scrollArrow.addEventListener('click', function() {
+      const total = heroContainer.offsetHeight - window.innerHeight;
+      const slideHeight = total / nouns.length;
+      const nextSlide = currentSlide + 1;
+      if (nextSlide < nouns.length) {
+        window.scrollTo({ top: heroContainer.offsetTop + slideHeight * nextSlide + 1, behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: heroContainer.offsetTop + heroContainer.offsetHeight + 1, behavior: 'smooth' });
+      }
+    });
+
+    // Fade out arrow once user scrolls past hero
+    window.addEventListener('scroll', function() {
+      const rect = heroContainer.getBoundingClientRect();
+      const scrolled = -rect.top;
+      const total = heroContainer.offsetHeight - window.innerHeight;
+      const progress = total > 0 ? scrolled / total : 0;
+      scrollArrow.style.opacity = progress > 0.9 ? '0' : '';
+      scrollArrow.style.pointerEvents = progress > 0.9 ? 'none' : '';
+    }, { passive: true });
+  }
+
   // Loop nufood robots video early so end-of-clip text never shows
   (function() {
     const v = document.getElementById('nufood-robots-video');
@@ -2269,7 +2322,7 @@
       // 0 Trust+Leadership: sweeping arc up over the heading - ends short to leave room for plane
       `M ${x1} ${y1} C ${x1+30} ${above-50}, ${x2-65} ${above-50}, ${x2-35} ${y2}`,
       // 1 Empathy: relaxed S-curve, dips down then rises
-      `M ${x1} ${y1} C ${x1+50} ${y1+55}, ${x2-50} ${y2-65}, ${x2} ${y2}`,
+      `M ${x1} ${y1} C ${x1+50} ${y1+55}, ${x2-50} ${y2-65}, ${x2-20} ${y2}`,
       // 2 Outcomes Over Output: smooth arc rising over heading - ends short of x2 to leave room for crown
       `M ${x1} ${y1} C ${x1+50} ${above-55}, ${x2-55} ${above-30}, ${x2-30} ${y2}`,
       // 3 Innovation: multi-wave with smooth continuation - ends short of x2 to make room for pencil
@@ -2282,12 +2335,12 @@
     const doodleDefs = [
       // 0: paper plane - below and near line endpoint, clear of description text
       `M ${x2-23} ${y2+21} L ${x2-41} ${y2+8} L ${x2-36} ${y2+18} L ${x2-47} ${y2+19} L ${x2-47} ${y2+23} L ${x2-36} ${y2+24} L ${x2-41} ${y2+34} Z M ${x2-23} ${y2+21} L ${x2-47} ${y2+21} M ${x2-36} ${y2+18} L ${x2-41} ${y2+8} M ${x2-36} ${y2+24} L ${x2-41} ${y2+34}`,
-      // 1: open loop (near-full arc)
-      `M ${x2+8} ${y2} A 8 8 0 1 1 ${x2+7.99} ${y2+0.14}`,
+      // 1: open loop (near-full arc) - shifted left to avoid overlapping description text
+      `M ${x2-20} ${y2} A 8 8 0 1 1 ${x2-20.01} ${y2+0.14}`,
       // 2: crown - sits below line endpoint, top point 8px below line end
       `M ${x2-40} ${y2+28} L ${x2-40} ${y2+10} L ${x2-35} ${y2+18} L ${x2-30} ${y2+8} L ${x2-25} ${y2+18} L ${x2-20} ${y2+10} L ${x2-20} ${y2+28} Z M ${x2-40} ${y2+24} L ${x2-20} ${y2+24} M ${x2-40} ${y2+8} A 2 2 0 1 1 ${x2-40.01} ${y2+8} M ${x2-30} ${y2+6} A 2 2 0 1 1 ${x2-30.01} ${y2+6} M ${x2-20} ${y2+8} A 2 2 0 1 1 ${x2-20.01} ${y2+8}`,
-      // 3: vertical pencil to the LEFT of description text - body + tip + ferrule band + eraser line
-      `M ${x2-26} ${y2-24} L ${x2-18} ${y2-24} L ${x2-18} ${y2-8} L ${x2-26} ${y2-8} Z M ${x2-26} ${y2-8} L ${x2-22} ${y2+4} L ${x2-18} ${y2-8} M ${x2-26} ${y2-20} L ${x2-18} ${y2-20} M ${x2-24} ${y2-24} L ${x2-24} ${y2-20}`,
+      // 3: vertical pencil at line endpoint - body + tip + ferrule band + eraser line
+      `M ${x2-34} ${y2-24} L ${x2-26} ${y2-24} L ${x2-26} ${y2-8} L ${x2-34} ${y2-8} Z M ${x2-34} ${y2-8} L ${x2-30} ${y2+4} L ${x2-26} ${y2-8} M ${x2-34} ${y2-20} L ${x2-26} ${y2-20} M ${x2-32} ${y2-24} L ${x2-32} ${y2-20}`,
       // 4: cut diamond - outer rhombus + girdle line + upper/lower facet lines
       `M ${x2+20} ${y2-22} L ${x2+30} ${y2-10} L ${x2+20} ${y2+2} L ${x2+10} ${y2-10} Z M ${x2+10} ${y2-10} L ${x2+30} ${y2-10} M ${x2+17} ${y2-22} L ${x2+10} ${y2-10} M ${x2+23} ${y2-22} L ${x2+30} ${y2-10} M ${x2+14} ${y2-10} L ${x2+20} ${y2+2} M ${x2+26} ${y2-10} L ${x2+20} ${y2+2}`,
     ];
