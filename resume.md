@@ -23,7 +23,7 @@ GenAI Strategy & Adoption · Business Transformation · Innovation Management ·
 ### Head of UX · SageMaker AI & Agentic Experiences
 **Amazon Web Services (AWS)** · Seattle, USA · 2023 - Present
 
-Leading UX, design, and innovation for SageMaker AI and agentic GenAI experiences. Partnering with product, engineering, and research teams to identify high-value GenAI opportunities and guide them through the full innovation pipeline - from opportunity mapping and pilot design through to adoption programs and scaled launches. Drive product and design strategy for human-in-the-loop agentic systems across global teams, champion best practices for GenAI adoption, and run the UX operational reviews that ensure every launch is user-ready. Mentor designers, influence roadmaps across orgs, and present at global conferences on agentic AI UX and the commercial case for human-centered GenAI.
+Directing UX design and innovation team to create new design patterns for designing with and for AI - I focus on human-in-the-loop agentic AI systems. I drive product strategy and run end-to-end usability programs, spearheading the UX operational reviews that ensure that all UX requirements of the product are ready for launches. I define design direction across global teams, mentor designers and influence roadmaps across orgs. At global conferences I present the latest Agentic AI UX findings.
 
 ### Principal UX Leader · AI Services
 **Amazon Web Services (AWS)** · Seattle, USA · 2022 - 2023
