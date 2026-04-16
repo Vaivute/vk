@@ -1248,6 +1248,29 @@
       display: block;
       width: 100%;
     }
+    .spoke {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .spoke-dot, .spoke-label {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .caps-section.in-view .spoke { stroke-dashoffset: 0; }
+    .caps-section.in-view .spoke[data-spoke="0"] { transition-delay: 0s; }
+    .caps-section.in-view .spoke[data-spoke="1"] { transition-delay: 0.2s; }
+    .caps-section.in-view .spoke[data-spoke="2"] { transition-delay: 0.4s; }
+    .caps-section.in-view .spoke[data-spoke="3"] { transition-delay: 0.6s; }
+    .caps-section.in-view .spoke[data-spoke="4"] { transition-delay: 0.8s; }
+    .caps-section.in-view .spoke[data-spoke="5"] { transition-delay: 1.0s; }
+    .caps-section.in-view .spoke-dot, .caps-section.in-view .spoke-label { opacity: 1; }
+    .caps-section.in-view .spoke-dot[data-spoke="0"], .caps-section.in-view .spoke-label[data-spoke="0"] { transition-delay: 0.6s; }
+    .caps-section.in-view .spoke-dot[data-spoke="1"], .caps-section.in-view .spoke-label[data-spoke="1"] { transition-delay: 0.8s; }
+    .caps-section.in-view .spoke-dot[data-spoke="2"], .caps-section.in-view .spoke-label[data-spoke="2"] { transition-delay: 1.0s; }
+    .caps-section.in-view .spoke-dot[data-spoke="3"], .caps-section.in-view .spoke-label[data-spoke="3"] { transition-delay: 1.2s; }
+    .caps-section.in-view .spoke-dot[data-spoke="4"], .caps-section.in-view .spoke-label[data-spoke="4"] { transition-delay: 1.4s; }
+    .caps-section.in-view .spoke-dot[data-spoke="5"], .caps-section.in-view .spoke-label[data-spoke="5"] { transition-delay: 1.6s; }
 
     /* Mobile capabilities tiles (hidden on desktop) */
     .caps-mobile { display: none; padding: 0 1.25rem 4rem; }
@@ -1644,59 +1667,71 @@
         <text x="600" y="336" text-anchor="middle" font-family="EB Garamond, serif" font-size="18" fill="#aaa" letter-spacing="1">Design</text>
         <text x="600" y="357" text-anchor="middle" font-family="EB Garamond, serif" font-size="18" fill="#aaa" letter-spacing="1">&amp; AI</text>
 
-        <!-- Spokes -->
-        <line x1="600" y1="280" x2="600" y2="118" stroke="#bbb" stroke-width="1.2"/>
-        <line x1="652" y1="310" x2="791" y2="233" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
-        <line x1="652" y1="370" x2="791" y2="447" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
-        <line x1="600" y1="400" x2="600" y2="562" stroke="#bbb" stroke-width="1.2"/>
-        <line x1="548" y1="370" x2="409" y2="447" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
-        <line x1="548" y1="310" x2="409" y2="233" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
+        <!-- Spokes (shortened 20%) -->
+        <line class="spoke" data-spoke="0" x1="600" y1="280" x2="600" y2="162" stroke="#bbb" stroke-width="1.2"/>
+        <line class="spoke" data-spoke="1" x1="652" y1="310" x2="753" y2="254" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
+        <line class="spoke" data-spoke="2" x1="652" y1="370" x2="753" y2="426" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
+        <line class="spoke" data-spoke="3" x1="600" y1="400" x2="600" y2="518" stroke="#bbb" stroke-width="1.2"/>
+        <line class="spoke" data-spoke="4" x1="548" y1="370" x2="447" y2="426" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
+        <line class="spoke" data-spoke="5" x1="548" y1="310" x2="447" y2="254" stroke="#ccc" stroke-width="1.2" filter="url(#hub-sketch)"/>
 
         <!-- Node dots — centered on line endpoints -->
-        <circle cx="600" cy="118" r="5" fill="#aaa"/>
-        <circle cx="791" cy="233" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
-        <circle cx="791" cy="447" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
-        <circle cx="600" cy="562" r="5" fill="#aaa"/>
-        <circle cx="409" cy="447" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
-        <circle cx="409" cy="233" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
+        <circle class="spoke-dot" data-spoke="0" cx="600" cy="162" r="5" fill="#aaa"/>
+        <circle class="spoke-dot" data-spoke="1" cx="753" cy="254" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
+        <circle class="spoke-dot" data-spoke="2" cx="753" cy="426" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
+        <circle class="spoke-dot" data-spoke="3" cx="600" cy="518" r="5" fill="#aaa"/>
+        <circle class="spoke-dot" data-spoke="4" cx="447" cy="426" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
+        <circle class="spoke-dot" data-spoke="5" cx="447" cy="254" r="5" fill="#aaa" filter="url(#hub-sketch)"/>
 
         <!-- 1. TOP: Agentic AI Products & UX -->
-        <text x="600" y="18" text-anchor="middle" font-family="EB Garamond, serif" font-size="28" fill="#333">Agentic AI Products &amp; UX</text>
-        <text x="600" y="44" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Agentic systems design</text>
-        <text x="600" y="62" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Human-in-the-loop experiences</text>
-        <text x="600" y="80" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">LLM product design</text>
-        <text x="600" y="98" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Design with &amp; for AI</text>
+        <g class="spoke-label" data-spoke="0">
+        <text x="600" y="62" text-anchor="middle" font-family="EB Garamond, serif" font-size="28" fill="#333">Agentic AI Products &amp; UX</text>
+        <text x="600" y="88" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Agentic systems design</text>
+        <text x="600" y="106" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Human-in-the-loop experiences</text>
+        <text x="600" y="124" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">LLM product design</text>
+        <text x="600" y="142" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Design with &amp; for AI</text>
+        </g>
 
         <!-- 2. TOP-RIGHT: Research & Service Design -->
-        <text x="815" y="213" text-anchor="start" font-family="EB Garamond, serif" font-size="28" fill="#333">Research &amp; Service Design</text>
-        <text x="815" y="239" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Mixed-method user research</text>
-        <text x="815" y="257" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Process mapping &amp; service design</text>
-        <text x="815" y="275" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Agentic UX patterns</text>
-        <text x="815" y="293" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Design systems &amp; prototyping</text>
+        <g class="spoke-label" data-spoke="1">
+        <text x="777" y="234" text-anchor="start" font-family="EB Garamond, serif" font-size="28" fill="#333">Research &amp; Service Design</text>
+        <text x="777" y="260" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Mixed-method user research</text>
+        <text x="777" y="278" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Process mapping &amp; service design</text>
+        <text x="777" y="296" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Agentic UX patterns</text>
+        <text x="777" y="314" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Design systems &amp; prototyping</text>
+        </g>
 
         <!-- 3. BOTTOM-RIGHT: Product &amp; Commercial Strategy -->
-        <text x="815" y="443" text-anchor="start" font-family="EB Garamond, serif" font-size="28" fill="#333">Product &amp; Commercial Strategy</text>
-        <text x="815" y="469" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Vision &amp; commercial roadmap</text>
-        <text x="815" y="487" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Cross-functional alignment</text>
-        <text x="815" y="505" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Scaling products &amp; teams</text>
+        <g class="spoke-label" data-spoke="2">
+        <text x="777" y="422" text-anchor="start" font-family="EB Garamond, serif" font-size="28" fill="#333">Product &amp; Commercial Strategy</text>
+        <text x="777" y="448" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Vision &amp; commercial roadmap</text>
+        <text x="777" y="466" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Cross-functional alignment</text>
+        <text x="777" y="484" text-anchor="start" font-family="Raleway, sans-serif" font-size="14" fill="#888">Scaling products &amp; teams</text>
+        </g>
 
         <!-- 4. BOTTOM: Leadership & Org -->
-        <text x="600" y="600" text-anchor="middle" font-family="EB Garamond, serif" font-size="28" fill="#333">Leadership &amp; Org</text>
-        <text x="600" y="626" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Team leadership · Design ops</text>
-        <text x="600" y="644" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Hiring &amp; mentoring</text>
-        <text x="600" y="662" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Building future leaders</text>
+        <g class="spoke-label" data-spoke="3">
+        <text x="600" y="556" text-anchor="middle" font-family="EB Garamond, serif" font-size="28" fill="#333">Leadership &amp; Org</text>
+        <text x="600" y="582" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Team leadership · Design ops</text>
+        <text x="600" y="600" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Hiring &amp; mentoring</text>
+        <text x="600" y="618" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#888">Building future leaders</text>
+        </g>
 
         <!-- 5. BOTTOM-LEFT: Innovation &amp; Transformation -->
-        <text x="385" y="443" text-anchor="end" font-family="EB Garamond, serif" font-size="28" fill="#333">Innovation &amp; Transformation</text>
-        <text x="385" y="469" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Experimentation &amp; pilots</text>
-        <text x="385" y="487" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Incubation → scaled rollout</text>
-        <text x="385" y="505" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">0→1 product creation</text>
+        <g class="spoke-label" data-spoke="4">
+        <text x="423" y="422" text-anchor="end" font-family="EB Garamond, serif" font-size="28" fill="#333">Innovation &amp; Transformation</text>
+        <text x="423" y="448" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Experimentation &amp; pilots</text>
+        <text x="423" y="466" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Incubation → scaled rollout</text>
+        <text x="423" y="484" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">0→1 product creation</text>
+        </g>
 
         <!-- 6. TOP-LEFT: UX Operations -->
-        <text x="385" y="213" text-anchor="end" font-family="EB Garamond, serif" font-size="28" fill="#333">UX Operations</text>
-        <text x="385" y="239" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Go/no-go UX frameworks</text>
-        <text x="385" y="257" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">for product launches</text>
-        <text x="385" y="275" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Building agentic UX teams</text>
+        <g class="spoke-label" data-spoke="5">
+        <text x="423" y="234" text-anchor="end" font-family="EB Garamond, serif" font-size="28" fill="#333">UX Operations</text>
+        <text x="423" y="260" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Go/no-go UX frameworks</text>
+        <text x="423" y="278" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">for product launches</text>
+        <text x="423" y="296" text-anchor="end" font-family="Raleway, sans-serif" font-size="14" fill="#888">Building agentic UX teams</text>
+        </g>
 
       </svg>
 
@@ -2287,6 +2322,15 @@
     if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIdx() + 1));
     window.addEventListener('resize', update);
     update();
+  })();
+
+  // Capabilities diagram: animate spokes when scrolled into view
+  (function() {
+    var caps = document.querySelector('.caps-section');
+    if (!caps || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) caps.classList.add('in-view');
+    }, { threshold: 0.25 }).observe(caps);
   })();
 
   // Values section interaction
