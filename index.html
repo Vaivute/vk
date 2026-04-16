@@ -1594,9 +1594,9 @@
           <div class="values-desc-wrap">
             <p class="value-desc active" data-desc="0">Earning trust through design and leadership, I set direction, grow teams and shape agentic AI interactions where transparency and humanised experiences come built in.</p>
             <p class="value-desc" data-desc="1">Leading with empathy, for users, teammates and every person who interacts with what I design and build.</p>
-            <p class="value-desc" data-desc="2">Design is done when it drives outcomes, not when it ships. I measure end to end - from first research insight through shipped product to commercial impact, running go/no-go UX readiness gates at scale at AWS to make sure every launch is actually ready to move the business.</p>
-            <p class="value-desc" data-desc="3">At Amazon SageMaker AI I established an innovation stream - driving new product directions, discovering novel agentic AI design patterns, and pioneering new design processes that didn't exist before. Pushing boundaries by asking what's genuinely new, not just what's different.</p>
-            <p class="value-desc" data-desc="4">Complexity is easy; clarity is hard. My goal is to strip away everything that doesn't serve the human.</p>
+            <p class="value-desc" data-desc="2">Design is done when it drives outcomes, not when it ships. I embed myself in the end to end process - from first research insight through shipped product to commercial impact, running go/no-go UX readiness gates at scale at AWS to make sure every launch is actually ready to move the business.</p>
+            <p class="value-desc" data-desc="3">At Amazon SageMaker AI, I established an innovation stream - driving new product directions, discovering novel agentic AI design patterns, and pioneering completely novel design processes. Pushing boundaries by asking what's genuinely new, not just what's different.</p>
+            <p class="value-desc" data-desc="4">Complexity is easy; clarity is hard. My goal is to strip away everything that does not serve the human.</p>
           </div>
         </div>
       </div>
@@ -2256,7 +2256,7 @@
     const itemRect = item.getBoundingClientRect();
     const descRect = descWrap.getBoundingClientRect();
 
-    const x1 = itemRect.right - innerRect.left + 8;
+    const x1 = itemRect.right - innerRect.left + 24;
     const y1 = itemRect.top + itemRect.height / 2 - innerRect.top;
     const x2 = descRect.left - innerRect.left - 8;
     const y2 = descRect.top + descRect.height / 2 - innerRect.top;
@@ -2270,8 +2270,8 @@
       `M ${x1} ${y1} C ${x1+30} ${above-50}, ${x2-65} ${above-50}, ${x2-35} ${y2}`,
       // 1 Empathy: relaxed S-curve, dips down then rises
       `M ${x1} ${y1} C ${x1+50} ${y1+55}, ${x2-50} ${y2-65}, ${x2} ${y2}`,
-      // 2 Taste+Quality: smooth arc rising over heading - ends short of x2 to leave room for balloon
-      `M ${x1} ${y1} C ${x1+25} ${above-55}, ${x2-55} ${above-30}, ${x2-30} ${y2}`,
+      // 2 Outcomes Over Output: smooth arc rising over heading - ends short of x2 to leave room for crown
+      `M ${x1} ${y1} C ${x1+50} ${above-55}, ${x2-55} ${above-30}, ${x2-30} ${y2}`,
       // 3 Innovation: multi-wave with smooth continuation - ends short of x2 to make room for pencil
       `M ${x1} ${y1} C ${x1+55} ${y1-75}, ${x1+115} ${y1+45}, ${mx} ${above-15} S ${x2-60} ${y2-45}, ${x2-30} ${y2}`,
       // 4 Clarity: easy arc looping below, then clean arrival
