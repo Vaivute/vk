@@ -1295,7 +1295,7 @@
       color: #000;
       letter-spacing: 0.03em;
       white-space: nowrap;
-      border: 1px solid #999;
+      border: 1px solid #ccc;
       border-radius: 40px;
       padding: 12px 22px;
     }
@@ -2455,7 +2455,7 @@
       node.baseColor = nodeColors[i];
     });
 
-    var hubRadius = 0.55;
+    var hubRadius = 0.75;
     for (var i = 1; i < nodeData.length; i++) {
       var dir = new THREE.Vector3(nodeData[i].pos[0], nodeData[i].pos[1], nodeData[i].pos[2]).normalize();
       var pts = [
