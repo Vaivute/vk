@@ -1282,20 +1282,22 @@
     }
     .c-label-title {
       font-family: 'EB Garamond', serif;
-      font-size: 20px;
-      color: #333;
+      font-size: 24px;
+      font-weight: 500;
+      color: #111;
       white-space: nowrap;
     }
     .c-label-hub {
       font-family: 'EB Garamond', serif;
-      font-size: 22px;
-      color: #A9BDB8;
+      font-size: 26px;
+      font-weight: 500;
+      color: #333;
       white-space: nowrap;
     }
     .c-label-items {
       font-family: 'Raleway', sans-serif;
       font-size: 13px;
-      color: #888;
+      color: #555;
       margin-top: 4px;
       opacity: 0;
       max-height: 0;
@@ -2496,7 +2498,7 @@
         v.project(camera);
         node.label.style.left = ((v.x * 0.5 + 0.5) * w) + 'px';
         node.label.style.top = ((-v.y * 0.5 + 0.5) * h) + 'px';
-        var depthOpacity = Math.max(0.25, Math.min(1, 1 - v.z * 0.7));
+        var depthOpacity = Math.max(0.45, Math.min(1, 1 - v.z * 0.5));
         node.label.style.opacity = depthOpacity * entranceProgress;
       });
 
