@@ -2429,17 +2429,26 @@
       { name: 'UX Operations', items: ['Go/no-go UX frameworks', 'Product launch readiness', 'Building agentic UX teams'], pos: [-2, 0.8, 0.9] }
     ];
 
-    var hubMat = new THREE.MeshBasicMaterial({ color: 0xA9BDB8 });
-    var dotMat = new THREE.MeshBasicMaterial({ color: 0xaaaaaa });
+    var nodeColors = [
+      new THREE.Color(0xA9BDB8),
+      new THREE.Color(0x5A8C82),
+      new THREE.Color(0x7BA4C7),
+      new THREE.Color(0xC8A078),
+      new THREE.Color(0x9B8EC4),
+      new THREE.Color(0xD4856A),
+      new THREE.Color(0x6AAB9E)
+    ];
     var lineMat = new THREE.LineBasicMaterial({ color: 0xcccccc, transparent: true, opacity: 0.35 });
 
     nodeData.forEach(function(node, i) {
-      var geom = new THREE.SphereGeometry(0.09, 16, 16);
-      var mesh = new THREE.Mesh(geom, dotMat);
+      var geom = new THREE.SphereGeometry(0.12, 16, 16);
+      var mat = new THREE.MeshBasicMaterial({ color: nodeColors[i] });
+      var mesh = new THREE.Mesh(geom, mat);
       mesh.position.set(node.pos[0], node.pos[1], node.pos[2]);
       if (i === 0) mesh.visible = false;
       group.add(mesh);
       node.mesh = mesh;
+      node.baseColor = nodeColors[i];
     });
 
     for (var i = 1; i < nodeData.length; i++) {
@@ -2494,8 +2503,17 @@
         group.scale.set(ease, ease, ease);
       }
 
-      // Gentle oscillation + mouse influence (nodes stay near original positions)
+      // Shift dot colors over time
       var t = Date.now() * 0.0003;
+      nodeData.forEach(function(node, i) {
+        if (i === 0) return;
+        var hsl = {};
+        node.baseColor.getHSL(hsl);
+        var shift = Math.sin(t * 1.5 + i * 1.2) * 0.08;
+        node.mesh.material.color.setHSL(hsl.h + shift, hsl.s, hsl.l);
+      });
+
+      // Gentle oscillation + mouse influence (nodes stay near original positions)
       group.rotation.y += (Math.sin(t) * 0.15 + mouseX * 0.06 - group.rotation.y) * 0.02;
       group.rotation.x += (Math.cos(t * 0.7) * 0.08 + mouseY * 0.04 - group.rotation.x) * 0.02;
 
