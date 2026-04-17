@@ -1303,12 +1303,16 @@
       padding: 8px 14px;
       background: rgba(255, 255, 255, 1);
       border-radius: 6px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
       opacity: 0;
       max-height: 0;
       overflow: hidden;
       transition: opacity 0.3s, max-height 0.4s;
       white-space: nowrap;
+    }
+    .c-label:hover {
+      opacity: 1 !important;
+      z-index: 10;
     }
     .c-label:hover .c-label-items {
       opacity: 1;
