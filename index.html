@@ -1271,11 +1271,14 @@
     }
     .c-label {
       position: absolute;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, 8px);
       text-align: center;
       pointer-events: auto;
       cursor: default;
       transition: opacity 0.4s;
+    }
+    .c-label-hub-wrap {
+      transform: translate(-50%, -50%);
     }
     .c-label-title {
       font-family: 'EB Garamond', serif;
@@ -2446,7 +2449,7 @@
     // CSS labels
     nodeData.forEach(function(node, i) {
       var el = document.createElement('div');
-      el.className = 'c-label';
+      el.className = i === 0 ? 'c-label c-label-hub-wrap' : 'c-label';
       el.innerHTML = '<div class="' + (i === 0 ? 'c-label-hub' : 'c-label-title') + '">' + node.name + '</div>' +
         (node.items.length ? '<div class="c-label-items">' + node.items.join('<br>') + '</div>' : '');
       labelsDiv.appendChild(el);
