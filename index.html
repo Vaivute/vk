@@ -2486,9 +2486,10 @@
         group.scale.set(ease, ease, ease);
       }
 
-      // Auto-rotation + mouse influence
-      group.rotation.y += 0.0015 + mouseX * 0.002;
-      group.rotation.x += (mouseY * 0.12 - group.rotation.x) * 0.03;
+      // Gentle oscillation + mouse influence (nodes stay near original positions)
+      var t = Date.now() * 0.0003;
+      group.rotation.y += (Math.sin(t) * 0.15 + mouseX * 0.06 - group.rotation.y) * 0.02;
+      group.rotation.x += (Math.cos(t * 0.7) * 0.08 + mouseY * 0.04 - group.rotation.x) * 0.02;
 
       // Update label positions
       var w = wrap.clientWidth;
