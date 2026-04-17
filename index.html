@@ -2462,8 +2462,8 @@
 
     // Background star particles
     var starGeom = new THREE.BufferGeometry();
-    var starPos = new Float32Array(300 * 3);
-    for (var s = 0; s < 300 * 3; s++) starPos[s] = (Math.random() - 0.5) * 16;
+    var starPos = new Float32Array(900 * 3);
+    for (var s = 0; s < 900 * 3; s++) starPos[s] = (Math.random() - 0.5) * 16;
     starGeom.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
     group.add(new THREE.Points(starGeom, new THREE.PointsMaterial({ color: 0xcccccc, size: 0.025, transparent: true, opacity: 0.3 })));
 
