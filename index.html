@@ -1172,6 +1172,7 @@
       .caps-section { padding: 2rem 0 0; }
       .caps-header { padding: 0 1.25rem; margin-bottom: 1.5rem; }
       .caps-hub-svg { display: none; }
+      .constellation-wrap { display: none; }
       .caps-mobile { display: block; }
 
       /* Projects */
@@ -1250,9 +1251,58 @@
       text-align: center;
       margin-bottom: 0.25rem;
     }
-    .caps-hub-svg {
-      display: block;
+    .caps-hub-svg { display: none; }
+    .constellation-wrap {
+      position: relative;
       width: 100%;
+      height: 600px;
+      overflow: hidden;
+    }
+    #constellation-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+    .constellation-labels {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .c-label {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: auto;
+      cursor: default;
+      transition: opacity 0.4s;
+    }
+    .c-label-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      color: #333;
+      white-space: nowrap;
+    }
+    .c-label-hub {
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      color: #A9BDB8;
+      white-space: nowrap;
+    }
+    .c-label-items {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      color: #888;
+      margin-top: 4px;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.3s, max-height 0.4s;
+      white-space: nowrap;
+    }
+    .c-label:hover .c-label-items {
+      opacity: 1;
+      max-height: 120px;
     }
     .spoke {
       stroke-dasharray: 200;
@@ -1480,6 +1530,7 @@
       .cv-entry h3 { page-break-after: avoid; break-after: avoid; }
     }
   </style>
+<script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
 </head>
 <body>
 
@@ -1659,6 +1710,12 @@
     <!-- Capabilities hub and spoke -->
     <div class="caps-section">
       <div class="caps-header">What I Do</div>
+
+      <!-- 3D Constellation (desktop) -->
+      <div class="constellation-wrap" id="constellation-wrap">
+        <canvas id="constellation-canvas"></canvas>
+        <div class="constellation-labels" id="constellation-labels"></div>
+      </div>
 
       <svg class="caps-hub-svg" viewBox="-120 -70 1440 820" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -2329,13 +2386,134 @@
     update();
   })();
 
-  // Capabilities diagram: animate spokes when scrolled into view
+  // 3D Constellation diagram
   (function() {
-    var caps = document.querySelector('.caps-section');
-    if (!caps || !('IntersectionObserver' in window)) return;
+    var wrap = document.getElementById('constellation-wrap');
+    if (!wrap || typeof THREE === 'undefined') return;
+
+    var canvas = document.getElementById('constellation-canvas');
+    var labelsDiv = document.getElementById('constellation-labels');
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(50, wrap.clientWidth / wrap.clientHeight, 0.1, 100);
+    camera.position.z = 7;
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    var group = new THREE.Group();
+    scene.add(group);
+
+    var nodeData = [
+      { name: 'AX & Innovation', items: [], pos: [0, 0, 0], isHub: true },
+      { name: 'Agentic AI Products & UX', items: ['Agentic systems design', 'Human-in-the-loop experiences', 'LLM product design', 'Design with & for AI'], pos: [0, 2.2, 0.6] },
+      { name: 'Research & Service Design', items: ['Mixed-method user research', 'Process mapping & service design', 'Agentic UX patterns', 'Design systems & prototyping'], pos: [2, 0.8, -0.9] },
+      { name: 'Product & Commercial Strategy', items: ['Vision & commercial roadmap', 'Cross-functional alignment', 'Scaling products & teams'], pos: [2, -0.8, 0.9] },
+      { name: 'Leadership & Org', items: ['Team leadership · Design ops', 'Hiring & mentoring', 'Building future leaders'], pos: [0, -2.2, -0.6] },
+      { name: 'Innovation & Transformation', items: ['Experimentation & pilots', 'Incubation \u2192 scaled rollout', '0\u21921 product creation'], pos: [-2, -0.8, -0.9] },
+      { name: 'UX Operations', items: ['Go/no-go UX frameworks', 'Product launch readiness', 'Building agentic UX teams'], pos: [-2, 0.8, 0.9] }
+    ];
+
+    var hubMat = new THREE.MeshBasicMaterial({ color: 0xA9BDB8 });
+    var dotMat = new THREE.MeshBasicMaterial({ color: 0xaaaaaa });
+    var lineMat = new THREE.LineBasicMaterial({ color: 0xcccccc, transparent: true, opacity: 0.35 });
+
+    nodeData.forEach(function(node, i) {
+      var geom = new THREE.SphereGeometry(i === 0 ? 0.18 : 0.09, 16, 16);
+      var mesh = new THREE.Mesh(geom, i === 0 ? hubMat : dotMat);
+      mesh.position.set(node.pos[0], node.pos[1], node.pos[2]);
+      group.add(mesh);
+      node.mesh = mesh;
+    });
+
+    for (var i = 1; i < nodeData.length; i++) {
+      var pts = [
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(nodeData[i].pos[0], nodeData[i].pos[1], nodeData[i].pos[2])
+      ];
+      var lineGeom = new THREE.BufferGeometry().setFromPoints(pts);
+      group.add(new THREE.Line(lineGeom, lineMat));
+    }
+
+    // Background star particles
+    var starGeom = new THREE.BufferGeometry();
+    var starPos = new Float32Array(300 * 3);
+    for (var s = 0; s < 300 * 3; s++) starPos[s] = (Math.random() - 0.5) * 16;
+    starGeom.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    group.add(new THREE.Points(starGeom, new THREE.PointsMaterial({ color: 0xcccccc, size: 0.025, transparent: true, opacity: 0.3 })));
+
+    // CSS labels
+    nodeData.forEach(function(node, i) {
+      var el = document.createElement('div');
+      el.className = 'c-label';
+      el.innerHTML = '<div class="' + (i === 0 ? 'c-label-hub' : 'c-label-title') + '">' + node.name + '</div>' +
+        (node.items.length ? '<div class="c-label-items">' + node.items.join('<br>') + '</div>' : '');
+      labelsDiv.appendChild(el);
+      node.label = el;
+    });
+
+    // Mouse tracking for subtle interaction
+    var mouseX = 0, mouseY = 0;
+    wrap.addEventListener('mousemove', function(e) {
+      var rect = wrap.getBoundingClientRect();
+      mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    });
+    wrap.addEventListener('mouseleave', function() { mouseX = 0; mouseY = 0; });
+
+    // Entrance animation
+    var entered = false;
+    var entranceProgress = 0;
+    group.scale.set(0.01, 0.01, 0.01);
+
+    var running = false;
+    function animate() {
+      if (!running) return;
+      requestAnimationFrame(animate);
+
+      // Entrance scale
+      if (entered && entranceProgress < 1) {
+        entranceProgress = Math.min(1, entranceProgress + 0.012);
+        var ease = 1 - Math.pow(1 - entranceProgress, 3);
+        group.scale.set(ease, ease, ease);
+      }
+
+      // Auto-rotation + mouse influence
+      group.rotation.y += 0.0015 + mouseX * 0.002;
+      group.rotation.x += (mouseY * 0.12 - group.rotation.x) * 0.03;
+
+      // Update label positions
+      var w = wrap.clientWidth;
+      var h = wrap.clientHeight;
+      nodeData.forEach(function(node) {
+        var v = node.mesh.position.clone();
+        v.applyMatrix4(group.matrixWorld);
+        v.project(camera);
+        node.label.style.left = ((v.x * 0.5 + 0.5) * w) + 'px';
+        node.label.style.top = ((-v.y * 0.5 + 0.5) * h) + 'px';
+        var depthOpacity = Math.max(0.25, Math.min(1, 1 - v.z * 0.7));
+        node.label.style.opacity = depthOpacity * entranceProgress;
+      });
+
+      renderer.render(scene, camera);
+    }
+
+    // Start/stop via IntersectionObserver
     new IntersectionObserver(function(entries) {
-      if (entries[0].isIntersecting) caps.classList.add('in-view');
-    }, { threshold: 0.25 }).observe(caps);
+      if (entries[0].isIntersecting) {
+        if (!running) { running = true; entered = true; animate(); }
+      } else {
+        running = false;
+      }
+    }, { threshold: 0.15 }).observe(wrap);
+
+    window.addEventListener('resize', function() {
+      if (!wrap.clientWidth) return;
+      camera.aspect = wrap.clientWidth / wrap.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+    });
   })();
 
   // Values section interaction
