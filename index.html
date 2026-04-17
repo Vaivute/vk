@@ -2606,18 +2606,18 @@
     const above = itemTop - 18;
     const mx = (x1 + x2) / 2;
 
-    // Unique path per value - some arc over the heading, some loop, some wave
+    // Unique path per value - all smooth cubic Beziers, no sharp corners
     const pathDefs = [
-      // 0 Trust+Leadership: sweeping arc up over the heading - ends short to leave room for plane
-      `M ${x1} ${y1} C ${x1+30} ${above-50}, ${x2-65} ${above-50}, ${x2-35} ${y2}`,
-      // 1 Empathy: relaxed S-curve, dips down then rises
-      `M ${x1} ${y1} C ${x1+50} ${y1+55}, ${x2-50} ${y2-65}, ${x2-20} ${y2}`,
-      // 2 Outcomes Over Output: smooth arc rising over heading - ends short of x2 to leave room for crown
-      `M ${x1} ${y1} C ${x1+50} ${above-55}, ${x2-55} ${above-30}, ${x2-30} ${y2}`,
-      // 3 Innovation: multi-wave with smooth continuation - ends short of x2 to make room for pencil
-      `M ${x1} ${y1} C ${x1+55} ${y1-75}, ${x1+115} ${y1+45}, ${mx} ${above-15} S ${x2-60} ${y2-45}, ${x2-30} ${y2}`,
-      // 4 Clarity: easy arc looping below, then clean arrival
-      `M ${x1} ${y1} C ${x1+55} ${y1+65}, ${x2-55} ${y2+50}, ${x2} ${y2}`,
+      // 0 Trust+Leadership: gentle arc upward
+      `M ${x1} ${y1} C ${x1+40} ${y1-60}, ${x2-60} ${y2-60}, ${x2-35} ${y2}`,
+      // 1 Empathy: relaxed S-curve
+      `M ${x1} ${y1} C ${x1+60} ${y1+50}, ${x2-60} ${y2-50}, ${x2-20} ${y2}`,
+      // 2 Outcomes Over Output: smooth arc rising
+      `M ${x1} ${y1} C ${x1+50} ${y1-55}, ${x2-55} ${y2-35}, ${x2-30} ${y2}`,
+      // 3 Innovation: smooth flowing arc
+      `M ${x1} ${y1} C ${x1+70} ${y1-50}, ${x2-70} ${y2-40}, ${x2-30} ${y2}`,
+      // 4 Clarity: gentle arc looping below
+      `M ${x1} ${y1} C ${x1+60} ${y1+55}, ${x2-60} ${y2+45}, ${x2} ${y2}`,
     ];
 
     // Pencil doodle at endpoint - different symbol per value
