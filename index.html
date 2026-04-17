@@ -1279,6 +1279,7 @@
     }
     .c-label-hub-wrap {
       transform: translate(-50%, -50%);
+      opacity: 1 !important;
     }
     .c-label-title {
       font-family: 'EB Garamond', serif;
@@ -1294,6 +1295,10 @@
       color: #000;
       letter-spacing: 0.03em;
       white-space: nowrap;
+      border: 2px solid #333;
+      border-radius: 50%;
+      padding: 18px 28px;
+      background: rgba(255, 255, 255, 0.95);
     }
     .c-label-items {
       font-family: 'Raleway', sans-serif;
@@ -2451,9 +2456,11 @@
       node.baseColor = nodeColors[i];
     });
 
+    var hubRadius = 0.55;
     for (var i = 1; i < nodeData.length; i++) {
+      var dir = new THREE.Vector3(nodeData[i].pos[0], nodeData[i].pos[1], nodeData[i].pos[2]).normalize();
       var pts = [
-        new THREE.Vector3(0, 0, 0),
+        dir.clone().multiplyScalar(hubRadius),
         new THREE.Vector3(nodeData[i].pos[0], nodeData[i].pos[1], nodeData[i].pos[2])
       ];
       var lineGeom = new THREE.BufferGeometry().setFromPoints(pts);
