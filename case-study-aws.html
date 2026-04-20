@@ -404,7 +404,7 @@
         <div class="cs-section-label">The Problem</div>
         <h2>Designing agentic AI with no shared vocabulary</h2>
         <p>As agentic AI moved from research curiosity to product reality at AWS, a persistent problem surfaced: existing guidance was either too abstract or too narrow. High-level principles like "be transparent" and "keep users in control" articulate what should be achieved but leave open the question of how. Low-level UI patterns - confidence indicators, prompt fields, chat interfaces - prescribe implementation but don't help teams decide what to build in the first place.</p>
-        <p>What was missing was mid-level design knowledge: concepts specific enough to act on, general enough to apply across contexts. The absence was felt in practice. Traditional methods like user stories and user flows broke down when designing for non-deterministic AI. Teams struggled to frame problems, align on the right human-AI balance, and communicate decisions across disciplines.</p>
+        <p>What was missing was mid-level design knowledge: concepts specific enough to act on, and general enough to apply across contexts. The absence was felt in practice. Traditional methods like user stories and user flows broke down when designing for non-deterministic AI. Teams struggled to frame problems, align on the right human-AI balance, and communicate decisions across disciplines.</p>
         <p>Agentic AI also introduced a new coordination challenge. Unlike conventional software - where user actions produce predictable system reactions - agents can initiate actions, make decisions autonomously, and work out of sight. Getting the interplay between human and AI right is foundational to trust, safety, and usefulness. But no unified vocabulary existed for designing it.</p>
       </div>
 
@@ -416,9 +416,9 @@
       <div class="cs-section">
         <div class="cs-section-label">The Research</div>
         <h2>Grounded in real products, validated in practice</h2>
-        <p>I initiated this innovation workstream within AWS and secured funding to hire the first Design Scholar in the organisation - an HCI professor from the University of Washington - to work on this project. Working with the resulting cross-disciplinary team, which also included a generative AI product lead, senior engineers, and UX designers, I directed the design and research strategy from conception to publication.</p>
+        <p>I initiated this innovation workstream within AWS and secured funding to hire the first Design Scholar in the organisation - an HCI professor from the University of Washington - to work on the project. Working with the resulting cross-disciplinary team, including a generative AI product lead, senior engineers, and UX designers, I directed the design and research strategy from conception to publication.</p>
         <p>We conducted landscape and artifact analysis of 60 commercially available AI applications, ranging from OpenAI's Deep Research and Adobe Photoshop to lesser-known tools with novel interaction models. We deliberately looked beyond dominant chat-interface patterns to surface emerging approaches to AI prominence, autonomy, and user involvement.</p>
-        <p>The framework was validated iteratively: through a formal design critique with six senior UX designers, reviews with scientists in responsible AI and open-source software, a presentation at Conflux - Amazon's flagship design conference with 6,000 attendees from all orgs within Amazon - and applied work across AWS SageMaker AI, where the framework is now in use across 200 projects. The result was a vocabulary that practitioners actually reached for in daily design work.</p>
+        <p>The framework was validated iteratively: through a formal design critique with six senior UX designers, reviews with scientists in responsible AI and open-source software, a presentation at Conflux - Amazon's flagship design conference with 6,000 attendees from all orgs within Amazon - and applied work across AWS SageMaker AI, where the framework is now in use across 200 projects. The result was a vocabulary that became core to the daily design work of practitioners.</p>
       </div>
 
       <hr class="cs-divider">
@@ -426,7 +426,7 @@
       <!-- The framework -->
       <div class="cs-section">
         <div class="cs-section-label">The Framework</div>
-        <h2>Three dimensions designers can directly control</h2>
+        <h2>Three dimensions that designers can directly control</h2>
         <p>We define human-AI coordination as the interplay of three dimensions. These map to the levers designers can actually manipulate - what is displayed, what users can do, and what the AI actually does. Other important qualities like trust, predictability, and agency are emergent: they arise from how these three are configured.</p>
 
         <div class="cs-dimensions">
@@ -444,7 +444,7 @@
           </div>
         </div>
 
-        <p>When both involvement and salience are high, coordination is high - a collaborative, deeply in-the-loop experience. When both are low, coordination is minimal - automated and backgrounded. The right balance is not fixed; it shifts with the task, the user, and the moment.</p>
+        <p>When both involvement and salience are high, coordination is high - a collaborative, deep in-the-loop experience. When both are low, coordination is minimal - automated and backgrounded. The right balance is not fixed; it shifts with the task, the user, and the moment.</p>
       </div>
 
       <!-- Coordination zones -->
@@ -489,7 +489,7 @@
       <div class="cs-section">
         <div class="cs-section-label">Coordination Curves</div>
         <h2>Mapping how involvement rises and falls across a workflow</h2>
-        <p>Because both agents and users can work independently, coordination cannot be static. A typical workflow moves through multiple zones: high involvement during initiation as users define goals and constraints; lower involvement during execution; a spike again at review and next steps.</p>
+        <p>Because both agents and users can work independently, coordination cannot be static. A typical workflow moves through multiple zones: high involvement during initiation as users define goals and constraints; lower involvement during execution; a spike again at review, and next steps.</p>
         <p>We visualise these shifts as coordination curves - a variation of user journey mapping that plots human involvement and AI salience across six phases: initiating, monitoring, updating, completing, extending, and settings. High-level curves reveal the overall shape of an experience. Looking beneath the surface exposes specific AI touchpoints, handoffs, and decision points.</p>
         <div class="cs-image">
           <img src="images+videos/humanai-03-16x9.png" alt="Coordination curves diagram showing how human involvement and AI salience shift across a workflow" />
@@ -508,7 +508,7 @@
         <div class="cs-patterns">
           <div class="cs-pattern">
             <h3>Responsive salience</h3>
-            <p>An AI agent that automatically adjusts its visibility and interaction intensity to match the context. When trust is low - a beginner user, a high-stakes task, sensitive data - the system increases salience: richer explanations, additional approval gates, expanded transparency. As confidence recovers, it quietly reverts. Early user testing validated the concept while revealing meaningful individual variation: some participants found high-salience modes exhausting, others valued the guidance. Several didn't notice the adaptation at all - a signal that when well calibrated, dynamic coordination can feel seamless rather than intrusive.</p>
+            <p>An AI agent that automatically adjusts its visibility and interaction intensity to match the context. When trust is low - a beginner user, a high-stakes task, sensitive data - the system increases salience: richer explanations, additional approval gates, expanded transparency. As confidence improves, it quietly takes a step back. Early user testing validated the concept while revealing meaningful individual variation: some participants found high-salience modes exhausting, others valued the guidance. Several didn't notice the adaptation at all - a signal that when well calibrated, dynamic coordination can feel seamless rather than intrusive.</p>
           </div>
           <div class="cs-pattern">
             <h3>Workplan gating</h3>
@@ -516,11 +516,11 @@
           </div>
           <div class="cs-pattern">
             <h3>Attribution markers</h3>
-            <p>Micro-copy, placement, and iconography that make AI contribution legible without being intrusive. Markers calibrate salience at the content level - surfacing AI involvement where it matters for trust or accountability, keeping it quiet elsewhere. The pattern addresses the challenge of done-under-me experiences becoming covertly conducted without users realising it.</p>
+            <p>Micro-copy, placement, and iconography that makes the contribution of AI legible without being intrusive. Markers calibrate salience at the content level - surfacing AI involvement where it matters for trust or accountability, keeping it quiet elsewhere. The pattern addresses the challenge of done-under-me experiences becoming covertly conducted without users realising it.</p>
           </div>
           <div class="cs-pattern">
             <h3>Progressive autonomy</h3>
-            <p>A pattern for gradually extending AI autonomy as users build familiarity and trust with a system. Coordination starts in done-with-me territory and migrates toward done-for-me as the user's mental model matures. The shift can be user-initiated, system-suggested, or a combination - with clear affordances for dialling back if needed.</p>
+            <p>A pattern for gradually extending AI autonomy as users build familiarity and trust with a system. Coordination starts in done-with-me territory and migrates toward done-for-me as the user's mental model matures. The shift can be user-initiated, system-suggested, or a combination of the two - with clear affordances for dialling back if needed.</p>
           </div>
         </div>
       </div>
