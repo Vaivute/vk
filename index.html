@@ -1748,7 +1748,7 @@
 
       <!-- 3D Constellation (desktop) -->
       <div class="constellation-wrap" id="constellation-wrap">
-        <svg id="constellation-lines" class="constellation-lines" aria-hidden="true"></svg>
+        <svg id="constellation-lines" class="constellation-lines" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true"></svg>
         <canvas id="constellation-canvas"></canvas>
         <div class="constellation-labels" id="constellation-labels"></div>
       </div>
@@ -2484,6 +2484,12 @@
       linesSvg.appendChild(ln);
       spokeLines.push(ln);
     }
+    // Anchor the SVG's user space to the wrap's pixel dimensions. Without this, Firefox can
+    // fall back to the default 300x150 user space and the spoke lines render at the wrong scale.
+    function syncSvgViewBox() {
+      linesSvg.setAttribute('viewBox', '0 0 ' + (wrap.clientWidth || 1) + ' ' + (wrap.clientHeight || 1));
+    }
+    syncSvgViewBox();
 
     // Background star particles
     var starGeom = new THREE.BufferGeometry();
@@ -2633,6 +2639,7 @@
       camera.aspect = wrap.clientWidth / wrap.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+      syncSvgViewBox();
     });
   })();
 
