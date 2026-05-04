@@ -1280,7 +1280,9 @@
     }
     .c-label {
       position: absolute;
-      transform: translate(-50%, -50%);
+      /* Default: anchor by the top edge (for nodes below the hub). Hover expansion grows
+         the label downward; the title stays put because it sits at the top of the rect. */
+      transform: translate(-50%, 0);
       text-align: center;
       pointer-events: auto;
       cursor: default;
@@ -1290,7 +1292,12 @@
       align-items: center;
       gap: 6px;
     }
-    .c-label.above-hub { flex-direction: column-reverse; }
+    .c-label.above-hub {
+      /* Anchor by the bottom edge; column-reverse puts the title at the bottom so it stays
+         pinned while items grow upward, away from the node. */
+      transform: translate(-50%, -100%);
+      flex-direction: column-reverse;
+    }
     .c-label-hub-wrap {
       transform: translate(-50%, -50%);
       opacity: 1 !important;
@@ -2584,33 +2591,31 @@
       });
       var hubX = nodeData[0]._sx;
       var hubY = nodeData[0]._sy;
-      var nodeClear = 16; // px — node sphere radius (~9px) + breathing room
+      var nodeClear = 16; // px — node sphere (~9px) + breathing room
+      // Title-only label half-height (~28px font + 6px flex gap to items). Used to position
+      // side labels diagonally; choosing it independent of current label height means the
+      // title doesn't drift on hover when items expand.
+      var titleHalfH = 22;
       nodeData.forEach(function(node, i) {
         if (i === 0) {
           node.label.style.left = node._sx + 'px';
           node.label.style.top = node._sy + 'px';
         } else {
+          var isAbove = node.pos[1] > 0;
           var dx = node._sx - hubX, dy = node._sy - hubY;
           var len = Math.sqrt(dx * dx + dy * dy);
-          if (len < 1) {
-            // Group is collapsed (entrance) — place label at node; opacity is ~0 anyway
-            node.label.style.left = node._sx + 'px';
-            node.label.style.top = node._sy + 'px';
-          } else {
+          var hOffset = 0;
+          if (len >= 1) {
             var ux = dx / len, uy = dy / len;
-            // Use the label's actual rendered size so wide titles get pushed out further than tall ones
-            var lr = node.label.getBoundingClientRect();
-            var hw = lr.width / 2, hh = lr.height / 2;
-            // Offset to put one rect-edge `nodeClear` away from the node center; pick the smaller
-            // (axis that "exits" the contains-node region first). Using min, not max — max forces
-            // both axes to clear, which for wide labels at steep angles produces enormous offsets.
-            var ox = Math.abs(ux) > 1e-3 ? (hw + nodeClear) / Math.abs(ux) : Infinity;
-            var oy = Math.abs(uy) > 1e-3 ? (hh + nodeClear) / Math.abs(uy) : Infinity;
-            var offset = Math.min(ox, oy);
-            if (!isFinite(offset)) offset = 0;
-            node.label.style.left = (node._sx + ux * offset) + 'px';
-            node.label.style.top = (node._sy + uy * offset) + 'px';
+            // Horizontal displacement matches the closed-state diagonal placement, but
+            // doesn't change with hover, so the title stays put and the cursor never
+            // falls off the label as items expand.
+            if (Math.abs(uy) > 1e-3) hOffset = ux * (titleHalfH + nodeClear) / Math.abs(uy);
           }
+          node.label.style.left = (node._sx + hOffset) + 'px';
+          // Pin the near edge of the label `nodeClear` from the node — top edge for
+          // below-hub labels, bottom edge for above-hub (column-reverse handles the title position).
+          node.label.style.top = (node._sy + (isAbove ? -nodeClear : nodeClear)) + 'px';
         }
         var depthOpacity = Math.max(0.45, Math.min(1, 1 - node._sz * 0.5));
         node.label.style.opacity = depthOpacity * entranceProgress;
