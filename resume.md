@@ -112,8 +112,8 @@ US 10912327 · Issued February 9, 2021
 
 ## Tools
 
-Claude Code · Kiro · Canva · GitHub · Visual Studio · OpenCode · Figma · Adobe CS · Python · Notion · Jira · Asana
+Claude Code · Claude Design · Kiro · Canva · GitHub · Visual Studio · OpenCode · Figma · Adobe CS · Python · Notion · Jira · Asana
 
 ## Languages
 
-English (Fluent) · Lithuanian (Native) · Russian (Conversational) · Spanish (Basic)
+English (Fluent) · Lithuanian (Native) · Russian (Conversational) · Spanish (Basic) · French (Basic)

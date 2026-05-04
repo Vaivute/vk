@@ -411,7 +411,7 @@
 
       <!-- Header -->
       <div class="cs-label">Amazon Web Services · SageMaker AI</div>
-      <h1 class="cs-title">Designing Away the Complexity: AI Model Customization for Every Team</h1>
+      <h1 class="cs-title">Designing Away Complexity: AI Model Customization for Every Team</h1>
       <div class="cs-byline">Shipped December 2025 &nbsp;·&nbsp; Amazon SageMaker AI &nbsp;·&nbsp; Design Lead</div>
 
       <!-- Hero image -->
@@ -425,7 +425,7 @@
         <div class="cs-section-label">The Problem</div>
         <h2>Fine-tuning an AI model meant doing two jobs at once</h2>
         <p>Before a team could adapt a foundation model to their use case, they had to first solve a separate problem: infrastructure. Which GPU instance type? How much capacity? How to configure networking, manage compute lifecycles, and set up MLOps tooling? This work had nothing to do with the actual ML objective - but it stood between every team and the thing they were trying to build.</p>
-        <p>Most teams lacked the MLOps expertise this required. They got stuck before they even started. The bottleneck wasn't intelligence or ambition; it was a design failure. The interface surfaced infrastructure decisions that most users couldn't meaningfully make, at the exact moment they needed to focus on their model.</p>
+        <p>Most teams lacked the MLOps expertise this required. They got stuck before they even started. The bottleneck wasn't intelligence or ambition; it was a design failure. The interface surfaced infrastructure decisions that most users couldn't meaningfully make at the exact moment they needed to focus on their model.</p>
         <p>For teams building agentic AI applications - where customised models that can reliably call tools and follow instructions are foundational - the gap between intent and execution was especially costly. Getting the model right requires iteration. Infrastructure friction makes iteration expensive. The design challenge was to make that friction disappear.</p>
       </div>
 
@@ -442,9 +442,9 @@
       <div class="cs-section">
         <div class="cs-section-label">My Role</div>
         <h2>End-to-end design leadership from strategy to release</h2>
-        <p>I led the design of this project from early problem framing through to UX readiness and release, directing one other designer across the full scope of the work. My role extended beyond craft: I worked closely with product teams to shape what the feature should be, not just how it should look, and made the connections needed to evaluate designs with the people who would actually use them.</p>
+        <p>I led the design of this project, from early problem framing through to UX readiness and release, directing my design team across the full scope of the work. My role extended beyond craft: I worked closely with product teams to shape what the feature should be, not just how it should look, and made the connections needed to evaluate designs with the people who would actually use them.</p>
         <p>A critical part of my contribution was bringing real customers into the process to evaluate the agentic workflows directly. These weren't lab sessions - they were working sessions with ML engineers and data science teams, exposing genuine friction and informing design decisions that would not have surfaced any other way. The feedback directly shaped how the agentic specification flow was structured and how much control users retained at each step.</p>
-        <p>At key milestones, I ran go/no-go UX readiness reviews - evaluating the final designs and ensuring that every aspect of the agentic experience was working correctly before release. This meant holding the quality bar not just for the UI but for the end-to-end agent behaviour: did it ask the right questions, generate sensible specifications, handle edge cases gracefully, and give users genuine confidence before anything ran.</p>
+        <p>At key milestones, I ran go/no-go UX readiness reviews - evaluating the final designs and ensuring that every aspect of the agentic experience was working correctly before release. This meant maintaining high quality not just for the UI but for the end-to-end agent behavior: did it ask the right questions? Generate sensible specifications? Handle edge cases gracefully? And give users genuine confidence before anything ran?</p>
       </div>
 
       <hr class="cs-divider">
@@ -453,9 +453,9 @@
       <div class="cs-section">
         <div class="cs-section-label">The Design Challenge</div>
         <h2>One product, two fundamentally different users</h2>
-        <p>The feature had to serve two user types whose needs pulled in opposite directions. ML engineers and data scientists understood fine-tuning techniques and wanted precise control - over hyperparameters, training configuration, instance behaviour, and experiment tracking. Developers and business teams had a clear use case and capable data, but lacked the vocabulary to translate their objective into technical configuration.</p>
-        <p>Serving both without compromising either demanded careful progressive disclosure. Every configuration decision needed a recommended default that a non-specialist could trust, while keeping advanced options accessible to the engineer who needed them. The path of least resistance had to be a good path - not a simplified path that would later need undoing.</p>
-        <p>The deeper challenge was the agentic workflow - a preview feature that lets users describe their business objective in natural language and have an AI agent generate the full customisation specification: dataset guidelines, reward functions, evaluation criteria, recommended model and hyperparameters. This was a fundamentally different design paradigm - moving from configuration-driven UI to objective-driven conversation. Designing it well meant solving for trust, transparency, and control across a multi-turn exchange that ends in an automated job.</p>
+        <p>The feature had to serve two user types whose requirements pulled in opposite directions. ML engineers and data scientists understood fine-tuning techniques and wanted precise control - over hyperparameters, training configuration, instance behavior, and experiment tracking. Developers and business teams had a clear use case and capable data, but lacked the vocabulary to translate their objective into a technical configuration.</p>
+        <p>Serving both without compromising, demanded careful progressive disclosure. Every configuration decision needed a recommended default that a non-specialist could trust, while keeping advanced options accessible to the engineer who needed them. The path of least resistance had to be a good path - not a simplified path that would later need undoing.</p>
+        <p>The deeper challenge was the agentic workflow - a preview feature that lets users describe their business objective in natural language and have an AI agent generate the full customization specification: dataset guidelines, reward functions, evaluation criteria, recommended model, and hyperparameters. This was a fundamentally different design paradigm - moving from configuration-driven UI to objective-driven conversation. Designing it well meant solving for trust, transparency, and control across a multi-turn exchange that ends in an automated job.</p>
       </div>
 
       <!-- Three design decisions -->
@@ -504,7 +504,7 @@
               <div class="cs-zone-name">Specification generation</div>
               <span class="cs-zone-tag">Agent proposes</span>
             </div>
-            <p class="cs-zone-desc">The agent generates a complete customisation specification: recommended model, technique (SFT, DPO, RLAIF, or RLVR), dataset guidelines, reward function design, hyperparameters, and evaluation criteria. The full specification is presented for review before any job is created.</p>
+            <p class="cs-zone-desc">The agent generates a complete customization specification: recommended model, technique (SFT, DPO, RLAIF, or RLVR), dataset guidelines, reward function design, hyperparameters, and evaluation criteria. The full specification is presented for review before any job is created.</p>
           </div>
           <div class="cs-zone">
             <div>
@@ -531,16 +531,16 @@
       <!-- Design patterns -->
       <div class="cs-section">
         <div class="cs-section-label">Design Patterns in Practice</div>
-        <h2>Solutions to the hardest design problems in this space</h2>
+        <h2>Solutions to the hardest design problems</h2>
 
         <div class="cs-patterns">
           <div class="cs-pattern">
             <h3>Trusted defaults</h3>
-            <p>Every configuration parameter has a recommended default surfaced directly in the UI - not hidden in documentation. Defaults are derived from pre-optimised training recipes for each model and technique combination. This shifts the cognitive load from "what should I set this to?" to "does this look right?" - a much more manageable question for non-specialists and a faster starting point for experts.</p>
+            <p>Every configuration parameter has a recommended default surfaced directly in the UI - not hidden in documentation. Defaults are derived from pre-optimized training recipes for each model and technique combination. This shifts the cognitive load from "what should I set this to?" to "does this look right?" - a much more manageable question for non-specialists and a faster starting point for experts.</p>
           </div>
           <div class="cs-pattern">
             <h3>Specification preview</h3>
-            <p>Before any agentic job runs, the system surfaces the full specification as a reviewable artefact. This was a critical trust decision: the agent's proposal is made legible and editable before it becomes action. Users in customer evaluation sessions told us that seeing the complete plan - rather than just a confirmation prompt - was the moment they decided whether to trust the system.</p>
+            <p>Before any agentic job runs, the system surfaces the full specification as a reviewable artefact. This was a critical trust decision: the agent's proposal is made legible and editable before it becomes action. Users in customer evaluation sessions told us that seeing the complete plan - rather than just a confirmation prompt - was the moment they decided on whether to trust the system.</p>
           </div>
           <div class="cs-image">
             <img src="images+videos/Sherpa/SageMaker%20AI%20%286%29.png" alt="Edit mode - user refining the generated specification" />
@@ -556,7 +556,7 @@
           </div>
           <div class="cs-pattern">
             <h3>Deployment flexibility</h3>
-            <p>Customised models can be deployed to either SageMaker endpoints or Amazon Bedrock from the same interface. The choice is presented as a clear, two-option decision at the moment of deployment - not a configuration buried in infrastructure settings. This respects the architectural choices teams have already made without forcing them to leave the customisation context to act on them.</p>
+            <p>Customized models can be deployed to either SageMaker endpoints or Amazon Bedrock from the same interface. The choice is presented as a clear, two-option decision at the moment of deployment - not a configuration buried in infrastructure settings. This respects the architectural choices teams have already made without forcing them to leave the customization context to act on them.</p>
           </div>
         </div>
       </div>
@@ -601,8 +601,8 @@
           <div class="cs-impact-category">Design</div>
           <ul class="cs-impact">
             <li>Customer evaluation sessions directly shaped the agentic specification flow and the structure of the review step before job launch</li>
-            <li>UX readiness reviews at key milestones ensured end-to-end agent behaviour - not just the UI - met the quality bar for release</li>
-            <li>Progressive disclosure pattern extended as a design standard across SageMaker AI's model customisation surface</li>
+            <li>UX readiness reviews at key milestones ensured end-to-end agent behavior - not just the UI - met the quality bar for release</li>
+            <li>Progressive disclosure pattern extended as a design standard across SageMaker AI's model customization surface</li>
             <li>Directly applied novel findings and new human-agentic AI coordination patterns from research completed with my Design Scholar - bringing academic rigour into production product design</li>
           </ul>
         </div>
@@ -613,9 +613,9 @@
         <div class="cs-section-label">Reflection</div>
         <h2>What designing for agentic workflows taught me about trust</h2>
         <p>The hardest design problem in this project wasn't the interface - it was the handoff. At the moment an agent proposes a specification and a user decides whether to trust it, the design has to do a great deal of work very quickly. It has to make the agent's reasoning legible, surface the right level of detail without overwhelming, and make it easy to adjust without making it feel like the whole point was just a long form in disguise.</p>
-        <p>Customer sessions were the most valuable input. Users consistently told us that the specification preview - seeing the full plan before anything ran - was the moment they decided whether to trust the system. That finding reshaped how we thought about the agentic workflow: not as a shortcut to configuration, but as a structured conversation that earns the right to act.</p>
+        <p>Customer sessions were the most valuable input. Users consistently told me that the specification preview - seeing the full plan before anything ran - was the moment they decided on whether to trust the system. That finding reshaped how I thought about the agentic workflow: not as a shortcut to configuration, but as a structured conversation that earns the right to act.</p>
         <p>The most enduring lesson is that agentic AI in a professional context requires a different trust model than consumer AI. Users aren't just evaluating whether the output seems good - they're deciding whether to stake something real on the agent's judgement. Design has to make that decision informed, not just fast.</p>
-        <p>This project also changed how I work as a designer. The hi-fi functional UI for this case study - fully designed, interactive, and production-ready - was built in hours rather than days using Kiro, Amazon's AI agent for builders, powered by Anthropic's Claude Opus 4.6 model and paired with a design system MCP for full detailed design support. What previously required days of iteration across tools collapsed into a single focused session. The speed didn't compromise the craft - it removed the friction between thinking and making. When the tools are as capable as the products you are designing, the constraint shifts from execution to thinking.</p>
+        <p>This project also changed how I work as a designer. The hi-fi functional UI for this case study - fully designed, interactive, and production-ready - was built in hours rather than days using Kiro, Amazon's AI agent for builders, powered by Anthropic's Claude Opus 4.6 model and paired with a design system MCP for full detailed design support. What previously required days of iteration across tools, collapsed into a single focused session. The speed didn't compromise the craft - it removed the friction between thinking and making. When the tools are as capable as the products you are designing, the constraint shifts from execution to thinking.</p>
       </div>
 
     </div>

@@ -382,7 +382,7 @@
       inset: 0;
       z-index: 1;
       overflow: hidden;
-      background-color: #f4f0e8;
+      background-color: #d0c4ad;
       transition: background-color 1.4s cubic-bezier(0.43, 0.195, 0.02, 1);
       pointer-events: none;
     }
@@ -453,7 +453,10 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.6s ease-out;
     }
+    .hero-image.ready { opacity: 1; }
     @keyframes imageFloat {
       0%   { transform: scale(1.04) translate(0%,    0%); }
       33%  { transform: scale(1.10) translate(-1.5%, 1.2%); }
@@ -1257,6 +1260,18 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
     }
+    .constellation-lines {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .constellation-lines line {
+      stroke: #999;
+      stroke-width: 1.4;
+      opacity: 0.55;
+    }
     .constellation-labels {
       position: absolute;
       top: 0; left: 0;
@@ -1265,12 +1280,17 @@
     }
     .c-label {
       position: absolute;
-      transform: translate(-50%, 8px);
+      transform: translate(-50%, -50%);
       text-align: center;
       pointer-events: auto;
       cursor: default;
       transition: opacity 0.4s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
     }
+    .c-label.above-hub { flex-direction: column-reverse; }
     .c-label-hub-wrap {
       transform: translate(-50%, -50%);
       opacity: 1 !important;
@@ -1297,7 +1317,6 @@
       font-family: 'Raleway', sans-serif;
       font-size: 18px;
       color: #333;
-      margin-top: 6px;
       padding: 8px 14px;
       background: rgba(255, 255, 255, 1);
       border-radius: 6px;
@@ -1700,7 +1719,7 @@
             <div class="value-item" data-value="4">Clarity</div>
           </div>
           <div class="values-desc-wrap">
-            <p class="value-desc active" data-desc="0">Earning trust through design and leadership, I set direction, grow teams and shape agentic AI interactions where transparency and humanised experiences come built in.</p>
+            <p class="value-desc active" data-desc="0">Earning trust through design and leadership, I set direction, grow teams and shape agentic AI interactions where transparency and humanized experiences come built in.</p>
             <p class="value-desc" data-desc="1">Leading with empathy, for users, teammates and every person who interacts with what I design and build.</p>
             <p class="value-desc" data-desc="2">Design is done when it drives outcomes, not when it ships. I embed myself in the end to end process - from first research insight through shipped product to commercial impact, running go/no-go UX readiness gates at scale at AWS to make sure every launch is actually ready to move the business.</p>
             <p class="value-desc" data-desc="3">At Amazon SageMaker AI, I established an innovation stream - driving new product directions, discovering novel agentic AI design patterns, and pioneering completely novel design processes. Pushing boundaries by asking what's genuinely new, not just what's different.</p>
@@ -1716,6 +1735,7 @@
 
       <!-- 3D Constellation (desktop) -->
       <div class="constellation-wrap" id="constellation-wrap">
+        <svg id="constellation-lines" class="constellation-lines" aria-hidden="true"></svg>
         <canvas id="constellation-canvas"></canvas>
         <div class="constellation-labels" id="constellation-labels"></div>
       </div>
@@ -1840,7 +1860,7 @@
         <div class="section-text">
           <div class="project-meta">Amazon Web Services</div>
           <h2><a href="case-study-aws.html">Designing Agentic AI Patterns: A Framework for Defining Human-in-the-Loop Experiences</a></h2>
-          <p class="project-desc">Directed design and research strategy and execution for inventing new design patterns and language when designing with and for agentic AI systems. Crafted design vision and drove leadership buy-in across the organisation. Published on Amazon Science and now adopted across 200+ AWS SageMaker AI projects.</p>
+          <p class="project-desc">Directed design and research strategy and execution for inventing new design patterns and language when designing with and for agentic AI systems. Crafted design vision and drove leadership buy-in across the organization. Published on Amazon Science and now adopted across 200+ AWS SageMaker AI projects.</p>
         </div>
         <div class="section-visual">
           <video autoplay loop muted playsinline style="width:100%;display:block;">
@@ -1862,7 +1882,7 @@
         <div class="section-text">
           <div class="project-meta">Amazon Web Services</div>
           <h2><a href="case-study-agents.html">Designing Away Complexity with AI Agents</a></h2>
-          <p class="project-desc">Led end-to-end design of SageMaker AI's serverless model customisation - shaping the agentic workflow that lets teams describe a business objective in natural language and then prompting an AI agent to generate the full fine-tuning specification. Directed the designer on the project, ran user working sessions with ML teams, and owned UX readiness through launch. Shipped December 2025.</p>
+          <p class="project-desc">Led end-to-end design of SageMaker AI's serverless model customization - shaping the agentic workflow that lets teams describe a business objective in natural language and then prompting an AI agent to generate the full fine-tuning specification. Directed the designer on the project, ran user working sessions with ML teams, and owned UX readiness through launch. Shipped December 2025.</p>
         </div>
       </div>
     </div>
@@ -1956,7 +1976,7 @@
         <div class="cv-entry">
           <h3>CEO · Dovetailed</h3>
           <div class="cv-org">Dovetailed (UK &amp; US) · 2011 – 2023</div>
-          <p>Built and scaled an award-winning UX and innovation studio. Led design and research across sectors - AI, health, food tech, water, and industrial systems. Partnered with startups and large organisations to create new product visions, services, and tools.</p>
+          <p>Built and scaled an award-winning UX and innovation studio. Led design and research across sectors - AI, health, food tech, water, and industrial systems. Partnered with startups and large organizations to create new product visions, services, and tools.</p>
         </div>
 
         <div class="cv-entry">
@@ -2206,7 +2226,7 @@
       <h1>About</h1>
       <p>Whenever the map runs out, I start to be drawn in - that is when problem solving is fascinating to me.</p>
       <p>I'm Vaiva Kalnikaitė - design leader, researcher, and founder working at the frontier of AI. I'm currently Head of UX at Amazon Web Services, leading design for agentic AI and human-in-the-loop systems: the practice of designing AI that genuinely collaborates with people rather than simply responding to them.</p>
-      <p>Before Amazon, I founded <a href="https://dovetailed.io" target="_blank">Dovetailed</a>, a UX and innovation studio based in Cambridge, UK. Our most recognised work was nūfood - the world's first edible 3D food printer - featured in the Financial Times, BBC World, The Spoon, and Digital Trends.</p>
+      <p>Before Amazon, I founded <a href="https://dovetailed.io" target="_blank">Dovetailed</a>, a UX and innovation studio based in Cambridge, UK. Our most recognized work was nūfood - the world's first edible 3D food printer - featured in the Financial Times, BBC World, The Spoon, and Digital Trends.</p>
       <p>I hold a PhD in Human-Computer Interaction from the University of Sheffield and am a Fellow of the Royal Society of Arts. My research has earned three Best Paper Awards at ACM CHI and CSCW (top 1% of submissions). Across fifteen years, the products I've led have contributed to over $1B in revenue - The best design decisions don't just improve products - they drive them.</p>
       <p>Outside of work I sail, play pickleball, actively invest in and support startups, and host dinners for new friends - bringing together people who have never met over food, in support of homelessness charities around Seattle.</p>
       <img class="about-photo" src="images+videos/vaiva_sailing.JPG" alt="Vaiva sailing">
@@ -2297,7 +2317,9 @@
       gl.uniform3fv(u.Dye,h2r(T.dyeColor));gl.uniform3fv(u.Rust,h2r(T.rustColor));
       gl.uniform1f(u.AccentRarity,T.accentRarity);gl.uniform1f(u.DyeSize,T.dyeSize);gl.uniform1f(u.Grain,T.grainAmount);
       gl.uniform4fv(u.Dyes,packed);
-      gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(loop)
+      gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+      if(!c.classList.contains('ready'))c.classList.add('ready');
+      requestAnimationFrame(loop)
     }
     loop();
   })();
@@ -2467,8 +2489,6 @@
       new THREE.Color(0xD4856A),
       new THREE.Color(0x6AAB9E)
     ];
-    var lineMat = new THREE.LineBasicMaterial({ color: 0x999999, transparent: true, opacity: 0.55 });
-
     nodeData.forEach(function(node, i) {
       var geom = new THREE.SphereGeometry(0.12, 16, 16);
       var mat = new THREE.MeshBasicMaterial({ color: nodeColors[i] });
@@ -2480,15 +2500,13 @@
       node.baseColor = nodeColors[i];
     });
 
-    var hubRadius = 0.75;
+    // 2D SVG spoke lines — recomputed each frame so they start at the pill's edge and end at the node
+    var linesSvg = document.getElementById('constellation-lines');
+    var spokeLines = [];
     for (var i = 1; i < nodeData.length; i++) {
-      var dir = new THREE.Vector3(nodeData[i].pos[0], nodeData[i].pos[1], nodeData[i].pos[2]).normalize();
-      var pts = [
-        dir.clone().multiplyScalar(hubRadius),
-        new THREE.Vector3(nodeData[i].pos[0], nodeData[i].pos[1], nodeData[i].pos[2])
-      ];
-      var lineGeom = new THREE.BufferGeometry().setFromPoints(pts);
-      group.add(new THREE.Line(lineGeom, lineMat));
+      var ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      linesSvg.appendChild(ln);
+      spokeLines.push(ln);
     }
 
     // Background star particles
@@ -2501,7 +2519,11 @@
     // CSS labels
     nodeData.forEach(function(node, i) {
       var el = document.createElement('div');
-      el.className = i === 0 ? 'c-label c-label-hub-wrap' : 'c-label';
+      var cls = i === 0 ? 'c-label c-label-hub-wrap' : 'c-label';
+      // Nodes above the hub (3D y > 0) project to the top half of the screen — flip the
+      // flex order so items expand upward (away from the node) like Leadership & Org does downward.
+      if (i > 0 && node.pos[1] > 0) cls += ' above-hub';
+      el.className = cls;
       el.innerHTML = '<div class="' + (i === 0 ? 'c-label-hub' : 'c-label-title') + '">' + node.name + '</div>' +
         (node.items.length ? '<div class="c-label-items">' + node.items.join('<br>') + '</div>' : '');
       labelsDiv.appendChild(el);
@@ -2551,15 +2573,74 @@
       // Update label positions
       var w = wrap.clientWidth;
       var h = wrap.clientHeight;
+      // Project every node to screen once
       nodeData.forEach(function(node) {
         var v = node.mesh.position.clone();
         v.applyMatrix4(group.matrixWorld);
         v.project(camera);
-        node.label.style.left = ((v.x * 0.5 + 0.5) * w) + 'px';
-        node.label.style.top = ((-v.y * 0.5 + 0.5) * h) + 'px';
-        var depthOpacity = Math.max(0.45, Math.min(1, 1 - v.z * 0.5));
+        node._sx = (v.x * 0.5 + 0.5) * w;
+        node._sy = (-v.y * 0.5 + 0.5) * h;
+        node._sz = v.z;
+      });
+      var hubX = nodeData[0]._sx;
+      var hubY = nodeData[0]._sy;
+      var nodeClear = 16; // px — node sphere radius (~9px) + breathing room
+      nodeData.forEach(function(node, i) {
+        if (i === 0) {
+          node.label.style.left = node._sx + 'px';
+          node.label.style.top = node._sy + 'px';
+        } else {
+          var dx = node._sx - hubX, dy = node._sy - hubY;
+          var len = Math.sqrt(dx * dx + dy * dy);
+          if (len < 1) {
+            // Group is collapsed (entrance) — place label at node; opacity is ~0 anyway
+            node.label.style.left = node._sx + 'px';
+            node.label.style.top = node._sy + 'px';
+          } else {
+            var ux = dx / len, uy = dy / len;
+            // Use the label's actual rendered size so wide titles get pushed out further than tall ones
+            var lr = node.label.getBoundingClientRect();
+            var hw = lr.width / 2, hh = lr.height / 2;
+            // Offset to put one rect-edge `nodeClear` away from the node center; pick the smaller
+            // (axis that "exits" the contains-node region first). Using min, not max — max forces
+            // both axes to clear, which for wide labels at steep angles produces enormous offsets.
+            var ox = Math.abs(ux) > 1e-3 ? (hw + nodeClear) / Math.abs(ux) : Infinity;
+            var oy = Math.abs(uy) > 1e-3 ? (hh + nodeClear) / Math.abs(uy) : Infinity;
+            var offset = Math.min(ox, oy);
+            if (!isFinite(offset)) offset = 0;
+            node.label.style.left = (node._sx + ux * offset) + 'px';
+            node.label.style.top = (node._sy + uy * offset) + 'px';
+          }
+        }
+        var depthOpacity = Math.max(0.45, Math.min(1, 1 - node._sz * 0.5));
         node.label.style.opacity = depthOpacity * entranceProgress;
       });
+
+      // Update spoke lines: start at the pill's edge (along the hub→node ray), end at the node center
+      var pillEl = nodeData[0].label.querySelector('.c-label-hub');
+      if (pillEl) {
+        var wrapRect = wrap.getBoundingClientRect();
+        var pillRect = pillEl.getBoundingClientRect();
+        var pillCx = pillRect.left + pillRect.width / 2 - wrapRect.left;
+        var pillCy = pillRect.top + pillRect.height / 2 - wrapRect.top;
+        var pillHw = pillRect.width / 2;
+        var pillHh = pillRect.height / 2;
+        for (var i = 1; i < nodeData.length; i++) {
+          var node = nodeData[i];
+          var dx = node._sx - pillCx, dy = node._sy - pillCy;
+          var tx = Math.abs(dx) > 0.5 ? pillHw / Math.abs(dx) : 1e9;
+          var ty = Math.abs(dy) > 0.5 ? pillHh / Math.abs(dy) : 1e9;
+          var t = Math.min(tx, ty);
+          var sx = pillCx + dx * t;
+          var sy = pillCy + dy * t;
+          var ln = spokeLines[i - 1];
+          ln.setAttribute('x1', sx);
+          ln.setAttribute('y1', sy);
+          ln.setAttribute('x2', node._sx);
+          ln.setAttribute('y2', node._sy);
+          ln.style.opacity = (0.55 * entranceProgress).toFixed(3);
+        }
+      }
 
       renderer.render(scene, camera);
     }

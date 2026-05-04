@@ -26,10 +26,42 @@ VARIANTS = [
     {
         "suffix": "",
         "subtitle": None,  # use BASE_SUBTITLE as-is
+        "source": None,    # use default SRC
     },
     {
         "suffix": "_DES",
         "subtitle": "PhD · FRSA | Transformation & Innovation Leader · Head of UX, GenAI",
+        "source": None,
+    },
+    {
+        "suffix": "_RSAC",
+        "subtitle": None,  # subtitle already in source file
+        "source": "resume-rsac.md",
+        "designed": True,
+    },
+    {
+        "suffix": "_FREELANCE",
+        "subtitle": None,
+        "source": "resume-freelance-ux.md",
+        "designed": True,
+    },
+    {
+        "suffix": "_24MAG",
+        "subtitle": None,
+        "source": "resume-24mag.md",
+        "designed": True,
+    },
+    {
+        "suffix": "_TEKSYSTEMS",
+        "subtitle": None,
+        "source": "resume-teksystems.md",
+        "designed": True,
+    },
+    {
+        "suffix": "_PIPLABS",
+        "subtitle": None,
+        "source": "resume-piplabs.md",
+        "designed": True,
     },
 ]
 
@@ -318,7 +350,158 @@ ul.r-list li a {
 """
 
 
-def build_html(body_html: str) -> str:
+CSS_DESIGNED = r"""
+@page {
+  size: A4;
+  margin: 18mm 18mm 20mm 18mm;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #2a2a2a;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 10.5pt;
+  line-height: 1.6;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+a { color: inherit; text-decoration: none; }
+strong { font-weight: 600; color: #111; }
+em { font-style: italic; color: #555; }
+
+.r-header {
+  padding-bottom: 14pt;
+  border-bottom: 1.5pt solid #5a8c82;
+  margin-bottom: 16pt;
+}
+.r-header h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  font-size: 30pt;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 8pt 0;
+  color: #111;
+}
+.r-header .r-meta {
+  font-family: 'Raleway', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 9pt;
+  color: #555;
+  margin: 0 0 3pt 0;
+}
+.r-header .r-meta:first-of-type {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 9pt;
+  letter-spacing: 0.08em;
+  color: #5a8c82;
+}
+
+main { display: block; }
+section {
+  padding: 12pt 0 6pt 0;
+  border-top: none;
+  page-break-inside: auto;
+  break-inside: auto;
+}
+section:first-of-type { padding-top: 2pt; }
+section h2 {
+  font-family: 'Raleway', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 10pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #5a8c82;
+  margin: 0 0 10pt 0;
+  padding-bottom: 4pt;
+  border-bottom: 0.5pt solid #e0e0e0;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+.r-entry {
+  margin-bottom: 11pt;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.r-entry:last-child { margin-bottom: 2pt; }
+.r-entry h3 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 12.5pt;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 2pt 0;
+  line-height: 1.3;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+.r-entry-meta {
+  font-family: 'Raleway', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 8.5pt;
+  color: #777;
+  letter-spacing: 0.02em;
+  margin-bottom: 5pt;
+}
+.r-entry-meta strong { font-weight: 600; color: #444; }
+.r-entry p {
+  margin: 4pt 0 0 0;
+  color: #333;
+  font-size: 10pt;
+  line-height: 1.6;
+}
+
+p.r-body {
+  margin: 0 0 6pt 0;
+  color: #333;
+  font-size: 10.5pt;
+  line-height: 1.65;
+}
+
+ul.r-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul.r-list li {
+  position: relative;
+  padding-left: 12pt;
+  margin-bottom: 5pt;
+  font-size: 10pt;
+  line-height: 1.55;
+  color: #333;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+ul.r-list li::before {
+  content: '';
+  position: absolute;
+  left: 2pt;
+  top: 5pt;
+  width: 4pt;
+  height: 4pt;
+  border-radius: 50%;
+  background: #5a8c82;
+}
+ul.r-list li strong { color: #111; }
+ul.r-list li em { color: #666; }
+ul.r-list li a {
+  color: #111;
+  text-decoration: underline;
+  text-decoration-color: #5a8c82;
+  text-decoration-thickness: 0.5pt;
+  text-underline-offset: 2pt;
+}
+"""
+
+
+def build_html(body_html, use_designed_css=False):
+    css = CSS_DESIGNED if use_designed_css else CSS
+    fonts = ""
+    if use_designed_css:
+        fonts = """<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">"""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -326,8 +509,9 @@ def build_html(body_html: str) -> str:
 <title>Vaiva Kalnikaitė — Résumé</title>
 <meta name="author" content="Vaiva Kalnikaitė">
 <meta name="description" content="Résumé of Vaiva Kalnikaitė — PhD, FRSA, Head of UX.">
-<meta name="keywords" content="UX, Design Leadership, Human-AI Interaction, Agentic AI, HCI, Design Research, Amazon, AWS, Dovetailed">
-<style>{CSS}</style>
+<meta name="keywords" content="UX, Design Leadership, HCI, Design Research, Amazon, AWS, Dovetailed">
+{fonts}
+<style>{css}</style>
 </head>
 <body>
 {body_html}
@@ -336,11 +520,11 @@ def build_html(body_html: str) -> str:
 """
 
 
-def build_variant(md, suffix, subtitle):
+def build_variant(md, suffix, subtitle, designed=False):
     if subtitle:
         md = md.replace(BASE_SUBTITLE, subtitle, 1)
     body = md_to_html(md)
-    html = build_html(body)
+    html = build_html(body, use_designed_css=designed)
     html_out = ROOT / f"resume{suffix.lower()}.html"
     pdf_out = ROOT / f"Vaiva_Kalnikaite_Resume{suffix}.pdf"
     html_out.write_text(html, encoding="utf-8")
@@ -360,6 +544,20 @@ def build_variant(md, suffix, subtitle):
     if r.returncode != 0 or not pdf_out.exists():
         sys.stderr.write(r.stderr)
         sys.exit(r.returncode or 1)
+
+    # Scrub generator metadata so PDF looks like a normal export
+    raw = pdf_out.read_bytes()
+    raw = re.sub(
+        rb"/Creator \((?:[^()\\]|\\.)*\)",
+        lambda m: b"/Creator (Vaiva Kalnikaite)" + b" " * max(0, len(m.group()) - 27),
+        raw,
+    )
+    raw = re.sub(
+        rb"/Producer \((?:[^()\\]|\\.)*\)",
+        lambda m: b"/Producer (macOS PDF)" + b" " * max(0, len(m.group()) - 21),
+        raw,
+    )
+    pdf_out.write_bytes(raw)
     print(f"wrote {pdf_out.name}  ({pdf_out.stat().st_size // 1024} KB)")
 
 
@@ -368,7 +566,13 @@ def main() -> None:
         sys.exit(f"error: {SRC} not found")
     md = SRC.read_text(encoding="utf-8")
     for variant in VARIANTS:
-        build_variant(md, variant["suffix"], variant["subtitle"])
+        src_md = md
+        if variant.get("source"):
+            src_path = ROOT / variant["source"]
+            if not src_path.exists():
+                sys.exit(f"error: {src_path} not found")
+            src_md = src_path.read_text(encoding="utf-8")
+        build_variant(src_md, variant["suffix"], variant["subtitle"], variant.get("designed", False))
 
 
 if __name__ == "__main__":

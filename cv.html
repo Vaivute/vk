@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV — Vaiva Kalnikaitė</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0e0e;
+    --ink-60: rgba(14,14,14,0.6);
+    --ink-30: rgba(14,14,14,0.3);
+    --ink-10: rgba(14,14,14,0.1);
+    --ink-06: rgba(14,14,14,0.06);
+    --paper: #f5f3ee;
+    --white: #ffffff;
+    --amber: #d4822a;
+    --red: #c0392b;
+    --sans: 'DM Sans', sans-serif;
+    --serif: 'DM Serif Display', serif;
+    --mono: 'DM Mono', monospace;
+    --rule: 1px solid var(--ink-10);
+  }
+
+  html { background: var(--paper); color: var(--ink); font-family: var(--sans); }
+
+  /* ── Password gate ── */
+  #password-gate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #password-gate .gate-box {
+    display: flex; flex-direction: column; gap: 20px;
+    max-width: 320px; width: 100%; padding: 0 24px;
+  }
+  #password-gate .gate-label {
+    font-family: var(--serif); font-size: 28px; font-weight: 400; line-height: 1.2;
+  }
+  #password-gate .gate-sub {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-60);
+    letter-spacing: 0.08em; margin-top: -12px;
+  }
+  #password-gate input {
+    font-family: var(--mono); font-size: 14px;
+    border: none; border-bottom: 1.5px solid var(--ink);
+    background: transparent; outline: none; padding: 8px 0;
+    color: var(--ink); width: 100%; letter-spacing: 0.1em;
+  }
+  #password-gate input::placeholder { color: var(--ink-30); letter-spacing: 0.05em; }
+  #password-gate .gate-error {
+    font-family: var(--mono); font-size: 11px; color: var(--red);
+    letter-spacing: 0.06em; display: none;
+  }
+  #password-gate button {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; background: var(--ink); color: var(--white);
+    border: none; padding: 12px 24px; cursor: pointer; align-self: flex-start;
+  }
+  #password-gate button:hover { opacity: 0.85; }
+  body.locked { overflow: hidden; }
+
+  /* ── Page layout ── */
+  body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 32px 120px;
+  }
+
+  /* ── Header ── */
+  .cv-header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 32px;
+    margin-bottom: 64px;
+  }
+  .cv-header-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+    margin-bottom: 12px;
+  }
+  .cv-header-name {
+    font-family: var(--serif);
+    font-size: clamp(36px, 6vw, 58px);
+    line-height: 1.05;
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .cv-header-title {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink-60);
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+  .cv-header-contact {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-60);
+    letter-spacing: 0.06em;
+    line-height: 1.9;
+  }
+  .cv-header-contact a {
+    color: var(--ink-60);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-30);
+  }
+  .cv-header-contact a:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ── Section ── */
+  .cv-section {
+    margin-bottom: 64px;
+  }
+  .cv-section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: var(--rule);
+  }
+
+  /* ── Profile ── */
+  .cv-profile {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink);
+    max-width: 680px;
+  }
+
+  /* ── Expertise list ── */
+  .cv-expertise {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px 32px;
+  }
+  .cv-expertise-item {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding-left: 14px;
+    position: relative;
+  }
+  .cv-expertise-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px;
+    width: 4px; height: 4px;
+    background: var(--amber);
+    border-radius: 50%;
+  }
+
+  /* ── Experience entries ── */
+  .cv-entry {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0 40px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: var(--rule);
+  }
+  .cv-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .cv-entry-meta {
+    padding-top: 3px;
+  }
+  .cv-entry-period {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-60);
+    margin-bottom: 6px;
+  }
+  .cv-entry-org {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-60);
+    line-height: 1.5;
+  }
+  .cv-entry-role {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .cv-entry-body {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--ink-60);
+  }
+
+  /* ── Education ── */
+  .cv-edu-item {
+    margin-bottom: 20px;
+  }
+  .cv-edu-item:last-child { margin-bottom: 0; }
+  .cv-edu-degree {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .cv-edu-school {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-60);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── Awards ── */
+  .cv-award-item {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink);
+    padding: 10px 0;
+    border-bottom: var(--rule);
+  }
+  .cv-award-item:last-child { border-bottom: none; }
+
+  /* ── Tools ── */
+  .cv-tools-row {
+    margin-bottom: 14px;
+  }
+  .cv-tools-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-30);
+    margin-bottom: 6px;
+  }
+  .cv-tools-value {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-60);
+  }
+
+  /* ── Print ── */
+  @media print {
+    #password-gate { display: none !important; }
+    body { padding: 20px; }
+  }
+
+  @media (max-width: 600px) {
+    .cv-entry {
+      grid-template-columns: 1fr;
+      gap: 6px 0;
+    }
+    .cv-entry-meta {
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+    }
+  }
+</style>
+</head>
+<body class="locked">
+
+<!-- Password gate -->
+<div id="password-gate">
+  <div class="gate-box">
+    <div class="gate-label">Vaiva Kalnikaitė</div>
+    <div class="gate-sub">CV — Private access only</div>
+    <input type="password" id="gate-input" placeholder="password" autocomplete="off" />
+    <div class="gate-error" id="gate-error">Incorrect password</div>
+    <button onclick="checkPassword()">Enter</button>
+  </div>
+</div>
+
+<!-- CV content -->
+<main>
+
+  <div class="cv-header">
+    <div class="cv-header-eyebrow">Curriculum Vitae</div>
+    <div class="cv-header-name">Vaiva Kalnikaitė<span style="font-style:italic">, PhD, FRSA</span></div>
+    <div class="cv-header-title">Head of UX &nbsp;·&nbsp; Design Leader &nbsp;·&nbsp; Research Strategist</div>
+    <div class="cv-header-contact">
+      Seattle, USA &nbsp;|&nbsp; Cambridge, UK<br>
+      <a href="mailto:vaiva@dovetailed.io">vaiva@dovetailed.io</a> &nbsp;|&nbsp;
+      <a href="https://dovetailed.io" target="_blank">dovetailed.io</a> &nbsp;|&nbsp;
+      <a href="https://linkedin.com/in/vaivakalnikaite" target="_blank">linkedin.com/in/vaivakalnikaite</a>
+    </div>
+  </div>
+
+  <section class="cv-section">
+    <div class="cv-section-label">Profile</div>
+    <p class="cv-profile">I'm a design leader with 15+ years shaping user experiences across AI, enterprise, and consumer products. I bridge research, design, and strategy to create meaningful, human-centered systems. As a founder and former Principal UX Designer at Amazon, I've led cross-functional teams and driven UX strategy for global products. I thrive in complex problem spaces and bring a strong academic grounding in HCI to every challenge.</p>
+  </section>
+
+  <section class="cv-section">
+    <div class="cv-section-label">Core Expertise</div>
+    <div class="cv-expertise">
+      <div class="cv-expertise-item">UX &amp; Product Strategy for AI and Emerging Tech</div>
+      <div class="cv-expertise-item">Leadership of Design, Research, and Engineering Teams</div>
+      <div class="cv-expertise-item">Human-AI Interaction and Human-Centered Automation</div>
+      <div class="cv-expertise-item">Scalable Design Systems &amp; Service Design</div>
+      <div class="cv-expertise-item">Applied Research (Qual &amp; Quant)</div>
+      <div class="cv-expertise-item">Business &amp; Experience Transformation</div>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <div class="cv-section-label">Experience</div>
+
+    <div class="cv-entry">
+      <div class="cv-entry-meta">
+        <div class="cv-entry-period">2011 — Present</div>
+        <div class="cv-entry-org">Dovetailed<br>UK &amp; US</div>
+      </div>
+      <div class="cv-entry-content">
+        <div class="cv-entry-role">Founder &amp; Director</div>
+        <div class="cv-entry-body">Built and scaled an award-winning UX and innovation studio. Led design and research across sectors — AI, health, food tech, water, and industrial systems. Partnered with startups and large orgs to create new product visions, services, and tools. Key focus on translating complex research into accessible experiences.</div>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-entry-meta">
+        <div class="cv-entry-period">2019 — 2022</div>
+        <div class="cv-entry-org">Amazon<br>Seattle, USA</div>
+      </div>
+      <div class="cv-entry-content">
+        <div class="cv-entry-role">Principal UX Designer</div>
+        <div class="cv-entry-body">Led UX for AI/ML tools in AWS, focusing on human-in-the-loop systems and agentic AI. Drove product strategy, ran end-to-end usability programs, and defined design direction across global teams. Mentored designers and influenced roadmaps across orgs.</div>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-entry-meta">
+        <div class="cv-entry-period">2013 — 2017</div>
+        <div class="cv-entry-org">University College London<br>UK</div>
+      </div>
+      <div class="cv-entry-content">
+        <div class="cv-entry-role">Visiting Senior Fellow – Human Experience Design</div>
+        <div class="cv-entry-body">Taught and collaborated on design research, HCI, and interdisciplinary methods. Advised PhDs and partnered on future-focused design programs.</div>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-entry-meta">
+        <div class="cv-entry-period">2011 — 2012</div>
+        <div class="cv-entry-org">AVEVA<br>Cambridge, UK</div>
+      </div>
+      <div class="cv-entry-content">
+        <div class="cv-entry-role">UX Design Lead</div>
+        <div class="cv-entry-body">Brought human-centered design into industrial software workflows. Introduced research-led methods to shape new product development.</div>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-entry-meta">
+        <div class="cv-entry-period">2010 — 2011</div>
+        <div class="cv-entry-org">General Electric<br>Cambridge, UK</div>
+      </div>
+      <div class="cv-entry-content">
+        <div class="cv-entry-role">UX Analyst</div>
+        <div class="cv-entry-body">Worked on enterprise UX, improving complex tooling through research and prototyping.</div>
+      </div>
+    </div>
+
+    <div class="cv-entry">
+      <div class="cv-entry-meta">
+        <div class="cv-entry-period">Earlier roles</div>
+        <div class="cv-entry-org"></div>
+      </div>
+      <div class="cv-entry-content">
+        <div class="cv-entry-role">Fellowships &amp; Research</div>
+        <div class="cv-entry-body">Open University &nbsp;·&nbsp; King's College London &nbsp;·&nbsp; Microsoft Research &nbsp;·&nbsp; PARC</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="cv-section">
+    <div class="cv-section-label">Education</div>
+    <div class="cv-edu-item">
+      <div class="cv-edu-degree">PhD, Human-Computer Interaction</div>
+      <div class="cv-edu-school">University of Sheffield, UK</div>
+    </div>
+    <div class="cv-edu-item">
+      <div class="cv-edu-degree">Exec Education, General Management</div>
+      <div class="cv-edu-school">Judge Business School, Cambridge</div>
+    </div>
+    <div class="cv-edu-item">
+      <div class="cv-edu-degree">BSc &amp; MSc, Computer Science</div>
+      <div class="cv-edu-school">University of Sheffield</div>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <div class="cv-section-label">Awards &amp; Recognition</div>
+    <div class="cv-award-item">SME Cambridgeshire Business Awards — Positive Impact &amp; Business Woman of the Year Finalist (2021)</div>
+    <div class="cv-award-item">Royal Society of Chemistry "Chemistry Means Business" Award (2018)</div>
+    <div class="cv-award-item">CHI Best Paper (Top 1%) &amp; Honorable Mention (Top 5%)</div>
+    <div class="cv-award-item">Smart Kitchen Summit — Startup Showcase Winner</div>
+    <div class="cv-award-item">Multiple Innovation and Open Pitch Awards (GE, IfM Cambridge, and others)</div>
+  </section>
+
+  <section class="cv-section">
+    <div class="cv-section-label">Tools &amp; Languages</div>
+    <div class="cv-tools-row">
+      <div class="cv-tools-label">Tools</div>
+      <div class="cv-tools-value">Figma &nbsp;·&nbsp; Sketch &nbsp;·&nbsp; InVision &nbsp;·&nbsp; Adobe CS &nbsp;·&nbsp; Proto.io &nbsp;·&nbsp; Python &nbsp;·&nbsp; Notion &nbsp;·&nbsp; Jira</div>
+    </div>
+    <div class="cv-tools-row">
+      <div class="cv-tools-label">Languages</div>
+      <div class="cv-tools-value">English (Fluent) &nbsp;·&nbsp; Lithuanian (Native) &nbsp;·&nbsp; Russian (Conversational) &nbsp;·&nbsp; Spanish (Basic)</div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const gate = document.getElementById('password-gate');
+  const input = document.getElementById('gate-input');
+  const error = document.getElementById('gate-error');
+
+  function checkPassword() {
+    if (input.value === 'rainier') {
+      gate.style.display = 'none';
+      document.body.classList.remove('locked');
+    } else {
+      error.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPassword();
+    if (error.style.display === 'block') error.style.display = 'none';
+  });
+
+  input.focus();
+</script>
+</body>
+</html>
