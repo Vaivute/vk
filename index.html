@@ -165,12 +165,12 @@
       min-height: 1em;
     }
 
-    /* ─── Top gradient bar (keeps nav readable while scrolling) ─── */
+    /* ─── Top bar (keeps nav readable while scrolling) ─── */
     #top-gradient {
       position: fixed;
       top: 0; left: 0; right: 0;
       height: 80px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0) 100%);
+      background: #ffffff;
       pointer-events: none;
       z-index: 99;
     }
@@ -364,13 +364,13 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
-      color: var(--text);
-      opacity: 0.35;
+      color: #f0ece4;
+      opacity: 0.5;
       cursor: pointer;
       transition: opacity 0.4s;
       animation: scrollBounce 2.4s ease-in-out infinite;
     }
-    .hero-scroll-arrow:hover { opacity: 0.7; }
+    .hero-scroll-arrow:hover { opacity: 0.85; }
     @keyframes scrollBounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50% { transform: translateX(-50%) translateY(6px); }
@@ -382,9 +382,8 @@
       inset: 0;
       z-index: 1;
       overflow: hidden;
-      background-color: #d0c4ad;
+      background-color: #1d1d20;
       transition: background-color 1.4s cubic-bezier(0.43, 0.195, 0.02, 1);
-      pointer-events: none;
     }
 
     .blob,
@@ -452,11 +451,13 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.6s ease-out;
+      pointer-events: auto;
+      animation: heroFadeIn 0.6s ease-out 0.05s both;
     }
-    .hero-image.ready { opacity: 1; }
+    @keyframes heroFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
     @keyframes imageFloat {
       0%   { transform: scale(1.04) translate(0%,    0%); }
       33%  { transform: scale(1.10) translate(-1.5%, 1.2%); }
@@ -547,7 +548,11 @@
       display: flex;
       align-items: center;
       padding: 0 10vw;
+      /* Let pointer events pass through to <loom-wallpaper> behind so the cursor warps the weave.
+         Re-enable on the actually-interactive children below. */
+      pointer-events: none;
     }
+    .hero-mobile, .hero-mobile-arrow, .hero-mobile-dot, .hero-mobile-track { pointer-events: auto; }
 
     .hero-text-inner { max-width: 680px; }
 
@@ -557,7 +562,7 @@
       font-weight: 400;
       font-size: clamp(52px, 7.5vw, 108px);
       line-height: 1.04;
-      color: #1a1a1a;
+      color: #f0ece4;
       letter-spacing: -0.02em;
     }
 
@@ -601,7 +606,7 @@
       position: absolute;
       left: 0; top: 0;
       font-style: italic;
-      color: #3a3a2a;
+      color: #c8b890;
       white-space: nowrap;
       opacity: 0;
       transform: translateY(6px);
@@ -621,10 +626,10 @@
       position: absolute;
       top: 0; left: 0;
       font-family: 'Lora', serif;
-      font-size: clamp(15px, 1.3vw, 19px);
-      line-height: 1.8;
+      font-size: clamp(17px, 1.5vw, 22px);
+      line-height: 1.75;
       font-weight: 300;
-      color: #2a2a1a;
+      color: #ffffff;
       text-align: justify;
       opacity: 0;
       transform: translateY(5px);
@@ -646,7 +651,7 @@
     .hero-mobile-verb {
       font-family: 'EB Garamond', serif;
       font-weight: 400;
-      color: #1a1a1a;
+      color: #f0ece4;
       line-height: 1.05;
       letter-spacing: -0.02em;
       margin-bottom: 0.4rem;
@@ -669,7 +674,7 @@
     .hero-mobile-noun {
       font-family: 'EB Garamond', serif;
       font-style: italic;
-      color: #3a3a2a;
+      color: #c8b890;
       line-height: 1.08;
       letter-spacing: -0.01em;
       margin-bottom: 1.25rem;
@@ -678,7 +683,7 @@
     .hero-mobile-sub {
       font-family: 'Lora', serif;
       font-weight: 300;
-      color: #2a2a1a;
+      color: #ffffff;
       margin: 0;
     }
     .hero-mobile-controls {
@@ -695,7 +700,7 @@
       height: 34px;
       border: none;
       background: transparent;
-      color: rgba(26,26,26,0.5);
+      color: rgba(240,236,228,0.5);
       font-family: 'EB Garamond', serif;
       font-size: 44px;
       line-height: 0.7;
@@ -708,7 +713,7 @@
       z-index: 3;
     }
     .hero-mobile-arrow:hover,
-    .hero-mobile-arrow:focus { color: #1a1a1a; outline: none; }
+    .hero-mobile-arrow:focus { color: #f0ece4; outline: none; }
     .hero-mobile-arrow:disabled { opacity: 0.2; cursor: default; }
     #hero-mobile-prev { left: 0.5rem; }
     #hero-mobile-next { right: 0.5rem; }
@@ -745,11 +750,11 @@
       width: 4px;
       height: 4px;
       border-radius: 50%;
-      background: rgba(58,68,68,0.25);
+      background: rgba(240,236,228,0.3);
       transition: background 0.4s, transform 0.4s;
     }
     .hero-dot.active {
-      background: rgba(58,68,68,0.7);
+      background: rgba(240,236,228,0.85);
       transform: scale(1.6);
     }
 
@@ -1154,7 +1159,7 @@
       .hero-mobile-slide { padding: 0 2.75rem; }
       .hero-mobile-controls { padding: 0 2.75rem; }
       .hero-mobile-noun { font-size: clamp(34px, 10vw, 50px); }
-      .hero-mobile-sub { font-size: 16px; line-height: 1.75; }
+      .hero-mobile-sub { font-size: 18px; line-height: 1.7; }
 
       /* Values */
       .values-section { padding: 4rem 1.25rem 2.5rem; }
@@ -1569,6 +1574,7 @@
     }
   </style>
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="images+videos/loom-wallpaper.js"></script>
 </head>
 <body>
 
@@ -1636,7 +1642,7 @@
 
         <!-- Animated bokeh background -->
         <div class="hero-bg" id="hero-bg">
-          <canvas class="hero-image" id="hero-weave" aria-hidden="true"></canvas>
+          <loom-wallpaper class="hero-image" id="hero-weave" pointer="window" aria-hidden="true"></loom-wallpaper>
         </div>
 
 
@@ -2291,45 +2297,8 @@
     document.getElementById('hero-progress').style.opacity = name === 'portfolio' ? '1' : '0';
   }
 
-  // Hero weave background (WebGL)
-  (function(){
-    var T={density:225,flowSpeed:0.015,cursorBend:0.5,bgColor:'#d0c4ad',threadColor:'#ece4d2',dyeColor:'#172a5a',rustColor:'#b8561e',accentRarity:0.032,dyeSize:1,grainAmount:0.026};
-    function h2r(h){var s=h.replace('#','');var n=[parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)];return[n[0]/255,n[1]/255,n[2]/255]}
-    var c=document.getElementById('hero-weave');if(!c)return;
-    var gl=c.getContext('webgl',{antialias:true});if(!gl)return;
-    var dpr=Math.min(window.devicePixelRatio||1,2);
-    function resize(){var r=c.parentElement.getBoundingClientRect();c.width=r.width*dpr;c.height=r.height*dpr;gl.viewport(0,0,c.width,c.height)}
-    resize();addEventListener('resize',resize);
-    var vs='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-    var fs="precision highp float;uniform vec2 uRes;uniform vec2 uMouse;uniform vec2 uVel;uniform float uTime;uniform float uDensity;uniform float uCursorBend;uniform vec3 uBg;uniform vec3 uThread;uniform vec3 uDye;uniform vec3 uRust;uniform float uAccentRarity;uniform float uDyeSize;uniform float uGrain;uniform vec4 uDyes[8];float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}float noise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);vec2 u=f*f*(3.0-2.0*f);return mix(mix(hash(i+vec2(0,0)),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);}float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<5;i++){v+=a*noise(p);p*=2.02;a*=0.5;}return v;}void main(){vec2 uv=gl_FragCoord.xy/uRes.xy;float aspect=uRes.x/uRes.y;vec2 p=uv;p.x*=aspect;vec2 m=uMouse;m.x*=aspect;vec2 d=p-m;float r=length(d);float ang=fbm(p*2.5+uTime*0.05)*3.14159;float swirl=atan(d.y,d.x)+1.5708;float cursorBend=exp(-r*2.5);ang=mix(ang,swirl,cursorBend*uCursorBend);ang+=(uVel.x*3.0)*cursorBend;vec2 warpDir=vec2(cos(ang),sin(ang));vec2 weftDir=vec2(-warpDir.y,warpDir.x);float warpCoord=dot(p,warpDir)*uDensity;float weftCoord=dot(p,weftDir)*uDensity;float warpLine=1.0-abs(fract(warpCoord)-0.5)*2.0;float weftLine=1.0-abs(fract(weftCoord)-0.5)*2.0;warpLine=smoothstep(0.55,0.95,warpLine);weftLine=smoothstep(0.55,0.95,weftLine);float wi=floor(warpCoord);float hi=floor(weftCoord);float over=mod(wi+hi,2.0);float threadMask=max(warpLine,weftLine);vec3 col=uBg;vec3 topThread=uThread;vec3 botThread=mix(uThread,uBg,0.5);vec3 threadCol=over>0.5?(warpLine>weftLine?topThread:botThread):(warpLine>weftLine?botThread:topThread);col=mix(col,threadCol,threadMask);float crossMask=warpLine*weftLine;col=mix(col,col*0.6,crossMask*0.7);float strandSeed=hash(vec2(wi,0.0));if(warpLine>weftLine&&warpLine>0.4){if(strandSeed>1.0-uAccentRarity)col=mix(col,uDye,warpLine*0.85);else if(strandSeed<uAccentRarity)col=mix(col,uRust,warpLine*0.7);}float strandSeed2=hash(vec2(0.0,hi));if(weftLine>warpLine&&weftLine>0.4){if(strandSeed2>1.0-uAccentRarity)col=mix(col,uDye,weftLine*0.85);else if(strandSeed2<uAccentRarity)col=mix(col,uRust,weftLine*0.7);}float dyeSum=0.0;for(int i=0;i<8;i++){vec4 dy=uDyes[i];if(dy.w<0.5)continue;vec2 dd=p-dy.xy*vec2(aspect,1.0);float rr=length(dd);float radius=sqrt(dy.z)*0.35*uDyeSize;float edge=smoothstep(radius,radius*0.7,rr);edge*=0.7+0.3*fbm(p*8.0+dy.z);edge*=smoothstep(4.0,0.3,dy.z);dyeSum+=edge;}dyeSum=clamp(dyeSum,0.0,1.0);col=mix(col,uDye,dyeSum*(0.4+threadMask*0.55));col+=exp(-r*4.0)*0.14*vec3(1.0,0.96,0.88)*threadMask;float vig=smoothstep(1.3,0.3,length(uv-0.5));col*=mix(0.85,1.0,vig);float grain=hash(gl_FragCoord.xy+uTime);col+=(grain-0.5)*uGrain;gl_FragColor=vec4(col,1.0);}";
-    function co(t,s){var sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);return sh}
-    var pr=gl.createProgram();gl.attachShader(pr,co(gl.VERTEX_SHADER,vs));gl.attachShader(pr,co(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
-    var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-    var l=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(l);gl.vertexAttribPointer(l,2,gl.FLOAT,false,0,0);
-    function U(n){return gl.getUniformLocation(pr,n)}
-    var u={Res:U('uRes'),Mouse:U('uMouse'),Vel:U('uVel'),Time:U('uTime'),Density:U('uDensity'),CursorBend:U('uCursorBend'),Bg:U('uBg'),Thread:U('uThread'),Dye:U('uDye'),Rust:U('uRust'),AccentRarity:U('uAccentRarity'),DyeSize:U('uDyeSize'),Grain:U('uGrain'),Dyes:U('uDyes')};
-    var mx=0.5,my=0.5,sx=0.5,sy=0.5,vx=0,vy=0,lx=0.5,ly=0.5,t0=performance.now(),dyes=[];
-    c.style.pointerEvents='auto';
-    c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();mx=(e.clientX-r.left)/r.width;my=1-(e.clientY-r.top)/r.height});
-    c.addEventListener('pointerdown',function(e){var r=c.getBoundingClientRect();dyes.push({t:performance.now(),x:(e.clientX-r.left)/r.width,y:1-(e.clientY-r.top)/r.height})});
-    function loop(){
-      var now=performance.now();var dx=mx-lx,dy=my-ly;vx=vx*0.85+dx*0.15;vy=vy*0.85+dy*0.15;lx=mx;ly=my;
-      sx+=(mx-sx)*0.14;sy+=(my-sy)*0.14;
-      var packed=new Float32Array(32);var live=dyes.filter(function(d){return(now-d.t)/1000<4});dyes=live;
-      for(var i=0;i<8;i++){var cc=live[i];if(cc){var age=(now-cc.t)/1000;packed[i*4]=cc.x;packed[i*4+1]=cc.y;packed[i*4+2]=age;packed[i*4+3]=1}else packed[i*4+3]=0}
-      gl.uniform2f(u.Res,c.width,c.height);gl.uniform2f(u.Mouse,sx,sy);gl.uniform2f(u.Vel,vx,vy);
-      gl.uniform1f(u.Time,(now-t0)/1000*(T.flowSpeed/0.05));
-      gl.uniform1f(u.Density,T.density);gl.uniform1f(u.CursorBend,T.cursorBend);
-      gl.uniform3fv(u.Bg,h2r(T.bgColor));gl.uniform3fv(u.Thread,h2r(T.threadColor));
-      gl.uniform3fv(u.Dye,h2r(T.dyeColor));gl.uniform3fv(u.Rust,h2r(T.rustColor));
-      gl.uniform1f(u.AccentRarity,T.accentRarity);gl.uniform1f(u.DyeSize,T.dyeSize);gl.uniform1f(u.Grain,T.grainAmount);
-      gl.uniform4fv(u.Dyes,packed);
-      gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
-      if(!c.classList.contains('ready'))c.classList.add('ready');
-      requestAnimationFrame(loop)
-    }
-    loop();
-  })();
+  // Hero weave background is rendered by the <loom-wallpaper> web component
+  // (see images+videos/loom-wallpaper.js). Nothing to do here.
 
   // Hero sticky scroll: "I" stays, phrases + subs transition
   const slideBgs = [
